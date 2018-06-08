@@ -19,6 +19,7 @@ setup(
     url=about['__url__'],
     description=about['__description__'],
     long_description=long_description,
+    long_description_content_type="text/markdown",
     license=about['__license__'],
     packages=find_packages(),
     install_requires=[

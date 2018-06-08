@@ -2,7 +2,7 @@
 Elliptic Curve Integrated Encryption Scheme in Python
 
 # Install
-`pip install ecies`
+`pip install eciespy`
 
 # Quickstart
 
