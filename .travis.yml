@@ -1,7 +1,14 @@
 language: python
 python:
-  - "3.5"
-  - "3.6"
-  - "3.7-dev"
+  - '3.5'
+  - '3.6'
 script:
   - python -m doctest ecies/utils.py
+deploy:
+  provider: pypi
+  distributions: "sdist bdist_wheel"
+  user: "kigawas"
+  password:
+    secure: nxq4Ej2cMmVEVV1IkhivDoVYqjba7WXWdOHscH7KOSGG2LDu5qZolffTuK4/S63EkJRa+2lLeLBciHu95S+RKfI06ITSRxdYGsE47opdq4Sdf2kGUEZn6BHLD2S0QKeLeiPF5IptzvFFNCWIflExe3kBKYBK0tneBXLGp+lehocV+11qktsRTrHL5YBP5M9xhGcotDZq6obWU0NhozNtTGT/LIchoj8Y0rW+fs3DyhKRf+Y6XH3skINa6VzLd1DjZl5R14nV5OJKMPnd9FwD04cuBwbTW9WCHJcz6u+TYI2kkiUambXPA+qbuzKnzNUaB4NtGwS9LgchHLB+BglSrEd1TJgcVT/sMB1Nob54QlMO3wH47y2zZnH8T6JIKgne/QurfYwFShJdpnSd9HDHTZ+h33BUIVsU4+qVHLyxHWYsqxguYemzqzrXbCPaM2tCI+cymeE+tFl0hwerxMUx+KlyAgXXLsyMMLQ5Pw0hoeTM/MElPgj6D6W+YU1Nsz+4iXdVU8Jt3b2cCss7/b1mHWGMINBSLhHB4dbjNsuf35TNp7UjmR4fQIhD1QI2Rwd+10rIIA6lkApXn6XA8uypQJHYAt+oyVHPJtLHsbWRpcCoYPDLdmEaIH0R+mt0sxFYRK/kxfhJ96+eX2ahqZFfXjwU2C2MkmNBgJCgybDJ9xc=
+  on:
+    tags: true
