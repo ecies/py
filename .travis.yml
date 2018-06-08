@@ -1,14 +1,18 @@
 language: python
 python:
-  - '3.5'
-  - '3.6'
+- '3.5'
+- '3.6'
+cache: pip
+install:
+- pip install -U pip
+- pip install -r requirements.txt
 script:
-  - python -m doctest ecies/utils.py
+- python -m doctest ecies/utils.py
 deploy:
   provider: pypi
-  distributions: "sdist bdist_wheel"
-  user: "kigawas"
+  distributions: sdist bdist_wheel
+  user: kigawas
   password:
-    secure: nxq4Ej2cMmVEVV1IkhivDoVYqjba7WXWdOHscH7KOSGG2LDu5qZolffTuK4/S63EkJRa+2lLeLBciHu95S+RKfI06ITSRxdYGsE47opdq4Sdf2kGUEZn6BHLD2S0QKeLeiPF5IptzvFFNCWIflExe3kBKYBK0tneBXLGp+lehocV+11qktsRTrHL5YBP5M9xhGcotDZq6obWU0NhozNtTGT/LIchoj8Y0rW+fs3DyhKRf+Y6XH3skINa6VzLd1DjZl5R14nV5OJKMPnd9FwD04cuBwbTW9WCHJcz6u+TYI2kkiUambXPA+qbuzKnzNUaB4NtGwS9LgchHLB+BglSrEd1TJgcVT/sMB1Nob54QlMO3wH47y2zZnH8T6JIKgne/QurfYwFShJdpnSd9HDHTZ+h33BUIVsU4+qVHLyxHWYsqxguYemzqzrXbCPaM2tCI+cymeE+tFl0hwerxMUx+KlyAgXXLsyMMLQ5Pw0hoeTM/MElPgj6D6W+YU1Nsz+4iXdVU8Jt3b2cCss7/b1mHWGMINBSLhHB4dbjNsuf35TNp7UjmR4fQIhD1QI2Rwd+10rIIA6lkApXn6XA8uypQJHYAt+oyVHPJtLHsbWRpcCoYPDLdmEaIH0R+mt0sxFYRK/kxfhJ96+eX2ahqZFfXjwU2C2MkmNBgJCgybDJ9xc=
+    secure: cdWBxLs5nzKv4y1FCupwS8hKONe0q1+QvcC4OgdftVw7Kf2YYwRJJhyMipr31IQf3n2JVK1G9N8r20D1XbNXZpqHpzp5sCi+CWFHVCWBax2RQnxujfrT1lVT9EZBgHoyqaJ5S6WPoai8+KiA3F6+6qcihU4qcHXEkptgbHB38G6OFMZIZh7YFnh3nVs+H4FD8ec3d4vmedp1caK/zYqoBenx//0xZJjDdbEa4ZFo7I1+uUiVritgSz1wPd2hhav2Ifcg1cZrFmrqfAzeXGk1guSCQlyuCTze3gLmvYclDLdULZbu6MCmp5ZzexPG0DKJQeV/sP26EHvJA3+81/odey/RlS/ayYHLgCFmGYP2PNsjFdFJdelZ/GgTHnCoRSN0Y31PJe3fS30n/NXwKU8olKs1kD4SGklwa71ZpfGhnu+J0q3W7naTailk704CLV9w+JoJlzOPWeyhNjJzAu7XxsGltfwjyASCp44bj3qYc/Z6S0mwaCGJsJ84WYSE8EwEteBjjHLr7HkFrpuz0fu40WL1S17p7t8LZyryUCdNW1hHfS8717WxU44Wk2p102h4CvhZtmB4yA9tbeC4l2nEsZlTWfq+lYdup57jtPpojcPYgB2ARW12iuH2Mpw6Jb5LdTWGA89hjeKXtQ015wvdUTGSEacEyfA0umZZuGvD6mc=
   on:
     tags: true
