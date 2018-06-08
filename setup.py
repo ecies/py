@@ -8,8 +8,8 @@ about = {}  # type: dict
 with open(os.path.join(here, 'ecies', '__version__.py'), 'r') as f:
     exec(f.read(), about)
 
-with open('README.md', 'r') as fh:
-    long_description = fh.read()
+with open('README.md', 'r') as f:
+    long_description = f.read()
 
 setup(
     name=about['__title__'],
@@ -24,6 +24,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'eth-keys',
+        'pysha3',
         'pycryptodomex',
         'coincurve',
     ],

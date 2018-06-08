@@ -37,7 +37,7 @@ def main():
     if args.generate:
         k = generate_eth_key()
         prv, pub, addr = k.to_hex(), k.public_key.to_hex(), k.public_key.to_checksum_address()
-        print('Private: {}\nPublic: {}\nAddress: {}\n'.format(prv, pub, addr))
+        print('Private: {}\nPublic: {}\nAddress: {}'.format(prv, pub, addr))
         return
 
     if args.encrypt == args.decrypt:
