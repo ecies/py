@@ -10,7 +10,7 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 # Install
 `pip install eciespy`
 
-# Quickstart
+# Quick Start
 
 ```python
 >>> from ecies.utils import generate_eth_key

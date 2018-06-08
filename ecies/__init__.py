@@ -7,8 +7,18 @@ __all__ = ['encrypt', 'decrypt']
 def encrypt(receiver_pubhex: str, msg: bytes) -> bytes:
     '''
     Encrypt with eth public key
-    :param receiver_pubhex: eth pubc key hex, 64 bytes
-    :param msg: raw bytes data to decrypt
+
+    Parameters
+    ----------
+    receiver_pubhex: str
+        Receiver's ethereum public key hex string
+    msg: bytes
+        Data to encrypt
+
+    Returns
+    -------
+    bytes
+        Encrypted data
     '''
     disposable_key = generate_key()
     receiver_pubkey = hex2pub(receiver_pubhex)
@@ -20,8 +30,18 @@ def encrypt(receiver_pubhex: str, msg: bytes) -> bytes:
 def decrypt(receiver_prvhex: str, msg: bytes) -> bytes:
     '''
     Decrypt with eth private key
-    :param receiver_prvhex: eth private key hex
-    :param msg: raw bytes data to decrypt
+
+    Parameters
+    ----------
+    receiver_pubhex: str
+        Receiver's ethereum private key hex string
+    msg: bytes
+        Data to decrypt
+
+    Returns
+    -------
+    bytes
+        Plain text
     '''
     pubkey = msg[0:65]  # pubkey's length is 65 bytes
     encrypted = msg[65:]

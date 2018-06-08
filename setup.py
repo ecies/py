@@ -1,3 +1,14 @@
+'''
+ _______  _______ _________ _______  _______  _______
+(  ____ \(  ____ \\__   __/(  ____ \(  ____ \(  ____ )|\     /|
+| (    \/| (    \/   ) (   | (    \/| (    \/| (    )|( \   / )
+| (__    | |         | |   | (__    | (_____ | (____)| \ (_) /
+|  __)   | |         | |   |  __)   (_____  )|  _____)  \   /
+| (      | |         | |   | (            ) || (         ) (
+| (____/\| (____/\___) (___| (____/\/\____) || )         | |
+(_______/(_______/\_______/(_______/\_______)|/          \_/
+
+'''
 import os
 
 from setuptools import setup, find_packages
@@ -37,14 +48,21 @@ setup(
         'secp256k1',
         'crypto',
         'elliptic curves',
+        'ecies',
         'bitcoin',
         'ethereum',
         'cryptocurrency'
     ),
     classifiers=(
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
         'Topic :: Security :: Cryptography',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: Implementation :: CPython',
         'License :: OSI Approved :: Apache Software License'
     )
 )
