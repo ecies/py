@@ -6,6 +6,7 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![Travis branch](https://img.shields.io/travis/kigawas/eciespy/master.svg)](https://travis-ci.org/kigawas/eciespy)
+[![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
 
 # Install
 `pip install eciespy`

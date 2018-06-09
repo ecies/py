@@ -18,4 +18,4 @@ deploy:
   on:
     tags: true
 after_success:
-  - codecov
+- codecov
