@@ -34,12 +34,15 @@ Parameters:
   - **receiver_pubhex** - Receiver's ethereum public key hex string
   - **msg** - Data to encrypt
 
+Returns:  **bytes**
 
 ## `ecies.decrypt(receiver_prvhex: str, msg: bytes) -> bytes`
 
 Parameters:
   - **receiver_prvhex** - Receiver's ethereum private key hex string
   - **msg** - Data to decrypt
+
+Returns:  **bytes**
 
 ## Mechanism
 
@@ -132,7 +135,7 @@ Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compres
 
 ### AES
 
-Now we have the shared key, and we can use the nonce and tag to decrypt. The example derives from `pycryptodome`'s [documentation](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes).
+Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. The example derives from `pycryptodome`'s [documentation](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes).
 
 ```python
 >>> from Cryptodome.Cipher import AES
@@ -144,3 +147,13 @@ Now we have the shared key, and we can use the nonce and tag to decrypt. The exa
 >>> decipher.decrypt_and_verify(data, tag)
 b'helloworld'
 ```
+
+# Release notes
+
+## 0.1.1
+
+- Update documentation
+
+## 0.1.0
+
+- First beta version release
