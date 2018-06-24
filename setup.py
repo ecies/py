@@ -30,7 +30,7 @@ setup(
     url=about['__url__'],
     description=about['__description__'],
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type='text/markdown',
     license=about['__license__'],
     packages=find_packages(),
     install_requires=[
@@ -56,13 +56,13 @@ setup(
     classifiers=(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
-        'Topic :: Security :: Cryptography',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
-        'License :: OSI Approved :: Apache Software License'
+        'Topic :: Security :: Cryptography',
     )
 )
