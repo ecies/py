@@ -1,6 +1,6 @@
 asn1crypto==0.24.0
 cffi==1.11.5
-coincurve==7.1.0
+coincurve==8.0.0
 cytoolz==0.9.0.1
 eth-hash==0.1.4
 eth-keys==0.2.0b3
