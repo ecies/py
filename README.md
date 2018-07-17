@@ -9,7 +9,7 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 [![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
 
 # Install
-Install like `pip install eciespy` under Python 3.5 or 3.6.
+Install with `pip install eciespy` under Python version >= 3.5.
 
 # Quick Start
 
@@ -24,7 +24,7 @@ Install like `pip install eciespy` under Python 3.5 or 3.6.
 b'this is a test'
 ```
 
-Or just use a builtin command `eciespy -h` in your favorite command line.
+Or just use a builtin command `eciespy` in your favorite command line.
 
 # API
 
@@ -152,7 +152,7 @@ In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha
 'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
 ```
 
-Let's discuss in details. The word *multiply* here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a scalar (like `k`). Here `k` is the integer format of a private key, for instance, a simple `1` as `k1`, and `(x, y)` here is an extremely large number pair like `(89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)`. 
+Let's discuss in details. The word *multiply* here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a scalar (like `k`). Here `k` is the integer format of a private key, for instance, a simple `1` as `k1`, and `(x, y)` here is an extremely large number pair like `(89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)`.
 
 Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://www.wikiwand.com/en/Elliptic_Curve_Digital_Signature_Algorithm#/Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely.
 
@@ -168,7 +168,7 @@ A point multiplying a scalar can be regarded that this point adds itself multipl
 '02c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5'
 ```
 
-- Uncompressed format (use `(x,y)` coordinate)
+- Uncompressed format (use `(x, y)` coordinate)
 ```python
 >>> uncompressed_key_hex = '04' + hex(point[0])[2:] + hex(point[1])[2:]
 >>> uncompressed_key = bytes.fromhex(uncompressed_key_hex)
@@ -190,7 +190,7 @@ Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compres
 >>> h.hexdigest()
 'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
 ```
-> You may want to ask, what if no hash? Briefly, hash can make it [safer](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman#/cite_ref-4).
+> You may want to ask, what if no hash? Briefly, hash can make it safer since hash function can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) for more details.
 
 ### AES
 
@@ -208,6 +208,11 @@ b'helloworld'
 ```
 
 # Release Notes
+
+## 0.1.2
+
+- Support Python 3.7 build
+- Minor fix on documentation
 
 ## 0.1.1
 
