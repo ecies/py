@@ -6,13 +6,12 @@ from ecies.utils import sha256, generate_eth_key, aes_encrypt, aes_decrypt
 
 
 class TestCrypt(unittest.TestCase):
-
     def setUp(self):
-        self.test_string = b'this is a test'
-        self.big_data = b'0' * 1024 * 1024 * 100  # 100 MB
+        self.test_string = b"this is a test"
+        self.big_data = b"0" * 1024 * 1024 * 100  # 100 MB
 
     def test_hash(self):
-        self.assertEqual(sha256(b'0' * 16).hex()[:8], 'fcdb4b42')
+        self.assertEqual(sha256(b"0" * 16).hex()[:8], "fcdb4b42")
 
     def test_elliptic(self):
         data = self.test_string
