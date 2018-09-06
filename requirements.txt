@@ -2,7 +2,7 @@ asn1crypto==0.24.0
 cffi==1.11.5
 coincurve==9.0.0
 cytoolz==0.9.0.1
-eth-hash==0.1.4
+eth-hash==0.2.0
 eth-keys==0.2.0b3
 eth-utils==1.2.1
 pycparser==2.18
