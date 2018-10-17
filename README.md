@@ -1,6 +1,6 @@
 # eciespy
-Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 
+Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 
 [![License](https://img.shields.io/github/license/kigawas/eciespy.svg)](https://github.com/kigawas/eciespy)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
@@ -8,10 +8,11 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 [![Travis branch](https://img.shields.io/travis/kigawas/eciespy/master.svg)](https://travis-ci.org/kigawas/eciespy)
 [![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
 
-# Install
+## Install
+
 Install with `pip install eciespy` under Python version >= 3.5.
 
-# Quick Start
+## Quick Start
 
 ```python
 >>> from ecies.utils import generate_eth_key
@@ -26,21 +27,25 @@ b'this is a test'
 
 Or just use a builtin command `eciespy` in your favorite command line.
 
-# API
+## API
 
-## `ecies.encrypt(receiver_pubhex: str, msg: bytes) -> bytes`
+### `ecies.encrypt(receiver_pubhex: str, msg: bytes) -> bytes`
 
 Parameters:
-  - **receiver_pubhex** - Receiver's ethereum public key hex string
-  - **msg** - Data to encrypt
+
+- **receiver_pubhex** - Receiver's ethereum public key hex string
+
+- **msg** - Data to encrypt
 
 Returns:  **bytes**
 
-## `ecies.decrypt(receiver_prvhex: str, msg: bytes) -> bytes`
+### `ecies.decrypt(receiver_prvhex: str, msg: bytes) -> bytes`
 
 Parameters:
-  - **receiver_prvhex** - Receiver's ethereum private key hex string
-  - **msg** - Data to decrypt
+
+- **receiver_prvhex** - Receiver's ethereum private key hex string
+
+- **msg** - Data to decrypt
 
 Returns:  **bytes**
 
@@ -99,13 +104,11 @@ This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](ht
 
     > Notice that the server public key is generated every time when `ecies.encrypt` is invoked, thus, the calculated AES session key varies.
 
-
 2. Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
-
 
 Basically the encrypted data will be like this:
 
-```
+```plaintext
 +-------------------------------+----------+----------+-----------------+
 | 65 Bytes                      | 16 Bytes | 16 Bytes | == data size    |
 +-------------------------------+----------+----------+-----------------+
@@ -118,6 +121,7 @@ Basically the encrypted data will be like this:
 ```
 
 ### Secp256k1
+
 So, **how** do we calculate the ECDH key under `secp256k1`? If you use library like [`coincurve`](https://github.com/ofek/coincurve), you just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
 
 ```python
@@ -159,6 +163,7 @@ Mathematically, the elliptic curve cryptography is based on the fact that you ca
 A point multiplying a scalar can be regarded that this point adds itself multiple times, and the point `B` can be converted to a readable public key (compressed or uncompressed format).
 
 - Compressed format (only use `x` coordinate)
+
 ```python
 >>> point = (89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)
 >>> prefix = '02' if point[1] % 2 == 0 else '03'
@@ -169,6 +174,7 @@ A point multiplying a scalar can be regarded that this point adds itself multipl
 ```
 
 - Uncompressed format (use `(x, y)` coordinate)
+
 ```python
 >>> uncompressed_key_hex = '04' + hex(point[0])[2:] + hex(point[1])[2:]
 >>> uncompressed_key = bytes.fromhex(uncompressed_key_hex)
@@ -190,6 +196,7 @@ Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compres
 >>> h.hexdigest()
 'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
 ```
+
 > You may want to ask, what if no hash? Briefly, hash can make it safer since hash function can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) for more details.
 
 ### AES
@@ -207,17 +214,21 @@ Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. Thi
 b'helloworld'
 ```
 
-# Release Notes
+## Release Notes
 
-## 0.1.2
+### 0.1.3
+
+- Bump dependency versions
+
+### 0.1.2
 
 - Support Python 3.7 build
 - Minor fix on documentation
 
-## 0.1.1
+### 0.1.1
 
 - Update documentation
 
-## 0.1.0
+### 0.1.0
 
 - First beta version release
