@@ -33,9 +33,9 @@ Or just use a builtin command `eciespy` in your favorite command line.
 
 Parameters:
 
-- **receiver_pubhex** - Receiver's ethereum public key hex string
+-   **receiver_pubhex** - Receiver's ethereum public key hex string
 
-- **msg** - Data to encrypt
+-   **msg** - Data to encrypt
 
 Returns:  **bytes**
 
@@ -43,9 +43,9 @@ Returns:  **bytes**
 
 Parameters:
 
-- **receiver_prvhex** - Receiver's ethereum private key hex string
+-   **receiver_prvhex** - Receiver's ethereum private key hex string
 
-- **msg** - Data to decrypt
+-   **msg** - Data to decrypt
 
 Returns:  **bytes**
 
@@ -53,25 +53,23 @@ Returns:  **bytes**
 
 ### Show help
 
-```bash
-$ eciespy -h
-usage: eciespy [-h] [-e] [-d] [-g] [-k KEY] [-D [DATA]] [-O [OUT]]
+    $ eciespy -h
+    usage: eciespy [-h] [-e] [-d] [-g] [-k KEY] [-D [DATA]] [-O [OUT]]
 
-Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
+    Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -e, --encrypt         encrypt with public key, not compatible with -d
-  -d, --decrypt         decrypt with private key, not compatible with -e
-  -g, --generate        generate ethereum key pair
-  -k KEY, --key KEY     public or private key file
-  -D [DATA], --data [DATA]
-                        file to encrypt or decrypt, if not specified, it will
-                        read from stdin
-  -O [OUT], --out [OUT]
-                        encrypted or decrypted file, if not specified, it will
-                        write to stdout
-```
+    optional arguments:
+      -h, --help            show this help message and exit
+      -e, --encrypt         encrypt with public key, not compatible with -d
+      -d, --decrypt         decrypt with private key, not compatible with -e
+      -g, --generate        generate ethereum key pair
+      -k KEY, --key KEY     public or private key file
+      -D [DATA], --data [DATA]
+                            file to encrypt or decrypt, if not specified, it will
+                            read from stdin
+      -O [OUT], --out [OUT]
+                            encrypted or decrypted file, if not specified, it will
+                            write to stdout
 
 ### Generate eth key
 
@@ -100,11 +98,11 @@ $ rm data enc_data
 
 This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](https://github.com/ofek/coincurve) and [`pycryptodome`](https://github.com/Legrandin/pycryptodome)) to provide an API of encrypting with `secp256k1` public key and decrypting with `secp256k1`'s private key. It has two steps:
 
-1. Use [ECDH](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman) to calculate an AES session key;
+1.  Use [ECDH](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman) to calculate an AES session key;
 
     > Notice that the server public key is generated every time when `ecies.encrypt` is invoked, thus, the calculated AES session key varies.
 
-2. Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
+2.  Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
 
 Basically the encrypted data will be like this:
 
@@ -156,13 +154,13 @@ In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha
 'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
 ```
 
-Let's discuss in details. The word *multiply* here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a scalar (like `k`). Here `k` is the integer format of a private key, for instance, a simple `1` as `k1`, and `(x, y)` here is an extremely large number pair like `(89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)`.
+Let's discuss in details. The word _multiply_ here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a scalar (like `k`). Here `k` is the integer format of a private key, for instance, a simple `1` as `k1`, and `(x, y)` here is an extremely large number pair like `(89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)`.
 
 Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://www.wikiwand.com/en/Elliptic_Curve_Digital_Signature_Algorithm#/Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely.
 
 A point multiplying a scalar can be regarded that this point adds itself multiple times, and the point `B` can be converted to a readable public key (compressed or uncompressed format).
 
-- Compressed format (only use `x` coordinate)
+-   Compressed format (only use `x` coordinate)
 
 ```python
 >>> point = (89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)
@@ -173,7 +171,7 @@ A point multiplying a scalar can be regarded that this point adds itself multipl
 '02c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5'
 ```
 
-- Uncompressed format (use `(x, y)` coordinate)
+-   Uncompressed format (use `(x, y)` coordinate)
 
 ```python
 >>> uncompressed_key_hex = '04' + hex(point[0])[2:] + hex(point[1])[2:]
@@ -184,7 +182,7 @@ A point multiplying a scalar can be regarded that this point adds itself multipl
 
 > If you want to convert the compressed format to uncompressed, basically, you need to calculate `y` from `x` by solving the equation using [Cipolla's Algorithm](https://www.wikiwand.com/en/Cipolla%27s_algorithm):
 > $$
-> y^2=(x^3 + 7) \bmod p,\ where\ p=2^{256}-2^{32}-2^{9}-2^{8}-2^{7}-2^{6}-2^{4}-1
+> y^2=(x^3 + 7) \\bmod p,\\ where\\ p=2^{256}-2^{32}-2^{9}-2^{8}-2^{7}-2^{6}-2^{4}-1
 > $$
 > You can check the [bitcoin wiki](https://en.bitcoin.it/wiki/Secp256k1) and this thread on [bitcointalk.org](https://bitcointalk.org/index.php?topic=644919.msg7205689#msg7205689) for more details.
 
@@ -218,17 +216,17 @@ b'helloworld'
 
 ### 0.1.3
 
-- Bump dependency versions
+-   Bump dependency versions
 
 ### 0.1.2
 
-- Support Python 3.7 build
-- Minor fix on documentation
+-   Support Python 3.7 build
+-   Minor fix on documentation
 
 ### 0.1.1
 
-- Update documentation
+-   Update documentation
 
 ### 0.1.0
 
-- First beta version release
+-   First beta version release
