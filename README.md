@@ -16,12 +16,17 @@ Install with `pip install eciespy` under Python version >= 3.5.
 ## Quick Start
 
 ```python
->>> from ecies.utils import generate_eth_key
+>>> from ecies.utils import generate_eth_key, generate_key
 >>> from ecies import encrypt, decrypt
->>> k = generate_eth_key()
->>> prvhex = k.to_hex()
->>> pubhex = k.public_key.to_hex()
+>>> eth_k = generate_eth_key()
+>>> prvhex = eth_k.to_hex()
+>>> pubhex = eth_k.public_key.to_hex()
 >>> data = b'this is a test'
+>>> decrypt(prvhex, encrypt(pubhex, data))
+b'this is a test'
+>>> secp_k = generate_key()
+>>> prvhex = secp_k.to_hex()
+>>> pubhex = secp_k.public_key.format(True).hex()
 >>> decrypt(prvhex, encrypt(pubhex, data))
 b'this is a test'
 ```
@@ -34,8 +39,7 @@ Or just use a builtin command `eciespy` in your favorite command line.
 
 Parameters:
 
--   **receiver_pubhex** - Receiver's ethereum public key hex string
-
+-   **receiver_pubhex** - Receiver's secp256k1 public key hex string
 -   **msg** - Data to encrypt
 
 Returns:  **bytes**
@@ -44,8 +48,7 @@ Returns:  **bytes**
 
 Parameters:
 
--   **receiver_prvhex** - Receiver's ethereum private key hex string
-
+-   **receiver_prvhex** - Receiver's secp256k1 private key hex string
 -   **msg** - Data to decrypt
 
 Returns:  **bytes**
@@ -214,6 +217,11 @@ b'helloworld'
 ```
 
 ## Release Notes
+
+### 0.1.4
+
+-   Change license to MIT
+-   Bump `coincurve` and `pycryptodome` versions
 
 ### 0.1.3
 
