@@ -2,7 +2,7 @@ import os
 import unittest
 
 from ecies import encrypt, decrypt
-from ecies.utils import sha256, generate_eth_key, aes_encrypt, aes_decrypt
+from ecies.utils import sha256, generate_eth_key, generate_key, aes_encrypt, aes_decrypt
 
 
 class TestCrypt(unittest.TestCase):
@@ -18,6 +18,16 @@ class TestCrypt(unittest.TestCase):
         k = generate_eth_key()
         prvhex = k.to_hex()
         pubhex = k.public_key.to_hex()
+        self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+
+        k = generate_key()
+        prvhex = k.to_hex()
+        pubhex = k.public_key.format(False).hex()
+        self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+
+        k = generate_key()
+        prvhex = k.to_hex()
+        pubhex = k.public_key.format(True).hex()
         self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
 
     def test_aes(self):
