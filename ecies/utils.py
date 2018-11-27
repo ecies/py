@@ -10,6 +10,17 @@ from eth_utils import decode_hex
 
 AES_CIPHER_MODE = AES.MODE_GCM
 
+__all__ = [
+    "sha256",
+    "generate_key",
+    "generate_eth_key",
+    "hex2prv",
+    "hex2pub",
+    "derive",
+    "aes_encrypt",
+    "aes_decrypt",
+]
+
 
 def sha256(msg: bytes) -> bytes:
     """
@@ -203,9 +214,3 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
 
     aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce=nonce)
     return aes_cipher.decrypt_and_verify(ciphered_data, tag)
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()
