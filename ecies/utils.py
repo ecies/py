@@ -163,7 +163,7 @@ def aes_encrypt(key: bytes, plain_text: bytes) -> bytes:
     Parameters
     ----------
     key: bytes
-        AES session key, derived from two secp256k1 keys
+        AES session key, which derived from two secp256k1 keys
     plain_text: bytes
         Plain text to encrypt
 
@@ -189,9 +189,9 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
     Parameters
     ----------
     key: bytes
-        AES session key, derived from two secp256k1 keys
+        AES session key, which derived from two secp256k1 keys
     cipher_text: bytes
-        Encrypted plain text:
+        Encrypted text:
             nonce(16 bytes) + tag(16 bytes) + encrypted data
 
     Returns
