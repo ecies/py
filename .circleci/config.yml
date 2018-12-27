@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test-3.7:
+  test-37:
     docker:
       - image: circleci/python:3.7
 
@@ -45,12 +45,12 @@ jobs:
           root: ~/repo
           paths: .
 
-  test-3.6:
-    <<: *test-3.7
+  test-36:
+    <<: *test-37
     docker:
       - image: circleci/python:3.6
-  test-3.5:
-    <<: *test-3.7
+  test-35:
+    <<: *test-37
     docker:
       - image: circleci/python:3.5
   deploy:
