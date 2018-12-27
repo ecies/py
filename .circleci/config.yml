@@ -67,8 +67,10 @@ jobs:
           name: Upload to pypi
           command: |
             . venv/bin/activate
+            python setup.py verify
             python setup.py sdist bdist_wheel
             twine upload dist/* --repository-url https://test.pypi.org/legacy/
+            twine upload dist/*
 
 workflows:
   version: 2
@@ -82,3 +84,8 @@ workflows:
             - test-3.7
             - test-3.6
             - test-3.5
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
