@@ -56,6 +56,9 @@ jobs:
       - image: circleci/python:3.5
 
   deploy:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:3.7
     steps:
       - attach_workspace:
           at: ~/repo
