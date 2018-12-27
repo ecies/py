@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test-37:
+  test-3.7: &test-template
     docker:
       - image: circleci/python:3.7
 
@@ -20,7 +20,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            ./create_venv.sh
+            python3 -m venv venv
+            venv/bin/pip install -U pip
+            venv/bin/pip install -r requirements.txt
 
       - save_cache:
           paths:
@@ -37,43 +39,42 @@ jobs:
             codecov
             python-codacy-coverage -r coverage.xml
 
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
-
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
-
-  test-36:
-    <<: *test-37
+  test-3.6:
+    <<: *test-template
     docker:
       - image: circleci/python:3.6
-  test-35:
-    <<: *test-37
+
+  test-3.5:
+    <<: *test-template
     docker:
       - image: circleci/python:3.5
-  deploy:
-    - attach_workspace:
-        at: ~/repo
-    - run:
-        name: init .pypirc
-        command: |
-          echo -e "[pypi]" >> ~/.pypirc
-          echo -e "username = kigawas" >> ~/.pypirc
-          echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
-    - run:
-        name: upload to pypi
-        command: |
-          . venv/bin/activate
-          python setup.py sdist
-          python setup.py bdist_wheel
-          twine upload dist/*
 
+  deploy:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+
+      - run:
+          name: Setup env
+          command: |
+            python3 -m venv venv
+            venv/bin/pip install -U pip twine wheel
+            venv/bin/pip install -r requirements.txt
+
+      - run:
+          name: Upload to pypi
+          command: |
+            . venv/bin/activate
+            python setup.py verify
+            python setup.py sdist bdist_wheel
+            twine upload dist/* --repository-url https://test.pypi.org/legacy/
+            twine upload dist/*
 
 workflows:
   version: 2
-  test-all-supported-python-versions:
+  test-deploy:
     jobs:
       - test-3.7
       - test-3.6

@@ -4,7 +4,7 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
 There is also a JavaScript version on [npm](https://www.npmjs.com/package/eciesjs).
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a2f9047c6e04f27bfe7f8a94d10cc55)](https://app.codacy.com/app/kigawas/eciespy?utm_source=github.com&utm_medium=referral&utm_content=kigawas/eciespy&utm_campaign=Badge_Grade_Dashboard)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/114b4556cd924c909878ed116876dda8)](https://www.codacy.com/app/kigawas/eciespy?utm_source=github.com&utm_medium=referral&utm_content=kigawas/eciespy&utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/github/license/kigawas/eciespy.svg)](https://github.com/kigawas/eciespy)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
@@ -126,7 +126,7 @@ Basically the encrypted data will be like this:
 
 ### Secp256k1
 
-So, **how** do we calculate the ECDH key under `secp256k1`? If you use library like [`coincurve`](https://github.com/ofek/coincurve), you just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
+So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library like [`coincurve`](https://github.com/ofek/coincurve), you might just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
 
 ```python
 >>> from coincurve import PrivateKey
@@ -219,6 +219,11 @@ b'helloworld'
 ```
 
 ## Release Notes
+
+### 0.1.5
+
+-   Bump dependency versions
+-   Use Circle CI
 
 ### 0.1.4
 

@@ -9,10 +9,10 @@
 (_______/(_______/\_______/(_______/\_______)|/          \_/
 
 """
-import os
-
 from setuptools import setup, find_packages
 from setuptools.command.install import install
+
+import os
 
 here = os.path.abspath(os.path.dirname(__file__))
 about = {}  # type: dict
@@ -30,7 +30,7 @@ class VerifyVersionCommand(install):
     description = "verify that the git tag matches our version"
 
     def run(self):
-        tag = os.getenv("CIRCLE_TAG", '').lstrip('v')
+        tag = os.getenv("CIRCLE_TAG", "").lstrip("v")
 
         if tag != about["__version__"]:
             info = "Git tag: {0} does not match the version of this app: {1}".format(
