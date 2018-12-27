@@ -223,7 +223,7 @@ b'helloworld'
 ### 0.1.5
 
 -   Bump dependency versions
--   Use Circle CI
+-   Switch to Circle CI from Travis CI
 
 ### 0.1.4
 
