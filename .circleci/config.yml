@@ -20,7 +20,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            ./create_venv.sh
+            python3 -m venv venv
+            venv/bin/pip install -U pip
+            venv/bin/pip install -r requirements.txt
 
       - save_cache:
           paths:
@@ -36,10 +38,6 @@ jobs:
             coverage run -m unittest discover .
             codecov
             python-codacy-coverage -r coverage.xml
-
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
 
       - persist_to_workspace:
           root: ~/repo
