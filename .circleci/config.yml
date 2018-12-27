@@ -64,12 +64,6 @@ jobs:
             venv/bin/pip install -r requirements.txt
 
       - run:
-          name: Init .pypirc
-          command: |
-            echo -e "[pypi]" >> ~/.pypirc
-            echo -e "username = kigawas" >> ~/.pypirc
-            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
-      - run:
           name: Upload to pypi
           command: |
             . venv/bin/activate

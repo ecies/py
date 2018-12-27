@@ -126,7 +126,7 @@ Basically the encrypted data will be like this:
 
 ### Secp256k1
 
-So, **how** do we calculate the ECDH key under `secp256k1`? If you use library like [`coincurve`](https://github.com/ofek/coincurve), you just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
+So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library like [`coincurve`](https://github.com/ofek/coincurve), you might just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
 
 ```python
 >>> from coincurve import PrivateKey
@@ -219,6 +219,11 @@ b'helloworld'
 ```
 
 ## Release Notes
+
+### 0.1.5
+
+-   Bump dependency versions
+-   Use Circle CI
 
 ### 0.1.4
 
