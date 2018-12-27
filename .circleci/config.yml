@@ -39,10 +39,6 @@ jobs:
             codecov
             python-codacy-coverage -r coverage.xml
 
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
-
   test-3.6:
     <<: *test-template
     docker:
@@ -58,21 +54,27 @@ jobs:
     docker:
       - image: circleci/python:3.7
     steps:
-      - attach_workspace:
-          at: ~/repo
+      - checkout
+
       - run:
-          name: init .pypirc
+          name: Setup env
+          command: |
+            python3 -m venv venv
+            venv/bin/pip install -U pip twine
+            venv/bin/pip install -r requirements.txt
+
+      - run:
+          name: Init .pypirc
           command: |
             echo -e "[pypi]" >> ~/.pypirc
             echo -e "username = kigawas" >> ~/.pypirc
             echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
       - run:
-          name: upload to pypi
+          name: Upload to pypi
           command: |
             . venv/bin/activate
-            python setup.py sdist
-            python setup.py bdist_wheel
-            twine upload dist/*
+            python setup.py sdist bdist_wheel
+            twine upload dist/* --repository-url https://test.pypi.org/legacy/
 
 workflows:
   version: 2
