@@ -5,11 +5,11 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 There is also a JavaScript version on [npm](https://www.npmjs.com/package/eciesjs).
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/114b4556cd924c909878ed116876dda8)](https://www.codacy.com/app/kigawas/eciespy?utm_source=github.com&utm_medium=referral&utm_content=kigawas/eciespy&utm_campaign=Badge_Grade)
-[![License](https://img.shields.io/github/license/kigawas/eciespy.svg)](https://github.com/kigawas/eciespy)
+[![CI](https://img.shields.io/circleci/project/github/kigawas/eciespy.svg)](https://circleci.com/gh/kigawas/eciespy)
+[![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
-[![Travis branch](https://img.shields.io/travis/kigawas/eciespy/master.svg)](https://travis-ci.org/kigawas/eciespy)
-[![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
+[![License](https://img.shields.io/github/license/kigawas/eciespy.svg)](https://github.com/kigawas/eciespy)
 
 ## Install
 
