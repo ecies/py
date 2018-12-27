@@ -60,7 +60,7 @@ jobs:
           name: Setup env
           command: |
             python3 -m venv venv
-            venv/bin/pip install -U pip twine
+            venv/bin/pip install -U pip twine wheel
             venv/bin/pip install -r requirements.txt
 
       - run:
