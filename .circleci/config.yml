@@ -1,11 +1,5 @@
 version: 2
 
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: circleci/node:11
-
-
 jobs:
   test-3.7:
     docker:
@@ -52,11 +46,11 @@ jobs:
           paths: .
 
   test-3.6:
-    <<: *test-template
+    <<: *test-3.7
     docker:
       - image: circleci/python:3.6
   test-3.5:
-    <<: *test-template
+    <<: *test-3.7
     docker:
       - image: circleci/python:3.5
   deploy:
