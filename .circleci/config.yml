@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test-37:
+  test-3.7: &test-template
     docker:
       - image: circleci/python:3.7
 
@@ -45,35 +45,38 @@ jobs:
           root: ~/repo
           paths: .
 
-  test-36:
-    <<: *test-37
+  test-3.6:
+    <<: *test-template
     docker:
       - image: circleci/python:3.6
-  test-35:
-    <<: *test-37
+
+  test-3.5:
+    <<: *test-template
     docker:
       - image: circleci/python:3.5
+
   deploy:
-    - attach_workspace:
-        at: ~/repo
-    - run:
-        name: init .pypirc
-        command: |
-          echo -e "[pypi]" >> ~/.pypirc
-          echo -e "username = kigawas" >> ~/.pypirc
-          echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
-    - run:
-        name: upload to pypi
-        command: |
-          . venv/bin/activate
-          python setup.py sdist
-          python setup.py bdist_wheel
-          twine upload dist/*
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: init .pypirc
+          command: |
+            echo -e "[pypi]" >> ~/.pypirc
+            echo -e "username = kigawas" >> ~/.pypirc
+            echo -e "password = $PYPI_PASSWORD" >> ~/.pypirc
+      - run:
+          name: upload to pypi
+          command: |
+            . venv/bin/activate
+            python setup.py sdist
+            python setup.py bdist_wheel
+            twine upload dist/*
 
 
 workflows:
   version: 2
-  test-all-supported-python-versions:
+  test-deploy:
     jobs:
       - test-3.7
       - test-3.6
