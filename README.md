@@ -144,7 +144,7 @@ So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library
 
 However, as a hacker like you with strong desire to learn something, you must be curious about the magic under the ground.
 
-In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha256(k2.public_key.multiply(k1)`.
+In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha256(k2.public_key.multiply(k1))`.
 
 ```python
 >>> k1.to_int()
