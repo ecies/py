@@ -220,6 +220,10 @@ b'helloworld'
 
 ## Release Notes
 
+### 0.1.6
+
+-   Bump dependency versions
+
 ### 0.1.5
 
 -   Bump dependency versions
