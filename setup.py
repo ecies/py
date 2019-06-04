@@ -51,7 +51,7 @@ setup(
     license=about["__license__"],
     packages=find_packages(),
     install_requires=["eth-keys", "pysha3", "pycryptodomex", "coincurve"],
-    python_requires=">=3",
+    python_requires=">=3.5",
     entry_points={"console_scripts": ["eciespy = ecies.__main__:main"]},
     keywords=[
         "secp256k1",
