@@ -20,13 +20,13 @@ def main():
         "-e",
         "--encrypt",
         action="store_true",
-        help="encrypt with public key, not compatible with -d",
+        help="encrypt with public key, exclusive with -d",
     )
     parser.add_argument(
         "-d",
         "--decrypt",
         action="store_true",
-        help="decrypt with private key, not compatible with -e",
+        help="decrypt with private key, exclusive with -e",
     )
     parser.add_argument(
         "-g", "--generate", action="store_true", help="generate ethereum key pair"

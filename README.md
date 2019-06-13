@@ -67,8 +67,8 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
 
 optional arguments:
   -h, --help            show this help message and exit
-  -e, --encrypt         encrypt with public key, not compatible with -d
-  -d, --decrypt         decrypt with private key, not compatible with -e
+  -e, --encrypt         encrypt with public key, exclusive with -d
+  -d, --decrypt         decrypt with private key, exclusive with -e
   -g, --generate        generate ethereum key pair
   -k KEY, --key KEY     public or private key file
   -D [DATA], --data [DATA]
