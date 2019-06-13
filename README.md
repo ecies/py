@@ -219,7 +219,7 @@ Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compres
 
 You may want to ask, what if no hash? Briefly, hash can:
 
-1.  Make the shared key's length fixed
+1.  Make the shared key's length fixed;
 2.  Make it safer since hash functions can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) to know more.
 
 ### AES
