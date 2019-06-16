@@ -128,7 +128,7 @@ Basically the encrypted data will be like this:
 
 ### Secp256k1
 
-#### Glance on ecdh
+#### Glance at ecdh
 
 So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library like [`coincurve`](https://github.com/ofek/coincurve), you might just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
 
