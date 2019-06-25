@@ -202,6 +202,10 @@ A point multiplying a scalar can be regarded that this point adds itself multipl
 '04c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee51ae168fea63dc339a3c58419466ceaeef7f632653266d0e1236431a950cfe52a'
 ```
 
+The format is depicted by the image below from the [bitcoin book](https://github.com/bitcoinbook/bitcoinbook).
+
+![EC public key format](https://raw.githubusercontent.com/bitcoinbook/bitcoinbook/develop/images/mbc2_0407.png)
+
 > If you want to convert the compressed format to uncompressed, basically, you need to calculate `y` from `x` by solving the equation using [Cipolla's Algorithm](https://www.wikiwand.com/en/Cipolla%27s_algorithm):
 >
 > ![y^2=(x^3 + 7) mod p, where p=2^{256}-2^{32}-2^{9}-2^{8}-2^{7}-2^{6}-2^{4}-1](https://tex.s2cms.ru/svg/%20y%5E2%3D(x%5E3%20%2B%207)%20%5Cbmod%20p%2C%5C%20where%5C%20p%3D2%5E%7B256%7D-2%5E%7B32%7D-2%5E%7B9%7D-2%5E%7B8%7D-2%5E%7B7%7D-2%5E%7B6%7D-2%5E%7B4%7D-1%20)
