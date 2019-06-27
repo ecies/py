@@ -243,14 +243,10 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.1.7
+### 0.1.6 ~ 0.1.8
 
 -   Bump dependency versions
 -   Update documentation
-
-### 0.1.6
-
--   Bump dependency versions
 
 ### 0.1.5
 
