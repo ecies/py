@@ -106,9 +106,9 @@ $ rm data enc_data
 
 This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](https://github.com/ofek/coincurve) and [`pycryptodome`](https://github.com/Legrandin/pycryptodome)) to provide an API of encrypting with `secp256k1` public key and decrypting with `secp256k1`'s private key. It has two parts generally:
 
-1.  Use [ECDH](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman) to calculate an AES session key;
+1.  Use [ECDH](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman) to exchange an AES session key;
 
-    > Notice that the server public key is generated every time when `ecies.encrypt` is invoked, thus, the calculated AES session key varies.
+    > Notice that the server public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
 
 2.  Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
 
