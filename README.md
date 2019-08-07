@@ -4,6 +4,8 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
 There is also a JavaScript version on [npm](https://www.npmjs.com/package/eciesjs).
 
+You can also check a flask web backend demo [here](https://github.com/kigawas/eciespy-demo).
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/114b4556cd924c909878ed116876dda8)](https://www.codacy.com/app/kigawas/eciespy?utm_source=github.com&utm_medium=referral&utm_content=kigawas/eciespy&utm_campaign=Badge_Grade)
 [![CI](https://img.shields.io/circleci/project/github/kigawas/eciespy.svg)](https://circleci.com/gh/kigawas/eciespy)
 [![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
@@ -108,7 +110,7 @@ This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](ht
 
 1.  Use [ECDH](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman) to exchange an AES session key;
 
-    > Notice that the server public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
+    > Notice that the sender public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
 
 2.  Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
 
@@ -118,9 +120,9 @@ Basically the encrypted data will be like this:
 +-------------------------------+----------+----------+-----------------+
 | 65 Bytes                      | 16 Bytes | 16 Bytes | == data size    |
 +-------------------------------+----------+----------+-----------------+
-| Server Public Key(Disposable) | Nonce/IV | Tag/MAC  | Encrypted data  |
+| Sender Public Key (ephemeral) | Nonce/IV | Tag/MAC  | Encrypted data  |
 +-------------------------------+----------+----------+-----------------+
-| server_pub                    | nonce    | tag      | encrypted_data  |
+| sender_pub                    | nonce    | tag      | encrypted_data  |
 +-------------------------------+----------+----------+-----------------+
 |           Secp256k1           |              AES-256-GCM              |
 +-------------------------------+---------------------------------------+
