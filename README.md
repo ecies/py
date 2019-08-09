@@ -1,11 +1,5 @@
 # eciespy
 
-Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
-
-There is also a JavaScript version on [npm](https://www.npmjs.com/package/eciesjs).
-
-You can also check a flask web backend demo [here](https://github.com/kigawas/eciespy-demo).
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/114b4556cd924c909878ed116876dda8)](https://www.codacy.com/app/kigawas/eciespy?utm_source=github.com&utm_medium=referral&utm_content=kigawas/eciespy&utm_campaign=Badge_Grade)
 [![CI](https://img.shields.io/circleci/project/github/kigawas/eciespy.svg)](https://circleci.com/gh/kigawas/eciespy)
 [![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
@@ -13,9 +7,19 @@ You can also check a flask web backend demo [here](https://github.com/kigawas/ec
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![License](https://img.shields.io/github/license/kigawas/eciespy.svg)](https://github.com/kigawas/eciespy)
 
+Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
+
+Other language versions:
+
+-   [TypeScript](https://github.com/kigawas/eciesjs)
+-   [Rust](https://github.com/kigawas/eciesrs)
+-   [Golang](https://github.com/L11R/) (from community)
+
+You can also check a flask web backend demo [here](https://github.com/kigawas/eciespy-demo).
+
 ## Install
 
-Install with `pip install eciespy` under Python version >= 3.5.
+Install with `pip install eciespy` under Python 3.5+.
 
 ## Quick Start
 
@@ -148,7 +152,7 @@ So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library
 'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
 ```
 
-#### Calcuate your ecdh key manually
+#### Calculate your ecdh key manually
 
 However, as a hacker like you with strong desire to learn something, you must be curious about the magic under the ground.
 

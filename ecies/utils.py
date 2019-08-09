@@ -1,4 +1,5 @@
 import hashlib
+import codecs
 
 from Cryptodome.Cipher import AES
 
@@ -6,7 +7,6 @@ from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
 
 from eth_keys import keys
-from eth_utils import decode_hex
 
 AES_CIPHER_MODE = AES.MODE_GCM
 
@@ -20,6 +20,16 @@ __all__ = [
     "aes_encrypt",
     "aes_decrypt",
 ]
+
+
+def remove_0x(s: str) -> str:
+    if s.startswith('0x') or s.startswith('0X'):
+        return s[2:]
+    return s
+
+
+def decode_hex(s: str) -> bytes:
+    return codecs.decode(remove_0x(s), 'hex')  # type: ignore
 
 
 def sha256(msg: bytes) -> bytes:
@@ -174,9 +184,9 @@ def aes_encrypt(key: bytes, plain_text: bytes) -> bytes:
     """
     aes_cipher = AES.new(key, AES_CIPHER_MODE)
 
-    encrypted, tag = aes_cipher.encrypt_and_digest(plain_text)
+    encrypted, tag = aes_cipher.encrypt_and_digest(plain_text)  # type: ignore
     cipher_text = bytearray()
-    cipher_text.extend(aes_cipher.nonce)
+    cipher_text.extend(aes_cipher.nonce)  # type: ignore
     cipher_text.extend(tag)
     cipher_text.extend(encrypted)
     return bytes(cipher_text)
@@ -213,4 +223,4 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
     ciphered_data = cipher_text[32:]
 
     aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce=nonce)
-    return aes_cipher.decrypt_and_verify(ciphered_data, tag)
+    return aes_cipher.decrypt_and_verify(ciphered_data, tag)  # type: ignore
