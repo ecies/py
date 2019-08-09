@@ -11,7 +11,7 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
 Other language versions:
 
--   [JavaScript/TypeScript](https://github.com/kigawas/eciesjs)
+-   [TypeScript](https://github.com/kigawas/eciesjs)
 -   [Rust](https://github.com/kigawas/eciesrs)
 -   [Golang](https://github.com/L11R/) (from community)
 

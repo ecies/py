@@ -184,9 +184,9 @@ def aes_encrypt(key: bytes, plain_text: bytes) -> bytes:
     """
     aes_cipher = AES.new(key, AES_CIPHER_MODE)
 
-    encrypted, tag = aes_cipher.encrypt_and_digest(plain_text)
+    encrypted, tag = aes_cipher.encrypt_and_digest(plain_text)  # type: ignore
     cipher_text = bytearray()
-    cipher_text.extend(aes_cipher.nonce)
+    cipher_text.extend(aes_cipher.nonce)  # type: ignore
     cipher_text.extend(tag)
     cipher_text.extend(encrypted)
     return bytes(cipher_text)
@@ -223,4 +223,4 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
     ciphered_data = cipher_text[32:]
 
     aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce=nonce)
-    return aes_cipher.decrypt_and_verify(ciphered_data, tag)
+    return aes_cipher.decrypt_and_verify(ciphered_data, tag)  # type: ignore
