@@ -13,7 +13,7 @@ Other language versions:
 
 -   [TypeScript](https://github.com/kigawas/eciesjs)
 -   [Rust](https://github.com/kigawas/eciesrs)
--   [Golang](https://github.com/L11R/) (from community)
+-   [Golang](https://github.com/L11R/eciesgo) (from community)
 
 You can also check a flask web backend demo [here](https://github.com/kigawas/eciespy-demo).
 
