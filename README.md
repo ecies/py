@@ -43,20 +43,20 @@ Or just use a builtin command `eciespy` in your favorite [command line](#command
 
 ## API
 
-### `ecies.encrypt(receiver_pubhex: str, msg: bytes) -> bytes`
+### `ecies.encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes`
 
 Parameters:
 
--   **receiver_pubhex** - Receiver's secp256k1 public key hex string
+-   **receiver_pk** - Receiver's public key (hex str or bytes)
 -   **msg** - Data to encrypt
 
 Returns:  **bytes**
 
-### `ecies.decrypt(receiver_prvhex: str, msg: bytes) -> bytes`
+### `ecies.decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes`
 
 Parameters:
 
--   **receiver_prvhex** - Receiver's secp256k1 private key hex string
+-   **receiver_sk** - Receiver's private key (hex str or bytes)
 -   **msg** - Data to decrypt
 
 Returns:  **bytes**
@@ -126,7 +126,7 @@ Basically the encrypted data will be like this:
 +-------------------------------+----------+----------+-----------------+
 | Sender Public Key (ephemeral) | Nonce/IV | Tag/MAC  | Encrypted data  |
 +-------------------------------+----------+----------+-----------------+
-| sender_pub                    | nonce    | tag      | encrypted_data  |
+| sender_pk                     | nonce    | tag      | encrypted_data  |
 +-------------------------------+----------+----------+-----------------+
 |           Secp256k1           |              AES-256-GCM              |
 +-------------------------------+---------------------------------------+
@@ -239,43 +239,28 @@ Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. Thi
 ```python
 >>> from Cryptodome.Cipher import AES
 >>> key = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
->>> nonce = b'\xf3\xe1\xba\x81\r,\x89\x00\xb1\x13\x12\xb7\xc7%V_'
+>>> iv = b'\xf3\xe1\xba\x81\r,\x89\x00\xb1\x13\x12\xb7\xc7%V_'
 >>> tag = b'\xec;q\xe1|\x11\xdb\xe3\x14\x84\xda\x94P\xed\xcfl'
 >>> data = b'\x02\xd2\xff\xed\x93\xb8V\xf1H\xb9'
->>> decipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
+>>> decipher = AES.new(key, AES.MODE_GCM, nonce=iv)
 >>> decipher.decrypt_and_verify(data, tag)
 b'helloworld'
 ```
 
 ## Release Notes
 
-### 0.1.6 ~ 0.1.9
+### 0.2.0
 
+-   API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex str and raw bytes
 -   Bump dependency versions
 -   Update documentation
 
-### 0.1.5
+### 0.1.1 ~ 0.1.9
 
 -   Bump dependency versions
--   Switch to Circle CI from Travis CI
-
-### 0.1.4
-
+-   Update documentation
+-   Switch to Circle CI
 -   Change license to MIT
--   Bump `coincurve` and `pycryptodome` versions
-
-### 0.1.3
-
--   Bump dependency versions
-
-### 0.1.2
-
--   Support Python 3.7 build
--   Minor fix on documentation
-
-### 0.1.1
-
--   Update documentation
 
 ### 0.1.0
 

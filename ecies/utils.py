@@ -2,10 +2,8 @@ import hashlib
 import codecs
 
 from Cryptodome.Cipher import AES
-
 from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
-
 from eth_keys import keys
 
 AES_CIPHER_MODE = AES.MODE_GCM
@@ -89,12 +87,12 @@ def hex2pub(pub_hex: str) -> PublicKey:
     Parameters
     ----------
     pub_hex: str
-        Ethereum public key hex string
+        Public key hex string
 
     Returns
     -------
     coincurve.PublicKey
-        A secp256k1 public key calculated from ethereum public key hex string
+        A secp256k1 public key
 
     >>> data = b'0'*32
     >>> data_hash = sha256(data)
@@ -108,7 +106,7 @@ def hex2pub(pub_hex: str) -> PublicKey:
     True
     """
     uncompressed = decode_hex(pub_hex)
-    if len(uncompressed) == 64:
+    if len(uncompressed) == 64:  # eth public key format
         uncompressed = b"\x04" + uncompressed
 
     return PublicKey(uncompressed)
@@ -121,12 +119,12 @@ def hex2prv(prv_hex: str) -> PrivateKey:
     Parameters
     ----------
     prv_hex: str
-        Ethereum private key hex string
+        Private key hex string
 
     Returns
     -------
     coincurve.PrivateKey
-        A secp256k1 private key calculated from ethereum private key hex string
+        A secp256k1 private key
 
     >>> k = generate_eth_key()
     >>> prvhex = k.to_hex()
@@ -202,7 +200,7 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
         AES session key, which derived from two secp256k1 keys
     cipher_text: bytes
         Encrypted text:
-            nonce(16 bytes) + tag(16 bytes) + encrypted data
+            iv(16 bytes) + tag(16 bytes) + encrypted data
 
     Returns
     -------
@@ -218,9 +216,13 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
     >>> aes_decrypt(key, aes_encrypt(key, data)) == data
     True
     """
-    nonce = cipher_text[:16]
+    iv = cipher_text[:16]
     tag = cipher_text[16:32]
     ciphered_data = cipher_text[32:]
 
-    aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce=nonce)
+    # NOTE
+    # pycryptodome's aes gcm take nonce as iv
+    # but actually nonce (12 bytes) should be used to generate iv (16 bytes) and iv should be sequential
+    # See https://crypto.stackexchange.com/a/71219
+    aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce=iv)
     return aes_cipher.decrypt_and_verify(ciphered_data, tag)  # type: ignore

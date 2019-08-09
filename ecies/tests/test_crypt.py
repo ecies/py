@@ -24,11 +24,13 @@ class TestCrypt(unittest.TestCase):
         prvhex = k.to_hex()
         pubhex = k.public_key.format(False).hex()
         self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+        self.assertEqual(data, decrypt(bytes.fromhex(prvhex), encrypt(bytes.fromhex(pubhex), data)))
 
         k = generate_key()
         prvhex = k.to_hex()
         pubhex = k.public_key.format(True).hex()
         self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+        self.assertEqual(data, decrypt(bytes.fromhex(prvhex), encrypt(bytes.fromhex(pubhex), data)))
 
     def test_aes(self):
         data = self.big_data
