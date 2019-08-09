@@ -29,7 +29,7 @@ def encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes:
     elif isinstance(receiver_pk, bytes):
         receiver_pubkey = PublicKey(receiver_pk)
     else:
-        raise ValueError("Invalid public key type")
+        raise TypeError("Invalid public key type")
 
     aes_key = derive(ephemeral_key, receiver_pubkey)
     cipher_text = aes_encrypt(aes_key, msg)
@@ -58,7 +58,7 @@ def decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes:
     elif isinstance(receiver_sk, bytes):
         private_key = PrivateKey(receiver_sk)
     else:
-        raise ValueError("Invalid secret key type")
+        raise TypeError("Invalid secret key type")
 
     pubkey = msg[0:65]  # uncompressed pubkey's length is 65 bytes
     encrypted = msg[65:]

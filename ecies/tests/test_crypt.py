@@ -32,6 +32,9 @@ class TestCrypt(unittest.TestCase):
         self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
         self.assertEqual(data, decrypt(bytes.fromhex(prvhex), encrypt(bytes.fromhex(pubhex), data)))
 
+        self.assertRaises(TypeError, encrypt, 1, data)
+        self.assertRaises(TypeError, decrypt, 1, encrypt(bytes.fromhex(pubhex), data))
+
     def test_aes(self):
         data = self.big_data
         key = os.urandom(16)
