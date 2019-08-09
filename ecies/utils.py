@@ -1,4 +1,5 @@
 import hashlib
+import codecs
 
 from Cryptodome.Cipher import AES
 
@@ -6,7 +7,6 @@ from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
 
 from eth_keys import keys
-from eth_utils import decode_hex
 
 AES_CIPHER_MODE = AES.MODE_GCM
 
@@ -20,6 +20,16 @@ __all__ = [
     "aes_encrypt",
     "aes_decrypt",
 ]
+
+
+def remove_0x(s: str) -> str:
+    if s.startswith('0x') or s.startswith('0X'):
+        return s[2:]
+    return s
+
+
+def decode_hex(s: str) -> bytes:
+    return codecs.decode(remove_0x(s), 'hex')  # type: ignore
 
 
 def sha256(msg: bytes) -> bytes:
