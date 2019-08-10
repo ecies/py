@@ -112,7 +112,7 @@ $ rm data enc_data
 
 This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](https://github.com/ofek/coincurve) and [`pycryptodome`](https://github.com/Legrandin/pycryptodome)) to provide an API of encrypting with `secp256k1` public key and decrypting with `secp256k1`'s private key. It has two parts generally:
 
-1.  Use [ECDH](https://www.wikiwand.com/en/Elliptic-curve_Diffie%E2%80%93Hellman) to exchange an AES session key;
+1.  Use [ECDH](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman) to exchange an AES session key;
 
     > Notice that the sender public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
 
@@ -182,7 +182,7 @@ Let's discuss in details. The word _multiply_ here means multiplying a **point**
 
 > Warning: 1 \* (x, y) == (x, y) is always true, since 1 is the **identity element** for multiplication.
 
-Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://www.wikiwand.com/en/Elliptic_Curve_Digital_Signature_Algorithm#/Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (easy to multiply, hard to divide).
+Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (easy to multiply, hard to divide).
 
 #### Compressed and uncompressed keys
 
@@ -212,7 +212,7 @@ The format is depicted by the image below from the [bitcoin book](https://github
 
 ![EC public key format](https://raw.githubusercontent.com/bitcoinbook/bitcoinbook/develop/images/mbc2_0407.png)
 
-> If you want to convert the compressed format to uncompressed, basically, you need to calculate `y` from `x` by solving the equation using [Cipolla's Algorithm](https://www.wikiwand.com/en/Cipolla%27s_algorithm):
+> If you want to convert the compressed format to uncompressed, basically, you need to calculate `y` from `x` by solving the equation using [Cipolla's Algorithm](https://en.wikipedia.org/wiki/Cipolla's_algorithm):
 >
 > ![y^2=(x^3 + 7) mod p, where p=2^{256}-2^{32}-2^{9}-2^{8}-2^{7}-2^{6}-2^{4}-1](https://tex.s2cms.ru/svg/%20y%5E2%3D(x%5E3%20%2B%207)%20%5Cbmod%20p%2C%5C%20where%5C%20p%3D2%5E%7B256%7D-2%5E%7B32%7D-2%5E%7B9%7D-2%5E%7B8%7D-2%5E%7B7%7D-2%5E%7B6%7D-2%5E%7B4%7D-1%20)
 >
