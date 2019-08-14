@@ -1,11 +1,11 @@
 # eciespy
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/114b4556cd924c909878ed116876dda8)](https://www.codacy.com/app/kigawas/eciespy?utm_source=github.com&utm_medium=referral&utm_content=kigawas/eciespy&utm_campaign=Badge_Grade)
-[![CI](https://img.shields.io/circleci/project/github/kigawas/eciespy.svg)](https://circleci.com/gh/kigawas/eciespy)
-[![Codecov](https://img.shields.io/codecov/c/github/kigawas/eciespy.svg)](https://codecov.io/gh/kigawas/eciespy)
+[![CI](https://img.shields.io/circleci/project/github/ecies/py.svg)](https://circleci.com/gh/ecies/py)
+[![Codecov](https://img.shields.io/codecov/c/github/ecies/py.svg)](https://codecov.io/gh/ecies/py)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
-[![License](https://img.shields.io/github/license/kigawas/eciespy.svg)](https://github.com/kigawas/eciespy)
+[![License](https://img.shields.io/github/license/ecies/py.svg)](https://github.com/ecies/py)
 
 Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
