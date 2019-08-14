@@ -60,7 +60,7 @@ def decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes:
 
     pubkey = msg[0:65]  # uncompressed pubkey's length is 65 bytes
     encrypted = msg[65:]
-    ephemeral_pubic_key = PublicKey(pubkey)
+    ephemeral_public_key = PublicKey(pubkey)
 
-    aes_key = decapsulate(ephemeral_pubic_key, private_key)
+    aes_key = decapsulate(ephemeral_public_key, private_key)
     return aes_decrypt(aes_key, encrypted)
