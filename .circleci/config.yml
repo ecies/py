@@ -1,7 +1,6 @@
-version: 2
-
+version: 2.1
 jobs:
-  test-3.7: &test-template
+  test-37: &test-template
     docker:
       - image: circleci/python:3.7
 
@@ -39,12 +38,12 @@ jobs:
             codecov
             python-codacy-coverage -r coverage.xml
 
-  test-3.6:
+  test-36:
     <<: *test-template
     docker:
       - image: circleci/python:3.6
 
-  test-3.5:
+  test-35:
     <<: *test-template
     docker:
       - image: circleci/python:3.5
@@ -76,23 +75,23 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-      - test-3.7:
+      - test-37:
           filters:
             tags:
               only: /^v.*/
-      - test-3.6:
+      - test-36:
           filters:
             tags:
               only: /^v.*/
-      - test-3.5:
+      - test-35:
           filters:
             tags:
               only: /^v.*/
       - deploy:
           requires:
-            - test-3.7
-            - test-3.6
-            - test-3.5
+            - test-37
+            - test-36
+            - test-35
           filters:
             tags:
               only: /^v.*/
