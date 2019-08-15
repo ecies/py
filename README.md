@@ -232,6 +232,8 @@ You may want to ask, what if no hash? Briefly, hash can:
 1.  Make the shared key's length fixed;
 2.  Make it safer since hash functions can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) for more details.
 
+> Warning: Accoring to some recent research, although widely used, the `sha256` key derivation function is [not secure enough](https://github.com/ecies/py/issues/82).
+
 ### AES
 
 Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. This is quite straight, and the example derives from `pycryptodome`'s [documentation](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes).
@@ -247,7 +249,7 @@ Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. Thi
 b'helloworld'
 ```
 
-> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/kigawas/eciespy/blob/master/ecies/utils.py#L223).
+> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L223).
 
 ## Release Notes
 
