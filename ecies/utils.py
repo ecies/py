@@ -2,11 +2,14 @@ import hashlib
 import codecs
 
 from Cryptodome.Cipher import AES
+from Cryptodome.Protocol.KDF import HKDF
+from Cryptodome.Hash import SHA256
 from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
 from eth_keys import keys
 
 AES_CIPHER_MODE = AES.MODE_GCM
+AES_KEY_BYTES_LEN = 32
 
 __all__ = [
     "sha256",
@@ -14,7 +17,6 @@ __all__ = [
     "generate_eth_key",
     "hex2prv",
     "hex2pub",
-    "derive",
     "aes_encrypt",
     "aes_decrypt",
 ]
@@ -136,32 +138,18 @@ def hex2prv(prv_hex: str) -> PrivateKey:
     return PrivateKey(decode_hex(prv_hex))
 
 
-def derive(private_key: PrivateKey, peer_public_key: PublicKey) -> bytes:
-    """
-    Key exchange between private key and peer's public key,
-    `derive(k1, k2.public_key)` should be equal to `derive(k2, k1.public_key)`.
+def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey) -> bytes:
+    shared_point = peer_public_key.multiply(private_key.secret)
+    master = private_key.public_key.format(compressed=False) + shared_point.format(compressed=False)
+    derived = HKDF(master, AES_KEY_BYTES_LEN, b'', SHA256)
+    return derived
 
-    Parameters
-    ----------
-    private_key: coincurve.PrivateKey
-        A secp256k1 private key
-    peer_public_key: coincurve.PublicKey
-        Peer's public key
 
-    Returns
-    -------
-    bytes
-        A secret key used for symmetric encryption
-
-    >>> from coincurve import PrivateKey
-    >>> ke1 = generate_eth_key()
-    >>> ke2 = generate_eth_key()
-    >>> k1 = hex2prv(ke1.to_hex())
-    >>> k2 = hex2prv(ke2.to_hex())
-    >>> derive(k1, k2.public_key) == derive(k2, k1.public_key)
-    True
-    """
-    return private_key.ecdh(peer_public_key.format())
+def decapsulate(public_key: PublicKey, peer_private_key: PrivateKey) -> bytes:
+    shared_point = public_key.multiply(peer_private_key.secret)
+    master = public_key.format(compressed=False) + shared_point.format(compressed=False)
+    derived = HKDF(master, AES_KEY_BYTES_LEN, b'', SHA256)
+    return derived
 
 
 def aes_encrypt(key: bytes, plain_text: bytes) -> bytes:

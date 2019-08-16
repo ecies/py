@@ -253,6 +253,10 @@ b'helloworld'
 
 ## Release Notes
 
+### 0.3.0
+
+-   API change: use `HKDF` to derive shared keys instead of `sha256`
+
 ### 0.2.0
 
 -   API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex str and raw bytes
