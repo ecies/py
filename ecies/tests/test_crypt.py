@@ -2,6 +2,8 @@ import os
 import unittest
 
 from coincurve import PrivateKey
+from Cryptodome.Protocol.KDF import HKDF
+from Cryptodome.Hash import SHA256
 
 from ecies import encrypt, decrypt
 from ecies.utils import sha256, encapsulate, decapsulate, generate_eth_key, generate_key, aes_encrypt, aes_decrypt
@@ -16,6 +18,12 @@ class TestCrypt(unittest.TestCase):
         self.assertEqual(sha256(b"0" * 16).hex()[:8], "fcdb4b42")
 
     def test_hdkf(self):
+        derived = HKDF(b'secret', 32, b'', SHA256).hex()
+        self.assertEqual(
+            derived,
+            "2f34e5ff91ec85d53ca9b543683174d0cf550b60d5f52b24c97b386cfcf6cbbf"
+        )
+
         k1 = PrivateKey(secret=bytes([2]))
         self.assertEqual(k1.to_int(), 2)
 
@@ -27,7 +35,7 @@ class TestCrypt(unittest.TestCase):
         )
         self.assertEqual(
             encapsulate(k1, k2.public_key).hex(),
-            '6f982d63e8590c9d9b5b4c1959ff80315d772edd8f60287c9361d548d5200f82'
+            "6f982d63e8590c9d9b5b4c1959ff80315d772edd8f60287c9361d548d5200f82"
         )
 
     def test_elliptic(self):
