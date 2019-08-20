@@ -3,7 +3,7 @@ cffi==1.12.3
 coincurve==12.0.0
 cytoolz==0.10.0
 eth-hash==0.2.0
-eth-keys==0.3.0
+eth-keys==0.3.1
 pycparser==2.19
 pycryptodomex==3.8.2
 pysha3==1.0.2
