@@ -249,7 +249,7 @@ Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. Thi
 b'helloworld'
 ```
 
-> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L223).
+> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L211).
 
 ## Release Notes
 
