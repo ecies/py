@@ -255,7 +255,7 @@ b'helloworld'
 
 ### 0.3.0
 
--   API change: use `HKDF` to derive shared keys instead of `sha256`
+-   API change: use `HKDF-sha256` to derive shared keys instead of `sha256`
 
 ### 0.2.0
 
