@@ -182,7 +182,7 @@ Let's discuss in details. The word _multiply_ here means multiplying a **point**
 
 > Warning: 1 \* (x, y) == (x, y) is always true, since 1 is the **identity element** for multiplication.
 
-Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (easy to multiply, hard to divide).
+Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (which means it's a "one-way function").
 
 #### Compressed and uncompressed keys
 
