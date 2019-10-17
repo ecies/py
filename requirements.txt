@@ -1,4 +1,4 @@
-asn1crypto==1.1.0
+asn1crypto==1.2.0
 cffi==1.13.0
 coincurve==12.0.0
 cytoolz==0.10.0
