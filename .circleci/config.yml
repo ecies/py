@@ -1,8 +1,8 @@
 version: 2.1
 jobs:
-  test-37: &test-template
+  test-38: &test-template
     docker:
-      - image: circleci/python:3.7
+      - image: circleci/python:3.8
 
     working_directory: ~/repo
 
@@ -37,6 +37,10 @@ jobs:
             coverage run -m unittest discover .
             codecov
             python-codacy-coverage -r coverage.xml
+  test-37:
+    <<: *test-template
+    docker:
+      - image: circleci/python:3.7
 
   test-36:
     <<: *test-template
@@ -51,7 +55,7 @@ jobs:
   deploy:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.7
+      - image: circleci/python:3.8
     steps:
       - checkout
 
@@ -75,6 +79,10 @@ workflows:
   version: 2
   test-deploy:
     jobs:
+      - test-38:
+          filters:
+            tags:
+              only: /^v.*/
       - test-37:
           filters:
             tags:
@@ -89,6 +97,7 @@ workflows:
               only: /^v.*/
       - deploy:
           requires:
+            - test-38
             - test-37
             - test-36
             - test-35
