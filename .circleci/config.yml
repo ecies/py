@@ -20,7 +20,8 @@ jobs:
           name: Install dependencies
           command: |
             python3 -m venv venv
-            curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3
+            . venv/bin/activate
+            curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
             . $HOME/.poetry/env
             poetry install
 
