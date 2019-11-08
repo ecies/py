@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "eciespy"
+version = "0.3.1"
+packages = [
+    { include = "ecies" },
+]
+license = "MIT"
+description = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
+authors = ["Weiliang Li <to.be.impressive@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/ecies/py"
+repository = "https://github.com/ecies/py"
+documentation = "https://github.com/ecies/py"
+keywords = [
+    "secp256k1",
+    "crypto",
+    "elliptic curves",
+    "ecies",
+    "bitcoin",
+    "ethereum",
+    "cryptocurrency",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Security :: Cryptography",
+]
+
+[tool.poetry.dependencies]
+python = "^3.5.3"
+coincurve = "^13.0"
+pycryptodomex = "^3.9"
+eth-keys = "^0.3.1"
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.9"
+mypy = "^0.740.0"
+flake8 = "^3.7"
+black = { version = "^18.6-alpha.0", allows-prereleases = true, python = "^3.6" }

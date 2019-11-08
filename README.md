@@ -253,6 +253,10 @@ b'helloworld'
 
 ## Release Notes
 
+### 0.3.1
+
+-   Support Python 3.8
+
 ### 0.3.0
 
 -   API change: use `HKDF-sha256` to derive shared keys instead of `sha256`

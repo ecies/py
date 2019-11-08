@@ -12,7 +12,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-{{ checksum "poetry.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
@@ -20,13 +20,14 @@ jobs:
           name: Install dependencies
           command: |
             python3 -m venv venv
-            venv/bin/pip install -U pip
-            venv/bin/pip install -r requirements.txt
+            curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python3
+            . $HOME/.poetry/env
+            poetry install
 
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-{{ checksum "poetry.lock" }}
 
       - run:
           name: Run tests
@@ -64,7 +65,7 @@ jobs:
           command: |
             python3 -m venv venv
             venv/bin/pip install -U pip twine wheel
-            venv/bin/pip install -r requirements.txt
+            venv/bin/python setup.py install
 
       - run:
           name: Upload to pypi
