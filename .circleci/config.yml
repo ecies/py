@@ -19,8 +19,8 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            sudo pip install -U pip        
             python -m venv venv
-            sudo pip install -U pip
             venv/bin/pip install -U pip
             venv/bin/pip install -r requirements.txt
 
@@ -38,6 +38,7 @@ jobs:
             coverage run -m unittest discover .
             codecov
             python-codacy-coverage -r coverage.xml
+            python setup.py install
   test-37:
     <<: *test-template
     docker:
