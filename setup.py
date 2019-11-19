@@ -50,8 +50,12 @@ setup(
     long_description_content_type="text/markdown",
     license=about["__license__"],
     packages=find_packages(),
-    install_requires=["eth-keys", "pysha3", "pycryptodomex", "coincurve"],
-    python_requires=">=3.5",
+    install_requires=[
+    python_requires=">=3.5",	        "coincurve>=13.0,<14.0",
+        "eth-keys>=0.3.1,<0.4.0",
+        "pycryptodomex>=3.9,<4.0",
+    ],
+    python_requires=">=3.5.3",
     entry_points={"console_scripts": ["eciespy = ecies.__main__:main"]},
     keywords=[
         "secp256k1",
@@ -72,6 +76,7 @@ setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Security :: Cryptography",
     ],
