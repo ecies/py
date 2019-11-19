@@ -51,7 +51,7 @@ setup(
     license=about["__license__"],
     packages=find_packages(),
     install_requires=[
-    python_requires=">=3.5",	        "coincurve>=13.0,<14.0",
+        "coincurve>=13.0,<14.0",
         "eth-keys>=0.3.1,<0.4.0",
         "pycryptodomex>=3.9,<4.0",
     ],
