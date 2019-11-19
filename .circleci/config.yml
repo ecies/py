@@ -20,6 +20,7 @@ jobs:
           name: Install dependencies
           command: |
             python -m venv venv
+            sudo pip install -U pip
             venv/bin/pip install -U pip
             venv/bin/pip install -r requirements.txt
 
