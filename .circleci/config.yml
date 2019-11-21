@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test-38: &test-template
     docker:
-      - image: circleci/python:3.8
+      - image: python:3.8
 
     working_directory: ~/repo
 
@@ -18,7 +18,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: |       
+          command: |
             python -m venv venv
             venv/bin/pip install -U pip
             venv/bin/pip install -r requirements.txt
@@ -41,12 +41,12 @@ jobs:
   test-37:
     <<: *test-template
     docker:
-      - image: circleci/python:3.7
+      - image: python:3.7
 
   test-36:
     <<: *test-template
     docker:
-      - image: circleci/python:3.6
+      - image: python:3.6
 
   test-35:
     <<: *test-template
@@ -56,7 +56,7 @@ jobs:
   deploy:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.8
+      - image: python:3.8
     steps:
       - checkout
 
