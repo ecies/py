@@ -52,7 +52,7 @@ jobs:
   test-35:
     <<: *test-template
     docker:
-      - image: circleci/python:3.5.3
+      - image: python:3.5.3
 
   deploy:
     working_directory: ~/repo
