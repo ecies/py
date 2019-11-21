@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test-38: &test-template
     docker:
-      - image: circleci/python:3.8
+      - image: python:3.8
 
     working_directory: ~/repo
 
@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            python3 -m venv venv
+            python -m venv venv
             venv/bin/pip install -U pip
             venv/bin/pip install -r requirements.txt
 
@@ -37,32 +37,33 @@ jobs:
             coverage run -m unittest discover .
             codecov
             python-codacy-coverage -r coverage.xml
+            python setup.py install
   test-37:
     <<: *test-template
     docker:
-      - image: circleci/python:3.7
+      - image: python:3.7
 
   test-36:
     <<: *test-template
     docker:
-      - image: circleci/python:3.6
+      - image: python:3.6
 
   test-35:
     <<: *test-template
     docker:
-      - image: circleci/python:3.5
+      - image: python:3.5.3
 
   deploy:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.8
+      - image: python:3.8
     steps:
       - checkout
 
       - run:
           name: Setup env
           command: |
-            python3 -m venv venv
+            python -m venv venv
             venv/bin/pip install -U pip twine wheel
             venv/bin/pip install -r requirements.txt
 
