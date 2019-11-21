@@ -27,15 +27,15 @@ Install with `pip install eciespy` under Python 3.5+.
 >>> from ecies.utils import generate_eth_key, generate_key
 >>> from ecies import encrypt, decrypt
 >>> eth_k = generate_eth_key()
->>> prvhex = eth_k.to_hex()
->>> pubhex = eth_k.public_key.to_hex()
+>>> prvhex = eth_k.to_hex()  # hex string
+>>> pubhex = eth_k.public_key.to_hex()  # hex string
 >>> data = b'this is a test'
 >>> decrypt(prvhex, encrypt(pubhex, data))
 b'this is a test'
 >>> secp_k = generate_key()
->>> prvhex = secp_k.to_hex()
->>> pubhex = secp_k.public_key.format(True).hex()
->>> decrypt(prvhex, encrypt(pubhex, data))
+>>> sk_bytes = secp_k.secret  # bytes
+>>> pk_bytes = secp_k.public_key.format(True)  # bytes
+>>> decrypt(sk_bytes, encrypt(pk_bytes, data))
 b'this is a test'
 ```
 
@@ -252,6 +252,12 @@ b'helloworld'
 > Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L211).
 
 ## Release Notes
+
+### 0.3.1
+
+-   Support Python 3.8
+-   Bump dependencies
+-   Update documentation
 
 ### 0.3.0
 
