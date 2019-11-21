@@ -1,5 +1,5 @@
 __title__ = "eciespy"
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 __description__ = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
 __url__ = "https://github.com/ecies/py"
 __author__ = "Weiliang Li"
