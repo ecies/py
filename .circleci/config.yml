@@ -20,6 +20,7 @@ jobs:
           name: Install dependencies
           command: |
             curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+            source $HOME/.poetry/env
             poetry install
 
       - save_cache:
