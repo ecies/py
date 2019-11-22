@@ -27,10 +27,10 @@ Install with `pip install eciespy` under Python 3.5+.
 >>> from ecies.utils import generate_eth_key, generate_key
 >>> from ecies import encrypt, decrypt
 >>> eth_k = generate_eth_key()
->>> prvhex = eth_k.to_hex()  # hex string
->>> pubhex = eth_k.public_key.to_hex()  # hex string
+>>> sk_hex = eth_k.to_hex()  # hex string
+>>> pk_hex = eth_k.public_key.to_hex()  # hex string
 >>> data = b'this is a test'
->>> decrypt(prvhex, encrypt(pubhex, data))
+>>> decrypt(sk_hex, encrypt(pk_hex, data))
 b'this is a test'
 >>> secp_k = generate_key()
 >>> sk_bytes = secp_k.secret  # bytes
