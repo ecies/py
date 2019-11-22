@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test-38: &test-template
     docker:
-      - image: circleci/python:3.8
+      - image: python:3.8
 
     working_directory: ~/repo
 
@@ -19,8 +19,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            python3 -m venv venv
-            source venv/bin/activate
+            curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
             poetry install
 
       - save_cache:
@@ -31,38 +30,38 @@ jobs:
       - run:
           name: Run tests
           command: |
-            source venv/bin/activate
-            pip install codecov codacy-coverage
-            coverage run -m doctest -v ecies/utils.py
-            coverage run -m unittest discover .
-            codecov
-            python-codacy-coverage -r coverage.xml
+            poetry run pip install codecov codacy-coverage
+            poetry run coverage run -m doctest -v ecies/utils.py
+            poetry run coverage run -m unittest discover .
+            poetry run codecov
+            poetry run python-codacy-coverage -r coverage.xml
+            poetry run python setup.py install
   test-37:
     <<: *test-template
     docker:
-      - image: circleci/python:3.7
+      - image: python:3.7
 
   test-36:
     <<: *test-template
     docker:
-      - image: circleci/python:3.6
+      - image: python:3.6
 
   test-35:
     <<: *test-template
     docker:
-      - image: circleci/python:3.5
+      - image: python:3.5.3
 
   deploy:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.8
+      - image: python:3.8
     steps:
       - checkout
 
       - run:
           name: Setup env
           command: |
-            python3 -m venv venv
+            python -m venv venv
             venv/bin/pip install -U pip twine wheel
             venv/bin/python setup.py install
 
