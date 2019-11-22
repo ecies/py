@@ -11,27 +11,6 @@ readme = "README.md"
 homepage = "https://github.com/ecies/py"
 repository = "https://github.com/ecies/py"
 documentation = "https://github.com/ecies/py"
-keywords = [
-    "secp256k1",
-    "crypto",
-    "elliptic curves",
-    "ecies",
-    "bitcoin",
-    "ethereum",
-    "cryptocurrency",
-]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.5",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Topic :: Security :: Cryptography",
-]
 
 [tool.poetry.dependencies]
 python = "^3.5.3"
