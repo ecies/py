@@ -38,6 +38,7 @@ jobs:
             codecov
             python-codacy-coverage -r coverage.xml
             python setup.py install
+            eciespy -g
   test-37:
     <<: *test-template
     docker:
