@@ -102,8 +102,8 @@ def hex2pub(pub_hex: str) -> PublicKey:
     >>> cc_prv = hex2prv(eth_prv.to_hex())
     >>> eth_prv.sign_msg_hash(data_hash).to_bytes() == cc_prv.sign_recoverable(data)
     True
-    >>> pubhex = eth_prv.public_key.to_hex()
-    >>> computed_pub = hex2pub(pubhex)
+    >>> pk_hex = eth_prv.public_key.to_hex()
+    >>> computed_pub = hex2pub(pk_hex)
     >>> computed_pub == cc_prv.public_key
     True
     """
@@ -129,9 +129,9 @@ def hex2prv(prv_hex: str) -> PrivateKey:
         A secp256k1 private key
 
     >>> k = generate_eth_key()
-    >>> prvhex = k.to_hex()
-    >>> pubhex = k.public_key.to_hex()
-    >>> computed_prv = hex2prv(prvhex)
+    >>> sk_hex = k.to_hex()
+    >>> pk_hex = k.public_key.to_hex()
+    >>> computed_prv = hex2prv(sk_hex)
     >>> computed_prv.to_int() == int(k.to_hex(), 16)
     True
     """

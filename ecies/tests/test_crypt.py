@@ -46,28 +46,28 @@ class TestCrypt(unittest.TestCase):
     def test_elliptic(self):
         data = self.test_string
         k = generate_eth_key()
-        prvhex = k.to_hex()
-        pubhex = k.public_key.to_hex()
-        self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+        sk_hex = k.to_hex()
+        pk_hex = k.public_key.to_hex()
+        self.assertEqual(data, decrypt(sk_hex, encrypt(pk_hex, data)))
 
         k = generate_key()
-        prvhex = k.to_hex()
-        pubhex = k.public_key.format(False).hex()
-        self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+        sk_hex = k.to_hex()
+        pk_hex = k.public_key.format(False).hex()
+        self.assertEqual(data, decrypt(sk_hex, encrypt(pk_hex, data)))
         self.assertEqual(
-            data, decrypt(bytes.fromhex(prvhex), encrypt(bytes.fromhex(pubhex), data))
+            data, decrypt(bytes.fromhex(sk_hex), encrypt(bytes.fromhex(pk_hex), data))
         )
 
         k = generate_key()
-        prvhex = k.to_hex()
-        pubhex = k.public_key.format(True).hex()
-        self.assertEqual(data, decrypt(prvhex, encrypt(pubhex, data)))
+        sk_hex = k.to_hex()
+        pk_hex = k.public_key.format(True).hex()
+        self.assertEqual(data, decrypt(sk_hex, encrypt(pk_hex, data)))
         self.assertEqual(
-            data, decrypt(bytes.fromhex(prvhex), encrypt(bytes.fromhex(pubhex), data))
+            data, decrypt(bytes.fromhex(sk_hex), encrypt(bytes.fromhex(pk_hex), data))
         )
 
         self.assertRaises(TypeError, encrypt, 1, data)
-        self.assertRaises(TypeError, decrypt, 1, encrypt(bytes.fromhex(pubhex), data))
+        self.assertRaises(TypeError, decrypt, 1, encrypt(bytes.fromhex(pk_hex), data))
 
     def test_aes(self):
         data = self.big_data
