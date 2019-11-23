@@ -253,6 +253,10 @@ b'helloworld'
 
 ## Release Notes
 
+### 0.3.2
+
+-   Fix CLI
+
 ### 0.3.1
 
 -   Support Python 3.8
