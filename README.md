@@ -239,7 +239,7 @@ You may want to ask, what if no hash? Briefly, hash can:
 Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. This is quite straight, and the example derives from `pycryptodome`'s [documentation](https://pycryptodome.readthedocs.io/en/latest/src/examples.html#encrypt-data-with-aes).
 
 ```python
->>> from Cryptodome.Cipher import AES
+>>> from Crypto.Cipher import AES
 >>> key = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
 >>> iv = b'\xf3\xe1\xba\x81\r,\x89\x00\xb1\x13\x12\xb7\xc7%V_'
 >>> tag = b'\xec;q\xe1|\x11\xdb\xe3\x14\x84\xda\x94P\xed\xcfl'
@@ -252,6 +252,10 @@ b'helloworld'
 > Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L211).
 
 ## Release Notes
+
+### 0.3.2
+
+-   Fix CLI
 
 ### 0.3.1
 
