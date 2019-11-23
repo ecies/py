@@ -53,7 +53,7 @@ setup(
     install_requires=[
         "coincurve>=13.0,<14.0",
         "eth-keys>=0.3.1,<0.4.0",
-        "pycryptodomex>=3.9,<4.0",
+        "pycryptodome>=3.9,<4.0",
     ],
     python_requires=">=3.5.3",
     entry_points={"console_scripts": ["eciespy = ecies.__main__:main"]},
