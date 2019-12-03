@@ -38,6 +38,7 @@ jobs:
             poetry run codecov
             poetry run python-codacy-coverage -r coverage.xml
             poetry run python setup.py install
+            poetry run eciespy -g
   test-37:
     <<: *test-template
     docker:

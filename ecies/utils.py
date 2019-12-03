@@ -1,9 +1,9 @@
 import hashlib
 import codecs
 
-from Cryptodome.Cipher import AES
-from Cryptodome.Protocol.KDF import HKDF
-from Cryptodome.Hash import SHA256
+from Crypto.Cipher import AES
+from Crypto.Protocol.KDF import HKDF
+from Crypto.Hash import SHA256
 from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
 from eth_keys import keys
@@ -23,13 +23,13 @@ __all__ = [
 
 
 def remove_0x(s: str) -> str:
-    if s.startswith('0x') or s.startswith('0X'):
+    if s.startswith("0x") or s.startswith("0X"):
         return s[2:]
     return s
 
 
 def decode_hex(s: str) -> bytes:
-    return codecs.decode(remove_0x(s), 'hex')  # type: ignore
+    return codecs.decode(remove_0x(s), "hex")  # type: ignore
 
 
 def sha256(msg: bytes) -> bytes:
@@ -102,8 +102,8 @@ def hex2pub(pub_hex: str) -> PublicKey:
     >>> cc_prv = hex2prv(eth_prv.to_hex())
     >>> eth_prv.sign_msg_hash(data_hash).to_bytes() == cc_prv.sign_recoverable(data)
     True
-    >>> pubhex = eth_prv.public_key.to_hex()
-    >>> computed_pub = hex2pub(pubhex)
+    >>> pk_hex = eth_prv.public_key.to_hex()
+    >>> computed_pub = hex2pub(pk_hex)
     >>> computed_pub == cc_prv.public_key
     True
     """
@@ -129,9 +129,9 @@ def hex2prv(prv_hex: str) -> PrivateKey:
         A secp256k1 private key
 
     >>> k = generate_eth_key()
-    >>> prvhex = k.to_hex()
-    >>> pubhex = k.public_key.to_hex()
-    >>> computed_prv = hex2prv(prvhex)
+    >>> sk_hex = k.to_hex()
+    >>> pk_hex = k.public_key.to_hex()
+    >>> computed_prv = hex2prv(sk_hex)
     >>> computed_prv.to_int() == int(k.to_hex(), 16)
     True
     """
@@ -140,15 +140,17 @@ def hex2prv(prv_hex: str) -> PrivateKey:
 
 def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey) -> bytes:
     shared_point = peer_public_key.multiply(private_key.secret)
-    master = private_key.public_key.format(compressed=False) + shared_point.format(compressed=False)
-    derived = HKDF(master, AES_KEY_BYTES_LEN, b'', SHA256)
+    master = private_key.public_key.format(compressed=False) + shared_point.format(
+        compressed=False
+    )
+    derived = HKDF(master, AES_KEY_BYTES_LEN, b"", SHA256)
     return derived
 
 
 def decapsulate(public_key: PublicKey, peer_private_key: PrivateKey) -> bytes:
     shared_point = public_key.multiply(peer_private_key.secret)
     master = public_key.format(compressed=False) + shared_point.format(compressed=False)
-    derived = HKDF(master, AES_KEY_BYTES_LEN, b'', SHA256)
+    derived = HKDF(master, AES_KEY_BYTES_LEN, b"", SHA256)
     return derived
 
 
