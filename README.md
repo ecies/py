@@ -140,16 +140,16 @@ So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library
 
 ```python
 >>> from coincurve import PrivateKey
->>> k1 = PrivateKey(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01')
->>> k2 = PrivateKey(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02')
+>>> k1 = PrivateKey.from_int(3)
+>>> k2 = PrivateKey.from_int(2)
 >>> k1.public_key.format(False).hex() # 65 bytes, False means uncompressed key
-'0479be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8'
+'04f9308a019258c31049344f85f89d5229b531c845836f99b08601f113bce036f9388f7b0f632de8140fe337e62a37f3566500a99934c2231b6cb9fd7584b8e672'
 >>> k2.public_key.format(False).hex() # 65 bytes
 '04c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee51ae168fea63dc339a3c58419466ceaeef7f632653266d0e1236431a950cfe52a'
 >>> k1.ecdh(k2.public_key.format()).hex()
-'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
+'c7d9ba2fa1496c81be20038e5c608f2fd5d0246d8643783730df6c2bbb855cb2'
 >>> k2.ecdh(k1.public_key.format()).hex()
-'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
+'c7d9ba2fa1496c81be20038e5c608f2fd5d0246d8643783730df6c2bbb855cb2'
 ```
 
 #### Calculate your ecdh key manually
@@ -160,16 +160,16 @@ In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha
 
 ```python
 >>> k1.to_int()
-1
->>> shared_pub = k2.public_key.multiply(bytes.fromhex(k1.to_hex()))
+3
+>>> shared_pub = k2.public_key.multiply(k1.secret)
 >>> shared_pub.point()
-(89565891926547004231252920425935692360644145829622209833684329913297188986597,
- 12158399299693830322967808612713398636155367887041628176798871954788371653930)
+(115780575977492633039504758427830329241728645270042306223540962614150928364886,
+ 78735063515800386211891312544505775871260717697865196436804966483607426560663)
 >>> import hashlib
 >>> h = hashlib.sha256()
 >>> h.update(shared_pub.format())
 >>> h.hexdigest()  # here you got the ecdh key same as above!
-'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
+'c7d9ba2fa1496c81be20038e5c608f2fd5d0246d8643783730df6c2bbb855cb2'
 ```
 
 > Warning: **NEVER** use small integers as private keys on any production systems or storing any valuable assets.
@@ -178,11 +178,11 @@ In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha
 
 #### Math on ecdh
 
-Let's discuss in details. The word _multiply_ here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a **scalar** (like `k`). Here `k` is the integer format of a private key, for instance, it can be `1` for `k1` here, and `(x, y)` here is an extremely large number pair like `(89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)`.
+Let's discuss in details. The word _multiply_ here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a **scalar** (like `k`). Here `k` is the integer format of a private key, for instance, it can be `3` for `k1` here, and `(x, y)` here is an extremely large number pair like `(115780575977492633039504758427830329241728645270042306223540962614150928364886, 78735063515800386211891312544505775871260717697865196436804966483607426560663)`.
 
-> Warning: 1 \* (x, y) == (x, y) is always true, since 1 is the **identity element** for multiplication.
+> Warning: 1 \* (x, y) == (x, y) is always true, since 1 is the **identity element** for multiplication. If you take integer 1 as private key, the public key will be the [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm).
 
-Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm), or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (which means it's a "one-way function").
+Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka base point, or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (which means it's a "one-way function").
 
 #### Compressed and uncompressed keys
 
@@ -192,6 +192,8 @@ A point multiplying a scalar can be regarded that this point adds itself multipl
 
 ```python
 >>> point = (89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)
+>>> point == k2.public_key.point()
+True
 >>> prefix = '02' if point[1] % 2 == 0 else '03'
 >>> compressed_key_hex = prefix + hex(point[0])[2:]
 >>> compressed_key = bytes.fromhex(compressed_key_hex)
@@ -218,16 +220,9 @@ The format is depicted by the image below from the [bitcoin book](https://github
 >
 > You can check the [bitcoin wiki](https://en.bitcoin.it/wiki/Secp256k1) and this thread on [bitcointalk.org](https://bitcointalk.org/index.php?topic=644919.msg7205689#msg7205689) for more details.
 
-Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compressed** key. It's better to use the compressed format, since you can always get `x` from `x` or `(x, y)` without any calculation.
+Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compressed** ECDH public key. It's better to use the compressed format, since you can always get `x` from `x` or `(x, y)` without any calculation.
 
-```python
->>> h = hashlib.sha256()
->>> h.update(compressed_key)
->>> h.hexdigest()
-'b1c9938f01121e159887ac2c8d393a22e4476ff8212de13fe1939de2a236f0a7'
-```
-
-You may want to ask, what if no hash? Briefly, hash can:
+You may want to ask, what if we don't hash it? Briefly, hash can:
 
 1.  Make the shared key's length fixed;
 2.  Make it safer since hash functions can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) for more details.
@@ -249,7 +244,7 @@ Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. Thi
 b'helloworld'
 ```
 
-> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L211).
+> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils.py`](https://github.com/ecies/py/blob/master/ecies/utils.py#L213).
 
 ## Release Notes
 
