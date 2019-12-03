@@ -105,7 +105,7 @@ $ echo 'data to encrypt' > data
 $ eciespy -e -k pub -D data -O enc_data
 $ eciespy -d -k prv -D enc_data
 data to encrypt
-$ rm data enc_data
+$ rm prv pub data enc_data
 ```
 
 ## Mechanism and implementation details
