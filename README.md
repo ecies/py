@@ -180,7 +180,7 @@ In one sentence, the `secp256k1`'s ECDH key of `k1` and `k2` is nothing but `sha
 
 Let's discuss in details. The word _multiply_ here means multiplying a **point** of a public key on elliptic curve (like `(x, y)`) with a **scalar** (like `k`). Here `k` is the integer format of a private key, for instance, it can be `3` for `k1` here, and `(x, y)` here is an extremely large number pair like `(115780575977492633039504758427830329241728645270042306223540962614150928364886, 78735063515800386211891312544505775871260717697865196436804966483607426560663)`.
 
-> Warning: 1 \* (x, y) == (x, y) is always true, since 1 is the **identity element** for multiplication. If you take integer 1 as private key, the public key will be the [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm).
+> Warning: 1 \* (x, y) == (x, y) is always true, since 1 is the **identity element** for multiplication. If you take integer 1 as a private key, the public key will be the [base point](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm#Signature_generation_algorithm).
 
 Mathematically, the elliptic curve cryptography is based on the fact that you can easily multiply point `A` (aka base point, or public key in ECDH) and scalar `k` (aka private key) to get another point `B` (aka public key), but it's almost impossible to calculate `A` from `B` reversely (which means it's a "one-way function").
 
