@@ -11,9 +11,9 @@ Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
 Other language versions:
 
--   [TypeScript](https://github.com/ecies/js)
--   [Rust](https://github.com/ecies/rs)
--   [Golang](https://github.com/ecies/go)
+- [TypeScript](https://github.com/ecies/js)
+- [Rust](https://github.com/ecies/rs)
+- [Golang](https://github.com/ecies/go)
 
 You can also check a flask web backend demo [here](https://github.com/kigawas/eciespy-demo).
 
@@ -47,19 +47,19 @@ Or just use a builtin command `eciespy` in your favorite [command line](#command
 
 Parameters:
 
--   **receiver_pk** - Receiver's public key (hex str or bytes)
--   **msg** - Data to encrypt
+- **receiver_pk** - Receiver's public key (hex str or bytes)
+- **msg** - Data to encrypt
 
-Returns:  **bytes**
+Returns: **bytes**
 
 ### `ecies.decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes`
 
 Parameters:
 
--   **receiver_sk** - Receiver's private key (hex str or bytes)
--   **msg** - Data to decrypt
+- **receiver_sk** - Receiver's private key (hex str or bytes)
+- **msg** - Data to decrypt
 
-Returns:  **bytes**
+Returns: **bytes**
 
 ## Command Line Interface
 
@@ -188,7 +188,7 @@ Mathematically, the elliptic curve cryptography is based on the fact that you ca
 
 A point multiplying a scalar can be regarded that this point adds itself multiple times, and the point `B` can be converted to a readable public key in a compressed or uncompressed format.
 
--   Compressed format (`x` coordinate only)
+- Compressed format (`x` coordinate only)
 
 ```python
 >>> point = (89565891926547004231252920425935692360644145829622209833684329913297188986597, 12158399299693830322967808612713398636155367887041628176798871954788371653930)
@@ -201,7 +201,7 @@ True
 '02c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5'
 ```
 
--   Uncompressed format (`(x, y)` coordinate)
+- Uncompressed format (`(x, y)` coordinate)
 
 ```python
 >>> uncompressed_key_hex = '04' + hex(point[0])[2:] + hex(point[1])[2:]
@@ -216,7 +216,7 @@ The format is depicted by the image below from the [bitcoin book](https://github
 
 > If you want to convert the compressed format to uncompressed, basically, you need to calculate `y` from `x` by solving the equation using [Cipolla's Algorithm](https://en.wikipedia.org/wiki/Cipolla's_algorithm):
 >
-> ![y^2=(x^3 + 7) mod p, where p=2^{256}-2^{32}-2^{9}-2^{8}-2^{7}-2^{6}-2^{4}-1](https://tex.s2cms.ru/svg/%20y%5E2%3D(x%5E3%20%2B%207)%20%5Cbmod%20p%2C%5C%20where%5C%20p%3D2%5E%7B256%7D-2%5E%7B32%7D-2%5E%7B9%7D-2%5E%7B8%7D-2%5E%7B7%7D-2%5E%7B6%7D-2%5E%7B4%7D-1%20)
+> ![y^2=(x^3 + 7) mod p, where p=2^{256}-2^{32}-2^{9}-2^{8}-2^{7}-2^{6}-2^{4}-1](<https://tex.s2cms.ru/svg/%20y%5E2%3D(x%5E3%20%2B%207)%20%5Cbmod%20p%2C%5C%20where%5C%20p%3D2%5E%7B256%7D-2%5E%7B32%7D-2%5E%7B9%7D-2%5E%7B8%7D-2%5E%7B7%7D-2%5E%7B6%7D-2%5E%7B4%7D-1%20>)
 >
 > You can check the [bitcoin wiki](https://en.bitcoin.it/wiki/Secp256k1) and this thread on [bitcointalk.org](https://bitcointalk.org/index.php?topic=644919.msg7205689#msg7205689) for more details.
 
@@ -248,33 +248,26 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.2
+### 0.3.0 ~ 0.3.3
 
--   Fix CLI
-
-### 0.3.1
-
--   Support Python 3.8
--   Bump dependencies
--   Update documentation
-
-### 0.3.0
-
--   API change: use `HKDF-sha256` to derive shared keys instead of `sha256`
+- API change: use `HKDF-sha256` to derive shared keys instead of `sha256`
+- Support Python 3.8
+- Bump dependencies
+- Update documentation
 
 ### 0.2.0
 
--   API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex str and raw bytes
--   Bump dependency versions
--   Update documentation
+- API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex str and raw bytes
+- Bump dependency versions
+- Update documentation
 
 ### 0.1.1 ~ 0.1.9
 
--   Bump dependency versions
--   Update documentation
--   Switch to Circle CI
--   Change license to MIT
+- Bump dependency versions
+- Update documentation
+- Switch to Circle CI
+- Change license to MIT
 
 ### 0.1.0
 
--   First beta version release
+- First beta version release
