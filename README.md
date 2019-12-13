@@ -96,27 +96,27 @@ Address: 0x47e801184B3a8ea8E6A4A7A4CFEfEcC76809Da72
 
 ### Encrypt with public key and decrypt with private key
 
-```console
-$ echo '0x95d3c5e483e9b1d4f5fc8e79b2deaf51362980de62dbb082a9a4257eef653d7d' > prv
-$ echo '0x98afe4f150642cd05cc9d2fa36458ce0a58567daeaf5fde7333ba9b403011140a4e28911fcf83ab1f457a30b4959efc4b9306f514a4c3711a16a80e3b47eb58b' > pub
+```bash
+echo '0x95d3c5e483e9b1d4f5fc8e79b2deaf51362980de62dbb082a9a4257eef653d7d' > prv
+echo '0x98afe4f150642cd05cc9d2fa36458ce0a58567daeaf5fde7333ba9b403011140a4e28911fcf83ab1f457a30b4959efc4b9306f514a4c3711a16a80e3b47eb58b' > pub
 $ echo 'helloworld' | eciespy -e -k pub | eciespy -d -k prv
 helloworld
-$ echo 'data to encrypt' > data
-$ eciespy -e -k pub -D data -O enc_data
+echo 'data to encrypt' > data
+eciespy -e -k pub -D data -O enc_data
 $ eciespy -d -k prv -D enc_data
 data to encrypt
-$ rm prv pub data enc_data
+rm prv pub data enc_data
 ```
 
 ## Mechanism and implementation details
 
 This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](https://github.com/ofek/coincurve) and [`pycryptodome`](https://github.com/Legrandin/pycryptodome)) to provide an API of encrypting with `secp256k1` public key and decrypting with `secp256k1`'s private key. It has two parts generally:
 
-1.  Use [ECDH](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman) to exchange an AES session key;
+1. Use [ECDH](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman) to exchange an AES session key;
 
     > Notice that the sender public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
 
-2.  Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
+2. Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
 
 Basically the encrypted data will be like this:
 
@@ -224,8 +224,8 @@ Then, the shared key between `k1` and `k2` is the `sha256` hash of the **compres
 
 You may want to ask, what if we don't hash it? Briefly, hash can:
 
-1.  Make the shared key's length fixed;
-2.  Make it safer since hash functions can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) for more details.
+1. Make the shared key's length fixed;
+2. Make it safer since hash functions can remove "weak bits" in the original computed key. Check the introduction section of this [paper](http://cacr.uwaterloo.ca/techreports/1998/corr98-05.pdf) for more details.
 
 > Warning: According to some recent research, although widely used, the `sha256` key derivation function is [not secure enough](https://github.com/ecies/py/issues/82).
 
