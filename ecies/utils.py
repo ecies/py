@@ -211,7 +211,7 @@ def aes_decrypt(key: bytes, cipher_text: bytes) -> bytes:
     ciphered_data = cipher_text[32:]
 
     # NOTE
-    # pycryptodome's aes gcm take nonce as iv
+    # pycryptodome's aes gcm takes nonce as iv
     # but actually nonce (12 bytes) should be used to generate iv (16 bytes) and iv should be sequential
     # See https://crypto.stackexchange.com/a/71219
     aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce=iv)
