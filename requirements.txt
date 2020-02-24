@@ -5,5 +5,5 @@ cytoolz==0.10.1
 eth-hash==0.2.0
 eth-keys==0.3.1
 pycparser==2.19
-pycryptodome==3.9.6
+pycryptodome==3.9.7
 toolz==0.10.0
