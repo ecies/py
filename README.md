@@ -248,7 +248,7 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.4
+### 0.3.1 ~ 0.3.5
 
 - Support Python 3.8
 - Bump dependencies
