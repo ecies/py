@@ -30,16 +30,18 @@ jobs:
 
       - save_cache:
           paths:
-            - ./venv
+            - /root/.cache/pypoetry/virtualenvs
           key: v1-dependencies-{{ checksum "poetry.lock" }}
 
       - run:
           name: Run tests
           command: |
-            poetry run coverage run -m doctest -v ecies/utils.py
+            poetry run pip install codecov
+            poetry run python -m doctest -v ecies/utils.py
             poetry run coverage run -m unittest discover .
+            poetry run coverage report
             poetry run coverage xml
-            bash <(curl -s https://codecov.io/bash)
+            poetry run codecov
 
       - run:
           name: Test CLI

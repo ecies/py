@@ -1,6 +1,6 @@
 [run]
-source =
-    ecies
+include =
+    ecies/__init__.py
+    ecies/utils.py
 omit =
-    */__main__.py
-    */__version__.py
+    ecies/__main__.py
