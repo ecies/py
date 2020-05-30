@@ -1,0 +1,6 @@
+[run]
+source =
+    ecies
+omit =
+    */__main__.py
+    */__version__.py

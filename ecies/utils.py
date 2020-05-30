@@ -143,14 +143,14 @@ def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey) -> bytes:
     master = private_key.public_key.format(compressed=False) + shared_point.format(
         compressed=False
     )
-    derived = HKDF(master, AES_KEY_BYTES_LEN, b"", SHA256)
+    derived: bytes = HKDF(master, AES_KEY_BYTES_LEN, b"", SHA256)
     return derived
 
 
 def decapsulate(public_key: PublicKey, peer_private_key: PrivateKey) -> bytes:
     shared_point = public_key.multiply(peer_private_key.secret)
     master = public_key.format(compressed=False) + shared_point.format(compressed=False)
-    derived = HKDF(master, AES_KEY_BYTES_LEN, b"", SHA256)
+    derived: bytes = HKDF(master, AES_KEY_BYTES_LEN, b"", SHA256)
     return derived
 
 
