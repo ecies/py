@@ -1,6 +1,5 @@
 [run]
 source =
     ecies
-    ecies/__init__.py
 omit =
-    */__main__.py
+    ecies/__main__.py
