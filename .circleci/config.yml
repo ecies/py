@@ -13,6 +13,8 @@ jobs:
     steps:
       - checkout
 
+      - jq/install
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -43,11 +45,11 @@ jobs:
           name: Test CLI
           command: |
             poetry build
-            curl -L https://github.com/dflemstr/rq/releases/download/v1.0.2/rq-v1.0.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz
-            cat pyproject.toml | ./rq -t | jq '.tool.poetry.version' -r
-      #       poetry run tomlq pyproject.toml
-      #       poetry run pip install dist/eciespy-{}.tar.gz
-      #       poetry run eciespy -g
+            curl -sL https://github.com/dflemstr/rq/releases/download/v1.0.2/rq-v1.0.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz
+            VERSION=$(cat pyproject.toml | ./rq -t | jq '.tool.poetry.version' -r)
+            poetry run pip install dist/eciespy-$VERSION.tar.gz
+            poetry run eciespy -g
+
   test-37:
     <<: *test-template
     docker:
