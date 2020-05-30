@@ -1,9 +1,21 @@
+"""
+ _______  _______ _________ _______  _______  _______
+(  ____ \(  ____ \\__   __/(  ____ \(  ____ \(  ____ )|\     /|
+| (    \/| (    \/   ) (   | (    \/| (    \/| (    )|( \   / )
+| (__    | |         | |   | (__    | (_____ | (____)| \ (_) /
+|  __)   | |         | |   |  __)   (_____  )|  _____)  \   /
+| (      | |         | |   | (            ) || (         ) (
+| (____/\| (____/\___) (___| (____/\/\____) || )         | |
+(_______/(_______/\_______/(_______/\_______)|/          \_/
+
+"""
 import argparse
 import sys
 
 from ecies import encrypt, decrypt
 from ecies.utils import generate_eth_key
-from ecies.__version__ import __description__
+
+__description__ = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
 
 
 def readablize(b: bytes) -> str:
