@@ -1,4 +1,8 @@
 version: 2.1
+
+orbs:
+  jq: circleci/jq@2.0.2
+
 jobs:
   test-38: &test-template
     docker:
@@ -34,8 +38,16 @@ jobs:
             poetry run coverage run -m unittest discover .
             poetry run coverage xml
             bash <(curl -s https://codecov.io/bash)
-            poetry run python setup.py install
-            poetry run eciespy -g
+
+      - run:
+          name: Test CLI
+          command: |
+            poetry build
+            curl -LSfs https://japaric.github.io/trust/install.sh | sh -s -- --git dflemstr/rq
+            cat pyproject.toml | rq -t | jq '.tool.poetry.version' -r
+      #       poetry run tomlq pyproject.toml
+      #       poetry run pip install dist/eciespy-{}.tar.gz
+      #       poetry run eciespy -g
   test-37:
     <<: *test-template
     docker:
@@ -61,6 +73,7 @@ jobs:
       - run:
           name: Setup env
           command: |
+            pip install -U pip poetry
             python -m venv venv
             venv/bin/pip install -U pip twine wheel
             venv/bin/python setup.py install
