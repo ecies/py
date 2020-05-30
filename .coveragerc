@@ -1,5 +1,0 @@
-[run]
-source =
-    ecies
-omit =
-    ecies/__main__.py
