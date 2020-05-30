@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "eciespy"
-version = "0.3.1"
+version = "0.3.5"
 packages = [
     { include = "ecies" },
 ]
@@ -16,10 +16,10 @@ documentation = "https://github.com/ecies/py"
 python = "^3.5.3"
 coincurve = "^13.0"
 pycryptodome = "^3.9"
-eth-keys = "^0.3.1"
+eth-keys = "^0.3.3"
 
 [tool.poetry.dev-dependencies]
-ipython = "^7.9"
-mypy = "^0.740.0"
-flake8 = "^3.7"
-black = { version = "^18.6-alpha.0", allows-prereleases = true, python = "^3.6" }
+ipython = { version = "^7.15", python = "^3.6" }
+mypy = "^0.770"
+flake8 = "^3.8"
+black = { version = "^19.10b0", python = "^3.6" }
