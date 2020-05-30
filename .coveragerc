@@ -1,0 +1,6 @@
+[run]
+include =
+    ecies/__init__.py
+    ecies/utils.py
+omit =
+    ecies/__main__.py
