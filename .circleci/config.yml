@@ -30,12 +30,13 @@ jobs:
 
       - save_cache:
           paths:
-            - ./venv
+            - ~/.cache/pypoetry/virtualenvs
           key: v1-dependencies-{{ checksum "poetry.lock" }}
 
       - run:
           name: Run tests
           command: |
+            ls ~/.cache
             poetry run python -m doctest -v ecies/utils.py
             poetry run coverage run -m unittest discover .
             poetry run coverage report
