@@ -23,3 +23,4 @@ ipython = { version = "^7.15", python = "^3.6" }
 mypy = "^0.770"
 flake8 = "^3.8"
 black = { version = "^19.10b0", python = "^3.6" }
+coverage = "^5.1"

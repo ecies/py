@@ -19,8 +19,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
-            source $HOME/.poetry/env
+            pip install -U pip poetry
             poetry install
 
       - save_cache:
@@ -31,12 +30,9 @@ jobs:
       - run:
           name: Run tests
           command: |
-            source $HOME/.poetry/env
-            poetry run pip install -U pip
-            poetry run pip install codecov codacy-coverage
             poetry run coverage run -m doctest -v ecies/utils.py
             poetry run coverage run -m unittest discover .
-            poetry run codecov
+            bash <(curl -s https://codecov.io/bash)
             poetry run python setup.py install
             poetry run eciespy -g
   test-37:
