@@ -248,11 +248,12 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.5
+### 0.3.1 ~ 0.3.6
 
 - Support Python 3.8
 - Bump dependencies
 - Update documentation
+- Poetry
 
 ### 0.3.0
 
@@ -261,12 +262,12 @@ b'helloworld'
 ### 0.2.0
 
 - API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex str and raw bytes
-- Bump dependency versions
+- Bump dependencies
 - Update documentation
 
 ### 0.1.1 ~ 0.1.9
 
-- Bump dependency versions
+- Bump dependencies
 - Update documentation
 - Switch to Circle CI
 - Change license to MIT
