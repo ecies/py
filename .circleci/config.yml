@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  jq: circleci/jq@2.0.2
-
 jobs:
   test-38: &test-template
     docker:
@@ -12,8 +9,6 @@ jobs:
 
     steps:
       - checkout
-
-      - jq/install
 
       # Download and cache dependencies
       - restore_cache:
@@ -47,11 +42,7 @@ jobs:
           name: Test CLI
           command: |
             poetry build
-
-            curl -sL https://github.com/dflemstr/rq/releases/download/v1.0.2/rq-v1.0.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz
-            VERSION=$(cat pyproject.toml | ./rq -t | jq '.tool.poetry.version' -r)
-            poetry run pip install dist/eciespy-$VERSION.tar.gz
-
+            poetry install
             poetry run eciespy -h
             poetry run eciespy -g
             echo '0x95d3c5e483e9b1d4f5fc8e79b2deaf51362980de62dbb082a9a4257eef653d7d' > prv
