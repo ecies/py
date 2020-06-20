@@ -101,11 +101,11 @@ echo '0x95d3c5e483e9b1d4f5fc8e79b2deaf51362980de62dbb082a9a4257eef653d7d' > prv
 echo '0x98afe4f150642cd05cc9d2fa36458ce0a58567daeaf5fde7333ba9b403011140a4e28911fcf83ab1f457a30b4959efc4b9306f514a4c3711a16a80e3b47eb58b' > pub
 $ echo 'helloworld' | eciespy -e -k pub | eciespy -d -k prv
 helloworld
-echo 'data to encrypt' > data
-eciespy -e -k pub -D data -O enc_data
+$ echo 'data to encrypt' > data
+$ eciespy -e -k pub -D data -O enc_data
 $ eciespy -d -k prv -D enc_data
 data to encrypt
-rm prv pub data enc_data
+$ rm prv pub data enc_data
 ```
 
 ## Mechanism and implementation details
