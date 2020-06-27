@@ -36,7 +36,7 @@ eth-keys = "^0.3.3"
 
 [tool.poetry.dev-dependencies]
 ipython = { version = "^7.15", python = "^3.6.8" }
-mypy = "^0.780"
+mypy = "^0.782"
 flake8 = "^3.8"
 black = { version = "^19.10b0", python = "^3.6.8" }
 
