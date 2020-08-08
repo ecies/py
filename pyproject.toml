@@ -35,10 +35,10 @@ pycryptodome = "^3.9"
 eth-keys = "^0.3.3"
 
 [tool.poetry.dev-dependencies]
-ipython = { version = "^7.16", python = "^3.6.8" }
+ipython = { version = "^7.16", python = "^3.7" }
 mypy = "^0.782"
 flake8 = "^3.8"
-black = { version = "^19.10b0", python = "^3.6.8" }
+black = { version = "^19.10b0", python = "^3.7" }
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
