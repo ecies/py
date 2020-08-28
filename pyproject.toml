@@ -38,7 +38,7 @@ eth-keys = "^0.3.3"
 ipython = { version = "^7.16", python = "^3.7" }
 mypy = "^0.782"
 flake8 = "^3.8"
-black = { version = "^19.10b0", python = "^3.7" }
+black = { version = "^20.8b1", python = "^3.7" }
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
