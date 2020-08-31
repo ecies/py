@@ -35,7 +35,7 @@ pycryptodome = "^3.9"
 eth-keys = "^0.3.3"
 
 [tool.poetry.dev-dependencies]
-ipython = { version = "^7.16", python = "^3.7" }
+ipython = { version = "^7.18", python = "^3.7" }
 mypy = "^0.782"
 flake8 = "^3.8"
 black = { version = "^20.8b1", python = "^3.7" }
