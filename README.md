@@ -248,9 +248,9 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.6
+### 0.3.1 ~ 0.3.7
 
-- Support Python 3.8
+- Support Python 3.8, 3.9
 - Bump dependencies
 - Update documentation
 - Poetry
