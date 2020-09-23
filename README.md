@@ -19,7 +19,7 @@ You can also check a flask web backend demo [here](https://github.com/kigawas/ec
 
 ## Install
 
-Install with `pip install eciespy` under [Python 3.5.3+](https://github.com/ecies/py/blob/master/pyproject.toml#L32).
+Install with `pip install eciespy` under Python 3.6+.
 
 ## Quick Start
 
@@ -248,12 +248,13 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.7
+### 0.3.1 ~ 0.3.8
 
 - Support Python 3.8, 3.9
 - Bump dependencies
 - Update documentation
 - Poetry
+- Phase out Python 3.5
 
 ### 0.3.0
 
