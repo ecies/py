@@ -67,7 +67,7 @@ jobs:
   test-35:
     <<: *test-template
     docker:
-      - image: python:3.5.3
+      - image: python:3.5.10
 
   deploy:
     working_directory: ~/repo
@@ -123,7 +123,6 @@ workflows:
             - test-38
             - test-37
             - test-36
-            - test-35
           filters:
             tags:
               only: /^v.*/
