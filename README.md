@@ -15,7 +15,7 @@ Other language versions:
 - [TypeScript](https://github.com/ecies/js)
 - [Golang](https://github.com/ecies/go)
 
-You can also check a flask web backend demo [here](https://github.com/kigawas/eciespy-demo).
+You can also check a fastapi web backend demo [here](https://github.com/kigawas/eciespy-demo).
 
 ## Install
 
