@@ -53,7 +53,7 @@ jobs:
   test-39:
     <<: *test-template
     docker:
-      - image: python:3.9-rc
+      - image: python:3.9
 
   test-37:
     <<: *test-template
