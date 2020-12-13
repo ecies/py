@@ -1,7 +1,7 @@
 # eciespy
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a11aeb9939244019d2c64bce3ff3c4e)](https://www.codacy.com/app/ecies/py)
-[![CI](https://img.shields.io/circleci/project/github/ecies/py.svg)](https://circleci.com/gh/ecies/py)
+[![CI](https://img.shields.io/github/workflow/status/ecies/py/Build)](https://github.com/ecies/py/actions)
 [![Codecov](https://img.shields.io/codecov/c/github/ecies/py.svg)](https://codecov.io/gh/ecies/py)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
@@ -14,8 +14,9 @@ Other language versions:
 - [Rust](https://github.com/ecies/rs)
 - [TypeScript](https://github.com/ecies/js)
 - [Golang](https://github.com/ecies/go)
+- [WASM](https://github.com/ecies/rs-wasm)
 
-You can also check a fastapi web backend demo [here](https://github.com/kigawas/eciespy-demo).
+You can also check a FastAPI web backend demo [here](https://github.com/kigawas/eciespy-demo).
 
 ## Install
 
@@ -114,7 +115,9 @@ This library combines `secp256k1` and `AES-256-GCM` (powered by [`coincurve`](ht
 
 1. Use [ECDH](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman) to exchange an AES session key;
 
-    > Notice that the sender public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
+   > Notice that the sender public key is generated every time when `ecies.encrypt` is invoked, thus, the AES session key varies.
+   >
+   > We are using HKDF-SHA256 instead of SHA256 to derive the AES keys.
 
 2. Use this AES session key to encrypt/decrypt the data under `AES-256-GCM`.
 
@@ -134,7 +137,7 @@ Basically the encrypted data will be like this:
 
 ### Secp256k1
 
-#### Glance at ecdh
+#### Glance at ECDH
 
 So, **how** do we calculate the ECDH key under `secp256k1`? If you use a library like [`coincurve`](https://github.com/ofek/coincurve), you might just simply call `k1.ecdh(k2.public_key.format())`, then uh-huh, you got it! Let's see how to do it in simple Python snippets:
 
@@ -248,13 +251,11 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.8
+### 0.3.1 ~ 0.3.9
 
-- Support Python 3.8, 3.9
+- Support Python 3.8, 3.9 and phase out 3.5
 - Bump dependencies
 - Update documentation
-- Poetry
-- Phase out Python 3.5
 
 ### 0.3.0
 
