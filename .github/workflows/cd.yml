@@ -1,0 +1,28 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+jobs:
+  publish:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: abatilo/actions-poetry@v2.0.0
+        with:
+            poetry-version: 1.1.4
+      - name: Upload to pypi
+        run: |
+          poetry build
+          poetry config repositories.testpypi https://test.pypi.org/legacy/
+          poetry config pypi-token.testpypi "$TEST_PYPI_TOKEN"
+          poetry config pypi-token.pypi "$PYPI_TOKEN"
+          poetry publish --dry-run
+          poetry publish --repository testpypi
+          poetry publish
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+          TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
