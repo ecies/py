@@ -6,6 +6,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![License](https://img.shields.io/github/license/ecies/py.svg)](https://github.com/ecies/py)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fecies%2Fpy.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fecies%2Fpy?ref=badge_shield)
 
 Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
@@ -277,3 +278,7 @@ b'helloworld'
 ### 0.1.0
 
 - First beta version release
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fecies%2Fpy.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fecies%2Fpy?ref=badge_large)
