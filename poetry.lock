@@ -41,6 +41,7 @@ python-versions = ">=3.6"
 [package.dependencies]
 appdirs = "*"
 click = ">=7.1.2"
+dataclasses = {version = ">=0.6", markers = "python_version < \"3.7\""}
 mypy-extensions = ">=0.4.3"
 pathspec = ">=0.6,<1"
 regex = ">=2020.1.8"
@@ -73,7 +74,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
 name = "coincurve"
-version = "13.0.0"
+version = "14.0.0"
 description = "Cross-platform Python CFFI bindings for libsecp256k1"
 category = "main"
 optional = false
@@ -104,6 +105,14 @@ toolz = ">=0.8.0"
 
 [package.extras]
 cython = ["cython"]
+
+[[package]]
+name = "dataclasses"
+version = "0.8"
+description = "A backport of the dataclasses module for Python 3.6"
+category = "dev"
+optional = false
+python-versions = ">=3.6, <3.7"
 
 [[package]]
 name = "decorator"
@@ -472,7 +481,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "21d0652b572f1924c3085b810a425c7a955b9d74b9510336d1abd3a3c58e69cb"
+content-hash = "e527999fe8fb1cde013b58e2e0da890ae57d591b041a19ec8b8196a9cee21866"
 
 [metadata.files]
 appdirs = [
@@ -537,33 +546,26 @@ click = [
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
 ]
 coincurve = [
-    {file = "coincurve-13.0.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:75a6a7c6116d7f10992e06c0aeeaddcaee55a537ceef17961180ba8dd33e4a03"},
-    {file = "coincurve-13.0.0-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:a01b2769c1045a8ba60bef61ef15c3b6276dcb75b850cfc0bfab92a2856deb3c"},
-    {file = "coincurve-13.0.0-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:0da923e7eba89d65ff37d18be4935d710f21032f645e59f0b0749f40c19807d9"},
-    {file = "coincurve-13.0.0-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:b44eb772f696455ffc60e37c1b7de8ba4db9a388ddadfb960e6caf0f0da6b511"},
-    {file = "coincurve-13.0.0-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:f0b5cce8e677c493475cbe4356e4500e287d5f484918483f402bbd4305659af2"},
-    {file = "coincurve-13.0.0-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:e6e35e3cbb6872f51c3b869a4fa27f36dc760db268818084a879c47e5a5b69e4"},
-    {file = "coincurve-13.0.0-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:800b649bfc8e12a49927c98f02bfcc543af80f06bd25c4e5df41531ed142c681"},
-    {file = "coincurve-13.0.0-cp35-cp35m-macosx_10_13_x86_64.whl", hash = "sha256:6eaf8ef5d91f6ebc2df35b7fce958b33fbee581f0e0becedfcbb8947da1764e8"},
-    {file = "coincurve-13.0.0-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:b7f901083695dee84ab7b1a34c90d00fb18b71db74d25fae5be10455016049a7"},
-    {file = "coincurve-13.0.0-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:c26546176bdc1a77321d38a0178544f5f12f41c8b47e227581adebd61f30dea5"},
-    {file = "coincurve-13.0.0-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:9af82dd36721245416c32256c0a3504dc13ee07de29b09ebb9724c2684b2cfb6"},
-    {file = "coincurve-13.0.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:1f6d74500eb5ba1bf3a8e2ac3c7bcc96d7076082a3b5500fa63f4b8fad170b75"},
-    {file = "coincurve-13.0.0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:fa4b6e311d45995012d194569a02281448d700681d72857433e05821a75d310d"},
-    {file = "coincurve-13.0.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:96c023d330120a62234638b563f83d3064bfeb2d8a20ccbcf00ab4d851424458"},
-    {file = "coincurve-13.0.0-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:2d540d79adfca1c5be0122362b87ad7308b77a517da9dc51e523b7fbe8ac405a"},
-    {file = "coincurve-13.0.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:f136c98b4a2df3829e1f2f2e6a28f7ff9d5676c5c3614c6d3e511f07e024c093"},
-    {file = "coincurve-13.0.0-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:546fc4765e38aa36a723e8ebca03408145c4837d470bd3704e295902ee4e4224"},
-    {file = "coincurve-13.0.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:a769882d0e2bf5f21d54992794d78325021eabcc6bfc3d373aa1ad7760a0f7fe"},
-    {file = "coincurve-13.0.0-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:e3ebedd738135b0661821c9d69369ee009adb87b21a32599fff7f78589d5e58d"},
-    {file = "coincurve-13.0.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:9e25ab16935d348be05bdf8fab648475e568a1b5754f518979c8e2cd08c4a71d"},
-    {file = "coincurve-13.0.0-cp38-cp38-manylinux1_i686.whl", hash = "sha256:bec315f32b09bb14b3261a50c0decf4d3f51dcf5de9d6cfeaf463c37656f0087"},
-    {file = "coincurve-13.0.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:1be6b876bfbdfdd8c4e94708c9cd024cb06c8461cabbcd9b96659743a23dfbd6"},
-    {file = "coincurve-13.0.0-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:4c1d9241a31c0fe6d50ce561294f63955ec0fb3afbf1579da8b3742612a6e9dc"},
-    {file = "coincurve-13.0.0-pp371-pypy3_71-manylinux2010_x86_64.whl", hash = "sha256:4595c6bfb5be36a7365c638f535b10afffe7bea70eff3b57e8c3cb5e7eaf5325"},
-    {file = "coincurve-13.0.0-py2.py3-none-win32.whl", hash = "sha256:8474d1576d06d9d0c210bd64e3e245e43a8ff6e18c90e343567c5954b088726e"},
-    {file = "coincurve-13.0.0-py2.py3-none-win_amd64.whl", hash = "sha256:1e3b9068df66df8669b4e58e03c5e95f382e582cf31a743c9aae9963272482bc"},
-    {file = "coincurve-13.0.0.tar.gz", hash = "sha256:9985627dc0c81fe98c3d2e97412801e9726d6110249317a2775cf365f0ba0df5"},
+    {file = "coincurve-14.0.0-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:82912e058a981b74d94c212e61f9a9d93b17a526aff50714f3d1bad2422126a0"},
+    {file = "coincurve-14.0.0-cp27-cp27m-manylinux1_i686.whl", hash = "sha256:e6603c628d039533f09e713890049c12f91e10e927db6ed8daed5b9f6c3bebb5"},
+    {file = "coincurve-14.0.0-cp27-cp27m-manylinux1_x86_64.whl", hash = "sha256:98a1652337dd370db368fea150d9da2907a679813a1c255d1df506225688e82f"},
+    {file = "coincurve-14.0.0-cp27-cp27mu-manylinux1_i686.whl", hash = "sha256:e8249603eabd24fdef18e22d91a4e328a390b760a7b1a63f1b1cd48e64aa21cf"},
+    {file = "coincurve-14.0.0-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:07d5c898229ecb2f51ce836282c16cc595664ccb8573d224c8b0bf2b004b55cb"},
+    {file = "coincurve-14.0.0-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:b90ba9373fb7c78b47191ebe5f78aad0e7ad82443cf80234c9c21bae9236dc15"},
+    {file = "coincurve-14.0.0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:55f3b72da36361dfbf9051a4137020c2c904949f77e3c11514b45299e0a0e49b"},
+    {file = "coincurve-14.0.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:1a4162b7f422db5154fd0762b3f65c17f5bd56094b7ad91570d49d1f10490fcb"},
+    {file = "coincurve-14.0.0-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:281c2ac39b989665b5cfb865359b9cc40421e4e3acab3b7f638adceabdb0b545"},
+    {file = "coincurve-14.0.0-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:bf379a21253f6f5d1fe0e98c40f64b8f2cbc620ff86216ed291aa4fb4e4ee5c1"},
+    {file = "coincurve-14.0.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:f39fa09c86042c07b5165a832decff7dd49fb756af6508ead85472b28b23d040"},
+    {file = "coincurve-14.0.0-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:33eaa26434c612a5a19b4effafafb0c8f685949760a736df797c6421f7381be9"},
+    {file = "coincurve-14.0.0-cp38-cp38-manylinux1_i686.whl", hash = "sha256:f2de2553967a4d31da85dcceea5c58b6dfe177a2be2f7d04b2101db330082591"},
+    {file = "coincurve-14.0.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:cb4a6f7faaf9b8848b66aed0fc72637875de92523ec95749c5d7dd7eb9e76653"},
+    {file = "coincurve-14.0.0-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:dc7a27fc5852192d9d3f4259770d0edbd8e54e65e62d9f4ff7a9766fe31a0cd9"},
+    {file = "coincurve-14.0.0-cp39-cp39-manylinux1_i686.whl", hash = "sha256:567b51364f54912482a0bc9e1ba574390d3a7e4c9350638760e512b2a7807572"},
+    {file = "coincurve-14.0.0-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:4d62538bafaa88d6d7c8cf2c5b3770698a5bc53ac9a36788e507964f30474559"},
+    {file = "coincurve-14.0.0-py2.py3-none-win32.whl", hash = "sha256:9de134cb11ae42a71956e8c726705e94be6259d886892a4e1933b43bb2b6e090"},
+    {file = "coincurve-14.0.0-py2.py3-none-win_amd64.whl", hash = "sha256:74602e7f986369146835ab9f3a50ab68c7fa02112f926b48dbee7e7b8715337c"},
+    {file = "coincurve-14.0.0.tar.gz", hash = "sha256:7bb4cf0a712c2f1637bd7a582c7b0c1c3532c25317ee21236ffc9340cb3d7f48"},
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
@@ -571,6 +573,10 @@ colorama = [
 ]
 cytoolz = [
     {file = "cytoolz-0.11.0.tar.gz", hash = "sha256:c64f3590c3eb40e1548f0d3c6b2ccde70493d0b8dc6cc7f9f3fec0bb3dcd4222"},
+]
+dataclasses = [
+    {file = "dataclasses-0.8-py3-none-any.whl", hash = "sha256:0201d89fa866f68c8ebd9d08ee6ff50c0b255f8ec63a71c16fda7af82bb887bf"},
+    {file = "dataclasses-0.8.tar.gz", hash = "sha256:8479067f342acf957dc82ec415d355ab5edb7e7646b90dc6e2fd1d96ad084c97"},
 ]
 decorator = [
     {file = "decorator-4.4.2-py2.py3-none-any.whl", hash = "sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760"},
