@@ -29,6 +29,7 @@ keywords = [
   "ethereum",
   "cryptocurrency",
 ]
+# package data
 include = ["ecies/py.typed"]
 
 [tool.poetry.dependencies]
