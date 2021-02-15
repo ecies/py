@@ -251,7 +251,7 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.9
+### 0.3.1 ~ 0.3.10
 
 - Support Python 3.8, 3.9 and phase out 3.5
 - Bump dependencies
