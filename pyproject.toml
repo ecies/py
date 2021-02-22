@@ -43,7 +43,7 @@ pycryptodome = "^3.9.9"
 black = {version = "^20.8b1", python = "^3.7"}
 flake8 = "^3.8"
 ipython = {version = "^7.20", python = "^3.7"}
-mypy = "^0.800"
+mypy = "^0.812"
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
