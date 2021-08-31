@@ -228,7 +228,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 
 [[package]]
 name = "ipython"
-version = "7.26.0"
+version = "7.27.0"
 description = "IPython: Productive Interactive Computing"
 category = "dev"
 optional = false
@@ -509,7 +509,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "dd5e567275c9499fb730db9936280cf99ace46c20c7f9027bfc29ec7c99ec15c"
+content-hash = "7ad078cf06be20eadb8aa6e81fce3a456593fad1f68ef5628b81e7f3b0e29841"
 
 [metadata.files]
 appdirs = [
@@ -615,6 +615,26 @@ colorama = [
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
 cytoolz = [
+    {file = "cytoolz-0.11.0-cp35-cp35m-macosx_10_6_x86_64.whl", hash = "sha256:c50051c02b23823209d6b0e8f7b2b37371312da50ca78165871dc6fed7bd37df"},
+    {file = "cytoolz-0.11.0-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:140eaadcd86216d4a185db3a37396ee80dd2edc6e490ba37a3d7c1b17a124078"},
+    {file = "cytoolz-0.11.0-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:c183237f4f0bac53238588e3567c0287130dd9ed6b6b880579a5cca960a89f54"},
+    {file = "cytoolz-0.11.0-cp35-cp35m-manylinux2014_x86_64.whl", hash = "sha256:6cba0572e3ad187e0ea0ddd20bb9c6aad794c23d997ed2b2aa2bbd109fe61f9f"},
+    {file = "cytoolz-0.11.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:c7ed490f7f5c069a5082b73803ff4595f12ed0eb6b52ffa5ffe15d532acb71ed"},
+    {file = "cytoolz-0.11.0-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e2e7cbfec2681e8acfd0013e9581905f251455d411457a6f475ba1870d1685fc"},
+    {file = "cytoolz-0.11.0-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:596a40ce920dd6cdab42d3dec5a4e8bb0bf258bb79426a4ed7658a27c214941b"},
+    {file = "cytoolz-0.11.0-cp36-cp36m-win_amd64.whl", hash = "sha256:477f71b8b2c6fdd97aa3a421ba0cfd04b22ffed1b22dda3fea06db2756ee7097"},
+    {file = "cytoolz-0.11.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:5692a100d657f9bc2fede44ff41649c0c577f251bc0bd06c699c177235a0f81c"},
+    {file = "cytoolz-0.11.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8893b54f8d8d1bbc5a22dc4989d9b3eb269dd5ee1247993158e1f9ae0fbb9c88"},
+    {file = "cytoolz-0.11.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:84519cf4f63308b0ce39162b7a341367338953cd9fbf7edd335cbc44dcd321e9"},
+    {file = "cytoolz-0.11.0-cp37-cp37m-win_amd64.whl", hash = "sha256:2f9963114029e78ddb626140cbb15b79ad0fd1563484b73fb29403a3d5bf3ed4"},
+    {file = "cytoolz-0.11.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:c65635ad93bac9002e36d42603bd87514e8ea932910158054b409ceee05ff4fe"},
+    {file = "cytoolz-0.11.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a6e95de2fe891075f71edb0a56701eeaae04d43f44470c24d45e89f1ea801e85"},
+    {file = "cytoolz-0.11.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:b4a3eb96eda360b14fa6c7d2ce6faf684319c051f9ea620b009cb28a2878ed32"},
+    {file = "cytoolz-0.11.0-cp38-cp38-win_amd64.whl", hash = "sha256:d0fdf0186201f882274db95fc5644ef34bfb0593d9db23b7343b0e6c8c000a0a"},
+    {file = "cytoolz-0.11.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:f85a8e164ebbe75e77a9c8a0b91bd2a3ceb5beeb0f1c180affe75318a41df98c"},
+    {file = "cytoolz-0.11.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fb1b6bb4dee54fe62306d7330639f57a0dbb612520516b97b1c9dea5bc506634"},
+    {file = "cytoolz-0.11.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:3159da30eaf214746215293fdba19b6b54af59b3b2ba979eb9e184c6c7a854d2"},
+    {file = "cytoolz-0.11.0-cp39-cp39-win_amd64.whl", hash = "sha256:b61f23e9fa7cd5a87a503ab659f816858e2235926cd95b0c7e37403530d4a2d6"},
     {file = "cytoolz-0.11.0.tar.gz", hash = "sha256:c64f3590c3eb40e1548f0d3c6b2ccde70493d0b8dc6cc7f9f3fec0bb3dcd4222"},
 ]
 dataclasses = [
@@ -650,8 +670,8 @@ importlib-metadata = [
     {file = "importlib_metadata-3.10.0.tar.gz", hash = "sha256:c9db46394197244adf2f0b08ec5bc3cf16757e9590b02af1fca085c16c0d600a"},
 ]
 ipython = [
-    {file = "ipython-7.26.0-py3-none-any.whl", hash = "sha256:892743b65c21ed72b806a3a602cca408520b3200b89d1924f4b3d2cdb3692362"},
-    {file = "ipython-7.26.0.tar.gz", hash = "sha256:0cff04bb042800129348701f7bd68a430a844e8fb193979c08f6c99f28bb735e"},
+    {file = "ipython-7.27.0-py3-none-any.whl", hash = "sha256:75b5e060a3417cf64f138e0bb78e58512742c57dc29db5a5058a2b1f0c10df02"},
+    {file = "ipython-7.27.0.tar.gz", hash = "sha256:58b55ebfdfa260dad10d509702dc2857cb25ad82609506b070cf2d7b7df5af13"},
 ]
 ipython-genutils = [
     {file = "ipython_genutils-0.2.0-py2.py3-none-any.whl", hash = "sha256:72dd37233799e619666c9f639a9da83c34013a73e8bbc79a7a6348d93c61fab8"},
