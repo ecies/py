@@ -251,9 +251,9 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.10
+### 0.3.1 ~ 0.3.11
 
-- Support Python 3.8, 3.9 and phase out 3.5
+- Support Python 3.8, 3.9, 3.10 and phase out 3.5
 - Bump dependencies
 - Update documentation
 
@@ -263,7 +263,7 @@ b'helloworld'
 
 ### 0.2.0
 
-- API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex str and raw bytes
+- API change: `ecies.encrypt` and `ecies.decrypt` now can take both hex `str` and raw `bytes`
 - Bump dependencies
 - Update documentation
 
