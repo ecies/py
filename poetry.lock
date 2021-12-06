@@ -76,7 +76,7 @@ importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 name = "coincurve"
-version = "15.0.1"
+version = "16.0.0"
 description = "Cross-platform Python CFFI bindings for libsecp256k1"
 category = "main"
 optional = false
@@ -507,7 +507,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "924a0a7d563f5d2c112cdccf5051d6b3d3fa738fe04327254bc65d3e04fde7f1"
+content-hash = "24ab6695e5015146222e22e09578ea227e85cedad5f3d87235670ec5d8c2bad4"
 
 [metadata.files]
 appnope = [
@@ -583,27 +583,47 @@ click = [
     {file = "click-8.0.3.tar.gz", hash = "sha256:410e932b050f5eed773c4cda94de75971c89cdb3155a72a0831139a79e5ecb5b"},
 ]
 coincurve = [
-    {file = "coincurve-15.0.1-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:764065be6c1953b287af635d5e5ec232cb303b259ee232a86624b743db77436d"},
-    {file = "coincurve-15.0.1-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f3c29becba9c484400567bfc04970fd1ddef5d9086da6ad58daa87e632579847"},
-    {file = "coincurve-15.0.1-cp36-cp36m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1e99265e22d5fc7cb28a378a9efc185320904df8901bf776bead4c7c5b6ba254"},
-    {file = "coincurve-15.0.1-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bae738c3730ef4230b13a9e0d4ebda2c6bdd2d3a8065a3f2887392d44734e483"},
-    {file = "coincurve-15.0.1-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:2b21120f2fb6223a16f13612af349a6b33b777911c34da4d01347ae905f1f895"},
-    {file = "coincurve-15.0.1-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3dfddadfffd119fc62792478b8e85cb4db7731d1ca9edf80deffea0ed889eae1"},
-    {file = "coincurve-15.0.1-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5a68add46c590c75ec041b230368bd6e96ffbf5c6be9cb6c8b9672e3196c6a0a"},
-    {file = "coincurve-15.0.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:dfe09a17fcb5c2ce0a39bb100eb65863ba296bdc07baabe23fe4736b965147ed"},
-    {file = "coincurve-15.0.1-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:9030de7b770217b1e3a0b07a46b112407bbc6a671ba1dc08ee1546e7ebaea512"},
-    {file = "coincurve-15.0.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d32eebad222132a2e654c8a10ced1ddec02e0b0c0b45780984f53536131caea3"},
-    {file = "coincurve-15.0.1-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:40238fb994cea86d3a8af6decc848cfde5987372c7c93851ea4eff4a181139a7"},
-    {file = "coincurve-15.0.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:79d8d02ad38f07f31088bff0d629b215308b623f506d840696c9c65723580ad2"},
-    {file = "coincurve-15.0.1-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:eb32ae15b9de3db6e712167b4469dc7354f93e0a04dd1353c1e555d6dc6d9c53"},
-    {file = "coincurve-15.0.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e7cafea5041fe523207e91e91eb764a9656aed4387488f6b0fb1cca91eebd8b7"},
-    {file = "coincurve-15.0.1-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:35db5ed2199483e68106b4ef31f79824306bb2d9a9cb750930a9b2325da63ae5"},
-    {file = "coincurve-15.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:45ae1be2c8cb9d1c4447245060778552452db4875f8c79ffc329436f78576ca5"},
-    {file = "coincurve-15.0.1-pp36-pypy36_pp73-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:1f8f6cb28d6252b3f51325348c26d32102e3bcb5e93f4a986f1e231e0e1660c7"},
-    {file = "coincurve-15.0.1-pp37-pypy37_pp73-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:eed4b4bf721f4511ae678c676e2a4e8ba6a0480171d59dbdce8776d9e0bec47e"},
-    {file = "coincurve-15.0.1-py3-none-win32.whl", hash = "sha256:52e8c87ff8587cd346735cc1687f27e0bab49606e6e4be963b46f1bdb39ad9de"},
-    {file = "coincurve-15.0.1-py3-none-win_amd64.whl", hash = "sha256:11bd37fc072aaf22b40d05c4a9587c4b03058e8b22e70ca38fff7b3bed14e23c"},
-    {file = "coincurve-15.0.1.tar.gz", hash = "sha256:eb556b4c52827ca4b32a3b6cf86b19b848ae1cf9ab5e2bf7ed2eb05aa38aabe3"},
+    {file = "coincurve-16.0.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:0df23cba832bea28bc0f35176b2aaa7585cc85decce9560b79ec4991d49e0901"},
+    {file = "coincurve-16.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:166bd6ed3d3f3323f8f2bbada3840fde7a5e21790c33b510e666b81bebcf3b5e"},
+    {file = "coincurve-16.0.0-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:df1888a1f268275c84ce2245d1e6fe73e0135ecc3295ab69c736c1ded0373d8d"},
+    {file = "coincurve-16.0.0-cp310-cp310-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e8bfb4091c796085f3d14c946aa34e767a3c947ba5da9bdaa400126ca89c8499"},
+    {file = "coincurve-16.0.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:fbe60c5e79dd47bbe91e096ad21c5c37e59361f1726913d2dda59680f2f111f0"},
+    {file = "coincurve-16.0.0-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:43b1e975b83390b9f3e18b9b0ef00465a069328b9c32645201414fd8abb409fb"},
+    {file = "coincurve-16.0.0-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:29e4e57996a12cf2a410cf61759917fdb0177a7bcf1a8ab5c8888c9da8d9a26c"},
+    {file = "coincurve-16.0.0-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:8cc73c0b7903b669cc94b0775d588e13ce06df496032cc91bdeb77d79f633e07"},
+    {file = "coincurve-16.0.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:7ffc693dde858c30ac295c261799007ddc6bf92f3b2afbfefd61b1dd42e2199f"},
+    {file = "coincurve-16.0.0-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:ae7548e8be34bc595959933ae3f29ad7a63f1d35207d3e11cbc76e6c7484190c"},
+    {file = "coincurve-16.0.0-cp36-cp36m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c7fa11335c8518eead358c3bcfb9a66f53ce36f1bcfb4393a621207f1bcfda4f"},
+    {file = "coincurve-16.0.0-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9539c1736812fc09cbe6b0471e90f7ffd947688705832360299e97c3dab917ae"},
+    {file = "coincurve-16.0.0-cp36-cp36m-musllinux_1_1_aarch64.whl", hash = "sha256:d0f07d9ab46d7b6178d8ae4ca94ca64ef81abfc3f4042f3b133dbef2acace2a9"},
+    {file = "coincurve-16.0.0-cp36-cp36m-musllinux_1_1_i686.whl", hash = "sha256:b29aa4b890066b89be2cd8f1a176a872ad79893a649d6a09b34365eae905aba5"},
+    {file = "coincurve-16.0.0-cp36-cp36m-musllinux_1_1_x86_64.whl", hash = "sha256:659b77c9c8e81c35b72c3b1c1759590ed0a7f74674efb2baa9da933f3788e7f6"},
+    {file = "coincurve-16.0.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:4d9d1cb54c36dfd22539bb6aeea6a6135ea34e6b84c183272a4dbcd5cf5055d4"},
+    {file = "coincurve-16.0.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5ed6cc2844e88efd03f30bae00f9114624f813f9460585aa3d57cecad197736a"},
+    {file = "coincurve-16.0.0-cp37-cp37m-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:5d432ae55989ab4993e8aa5b888958347a947b9d61887fc5072b265329a3648f"},
+    {file = "coincurve-16.0.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d7969af60e7d2a58cf5280bfc7cac16cdb52a7f7c2e57e94c40807691e96035b"},
+    {file = "coincurve-16.0.0-cp37-cp37m-musllinux_1_1_aarch64.whl", hash = "sha256:bedf752706ce8b1fa6960d9294db24db76e28343dd0831ba8f435cfac4af973b"},
+    {file = "coincurve-16.0.0-cp37-cp37m-musllinux_1_1_i686.whl", hash = "sha256:cae66a1fa69c07cdce05f315830c2ea86528724a96507848b820ada029ac05e9"},
+    {file = "coincurve-16.0.0-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:7eda756fe9e026436eeb98d739b378a739f80c1cc99c77f00d3c91aed0908ff4"},
+    {file = "coincurve-16.0.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:14824fe05f032052f9c028ed820ee542d284f0e056af3258b8fbbd2faa832a47"},
+    {file = "coincurve-16.0.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:8618c7b9fdca0f91808db1c5cbe5b8c583b7a1d24504fe9bb50f878e265118ca"},
+    {file = "coincurve-16.0.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f73e9f08d9da0bdacc0b4b82216ef1db3d9b37d7a69ada9b8a4e6ade665c6ade"},
+    {file = "coincurve-16.0.0-cp38-cp38-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b7ad945429c86de2f861e4042bc8996bad80814ecd7984e81fc461258d61c46a"},
+    {file = "coincurve-16.0.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:9b87cb82ce8b62f56643696f344d0ca4bf0835b72be2fa874473a889d4a263da"},
+    {file = "coincurve-16.0.0-cp38-cp38-musllinux_1_1_aarch64.whl", hash = "sha256:d24dc141d15fd3dd75b114572556fe186106a0f5922ed9585cf6ae8323cd1de8"},
+    {file = "coincurve-16.0.0-cp38-cp38-musllinux_1_1_i686.whl", hash = "sha256:aa427eb103d370175604e628cc3c6dca90a4f3c7801914985f1500c1267b3b52"},
+    {file = "coincurve-16.0.0-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:a8edec78e126e106d0e1a0a052c40a77a135225fce46a56110a73f08275ed266"},
+    {file = "coincurve-16.0.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:1621b1fdc5740caa27ce6c670c7134dfb471d0a430c6a62c6891cc40b5479951"},
+    {file = "coincurve-16.0.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c45b3ce930ed4a9ba8690a313494fc9f05e3f313b080bf1d1695f2f7076ca016"},
+    {file = "coincurve-16.0.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9a43b256344398fe27240ff1c740057b1f62b4ccfbdc01580258f54d1f82b5d8"},
+    {file = "coincurve-16.0.0-cp39-cp39-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:4df9498894b6f3a19c5507cfe8bd945a261390bc687b9ed12c1f4671123eb172"},
+    {file = "coincurve-16.0.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5d4ae85e6125a65d38b5c0e1d1e9025ba39b49550703a07eb35efa5c41c18e56"},
+    {file = "coincurve-16.0.0-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:0a07a80843094c4c1e80a39e3b2525f5fd165804226f556d564b6db513850979"},
+    {file = "coincurve-16.0.0-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:1106efb37d8209690a56d3e25acf2bf76adec692fb13cd4574544e2644220f6d"},
+    {file = "coincurve-16.0.0-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:400ba504e6ab40ef906b93440866da962a956e3edd17afbc6c493a85a34740bc"},
+    {file = "coincurve-16.0.0-py3-none-win32.whl", hash = "sha256:1a8feb5b943fdd2520bcd77fde25101f20a8309a069a5d2e9648fc5156e05e0e"},
+    {file = "coincurve-16.0.0-py3-none-win_amd64.whl", hash = "sha256:3470d6529abc00bb6810ed05e1dd371b32a9679fa0f26d4d2fdd60784a9652cf"},
+    {file = "coincurve-16.0.0.tar.gz", hash = "sha256:e9fbbd29be70ebc6a9a3acd48a39cbe421ab0f4074654caef6a8ef465252433a"},
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
