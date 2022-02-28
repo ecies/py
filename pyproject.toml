@@ -42,7 +42,7 @@ pycryptodome = "^3.9.9"
 [tool.poetry.dev-dependencies]
 black = {version = "^22.1", python = "^3.7"}
 flake8 = "^4.0"
-ipython = {version = "^7.31", python = "^3.7"}
+ipython = {version = "^7.32", python = "^3.7"}
 mypy = "^0.931"
 
 [tool.poetry.scripts]
