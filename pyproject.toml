@@ -3,7 +3,7 @@ name = "eciespy"
 packages = [
   {include = "ecies"},
 ]
-version = "0.3.11"
+version = "0.3.12"
 # docs
 authors = ["Weiliang Li <to.be.impressive@gmail.com>"]
 description = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
@@ -33,17 +33,17 @@ keywords = [
 include = ["ecies/py.typed"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 # 3rd party
 coincurve = ">=13,<17"
 eth-keys = "^0.3.3"
 pycryptodome = "^3.9.9"
 
 [tool.poetry.dev-dependencies]
-black = {version = "^21.12b0", python = "^3.7"}
-flake8 = "^4.0"
-ipython = {version = "^7.31", python = "^3.7"}
-mypy = "^0.931"
+black = "^22.3"
+flake8 = "^4.0.1"
+ipython = {version = "^8.3.0", python = "^3.8"}
+mypy = "^0.960"
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"

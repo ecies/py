@@ -1,12 +1,11 @@
 #!/bin/sh
 
 # test
-poetry run pip install codecov
+poetry run pip install coverage
 poetry run python -m doctest -v ecies/utils.py
 poetry run coverage run -m unittest discover .
 poetry run coverage report
 poetry run coverage xml
-poetry run codecov
 
 # test cli
 poetry run eciespy -h

@@ -27,10 +27,14 @@ jobs:
           path: |
             ~/.cache/pypoetry/virtualenvs
           key: ${{ runner.os }}-${{ matrix.python-version }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
       - run: brew install automake
         if: matrix.os == 'macos-latest'
+
       - run: poetry install --no-dev
-      - name: Run test
-        run: |
-          ./scripts/ci.sh
+
+      - run: ./scripts/ci.sh
+
+      - uses: codecov/codecov-action@v2
+
       - run: poetry build
