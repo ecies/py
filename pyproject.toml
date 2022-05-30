@@ -35,7 +35,7 @@ include = ["ecies/py.typed"]
 [tool.poetry.dependencies]
 python = "^3.7"
 # 3rd party
-coincurve = ">=13,<17"
+coincurve = ">=13,<18"
 eth-keys = "^0.3.3"
 pycryptodome = "^3.9.9"
 
