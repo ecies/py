@@ -20,7 +20,7 @@ You can also check a FastAPI web backend demo [here](https://github.com/kigawas/
 
 ## Install
 
-Install with `pip install eciespy` under Python 3.6+.
+Install with `pip install eciespy` under Python 3.7+.
 
 ## Quick Start
 
@@ -251,9 +251,10 @@ b'helloworld'
 
 ## Release Notes
 
-### 0.3.1 ~ 0.3.11
+### 0.3.1 ~ 0.3.12
 
-- Support Python 3.8, 3.9, 3.10 and phase out 3.5
+- Support Python 3.8, 3.9, 3.10
+- Drop Python 3.5, 3.6
 - Bump dependencies
 - Update documentation
 
