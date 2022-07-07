@@ -38,12 +38,12 @@ python = ">=3.7,<3.11"
 # 3rd party
 coincurve = ">=13,<18"
 eth-keys = "^0.4.0"
-pycryptodome = "^3.14.1"
+pycryptodome = "^3.15.0"
 
 [tool.poetry.dev-dependencies]
-black = "^22.6"
+black = "^22.8"
 flake8 = "^4.0.1"
-ipython = {version = "^8.3.0", python = "^3.8"}
+ipython = {version = "^8.5.0", python = "^3.8"}
 mypy = "^0.961"
 
 [tool.poetry.scripts]
