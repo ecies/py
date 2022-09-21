@@ -161,11 +161,11 @@ test = ["asn1tools (>=0.146.2,<0.147)", "eth-hash[pycryptodome]", "eth-hash[pysh
 
 [[package]]
 name = "eth-typing"
-version = "3.1.0"
+version = "3.2.0"
 description = "eth-typing: Common type annotations for ethereum python packages"
 category = "main"
 optional = false
-python-versions = ">=3.6, <3.11"
+python-versions = ">=3.6, <4"
 
 [package.extras]
 dev = ["bumpversion (>=0.5.3,<1)", "flake8 (==3.8.3)", "ipython", "isort (>=4.2.15,<5)", "mypy (==0.782)", "pydocstyle (>=3.0.0,<4)", "pytest (>=6.2.5,<7)", "pytest-watch (>=4.1.0,<5)", "pytest-xdist", "sphinx (>=4.2.0,<5)", "sphinx-rtd-theme (>=0.1.9)", "towncrier (>=21,<22)", "tox (>=2.9.1,<3)", "twine", "wheel"]
@@ -493,7 +493,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "traitlets"
-version = "5.3.0"
+version = "5.4.0"
 description = ""
 category = "dev"
 optional = false
@@ -540,8 +540,8 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">=3.7,<3.11"
-content-hash = "df7e5389fe459ee1c00f58d5d761d2516e5c16b90aabef1eddc981c48df42668"
+python-versions = "^3.7"
+content-hash = "8d8022a879f7583c35ec9511ffc17228506c91d70d28fbf7fd7f33e3a34d77f7"
 
 [metadata.files]
 appnope = [
@@ -794,8 +794,8 @@ eth-keys = [
     {file = "eth_keys-0.4.0-py3-none-any.whl", hash = "sha256:e07915ffb91277803a28a379418bdd1fad1f390c38ad9353a0f189789a440d5d"},
 ]
 eth-typing = [
-    {file = "eth-typing-3.1.0.tar.gz", hash = "sha256:92698268be83c75f65a028d47421f7c0aed459be76dd7ce916af166dca8bc53e"},
-    {file = "eth_typing-3.1.0-py3-none-any.whl", hash = "sha256:46cd7d8b1214e059c8283b21d15e1aee375775c26ada9e1e8409e4e4c85926a8"},
+    {file = "eth-typing-3.2.0.tar.gz", hash = "sha256:177e2070da9bf557fe0fd46ee467a7be2d0b6476aa4dc18680603e7da1fc5690"},
+    {file = "eth_typing-3.2.0-py3-none-any.whl", hash = "sha256:2d7540c1c65c0e686c1dc357b8376a53caf4e1693724a90191ad133be568841d"},
 ]
 eth-utils = [
     {file = "eth-utils-2.0.0.tar.gz", hash = "sha256:32f50edb14c5be0c4f0e8c2e6117286ccc5dfda21d170f358add554a048398e3"},
@@ -955,8 +955,8 @@ toolz = [
     {file = "toolz-0.12.0.tar.gz", hash = "sha256:88c570861c440ee3f2f6037c4654613228ff40c93a6c25e0eba70d17282c6194"},
 ]
 traitlets = [
-    {file = "traitlets-5.3.0-py3-none-any.whl", hash = "sha256:65fa18961659635933100db8ca120ef6220555286949774b9cfc106f941d1c7a"},
-    {file = "traitlets-5.3.0.tar.gz", hash = "sha256:0bb9f1f9f017aa8ec187d8b1b2a7a6626a2a1d877116baba52a129bfa124f8e2"},
+    {file = "traitlets-5.4.0-py3-none-any.whl", hash = "sha256:93663cc8236093d48150e2af5e2ed30fc7904a11a6195e21bab0408af4e6d6c8"},
+    {file = "traitlets-5.4.0.tar.gz", hash = "sha256:3f2c4e435e271592fe4390f1746ea56836e3a080f84e7833f0f801d9613fec39"},
 ]
 typed-ast = [
     {file = "typed_ast-1.5.4-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:669dd0c4167f6f2cd9f57041e03c3c2ebf9063d0757dc89f79ba1daa2bfca9d4"},
