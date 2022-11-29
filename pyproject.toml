@@ -42,9 +42,9 @@ pycryptodome = "^3.15.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10"
-flake8 = "^5.0.4"
-ipython = {version = "^8.6.0", python = "^3.8"}
-mypy = "^0.982"
+flake8 = {version = "^6.0.0", python = "^3.8.1"}
+ipython = {version = "^8.7.0", python = "^3.8"}
+mypy = "^0.991"
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
