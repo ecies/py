@@ -1,6 +1,6 @@
 # eciespy
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a11aeb9939244019d2c64bce3ff3c4e)](https://www.codacy.com/app/ecies/py)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a11aeb9939244019d2c64bce3ff3c4e)](https://app.codacy.com/gh/ecies/py/dashboard)
 [![CI](https://img.shields.io/github/workflow/status/ecies/py/Build)](https://github.com/ecies/py/actions)
 [![Codecov](https://img.shields.io/codecov/c/github/ecies/py.svg)](https://codecov.io/gh/ecies/py)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
