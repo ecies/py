@@ -12,7 +12,7 @@
 import argparse
 import sys
 
-from ecies import encrypt, decrypt
+from ecies import decrypt, encrypt
 from ecies.utils import generate_eth_key
 
 __description__ = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
@@ -68,12 +68,12 @@ def main():
     args = parser.parse_args()
     if args.generate:
         k = generate_eth_key()
-        prv, pub, addr = (
+        sk, pub, addr = (
             k.to_hex(),
             k.public_key.to_hex(),
             k.public_key.to_checksum_address(),
         )
-        print("Private: {}\nPublic: {}\nAddress: {}".format(prv, pub, addr))
+        print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pub, addr))
         return
 
     if args.encrypt == args.decrypt:
@@ -86,18 +86,18 @@ def main():
 
     key = args.key.read().strip()
     if args.encrypt:
-        plaintext = args.data.read()
-        if isinstance(plaintext, str):
-            plaintext = plaintext.encode()
-        data = encrypt(key, plaintext)
+        plain_text = args.data.read()
+        if isinstance(plain_text, str):
+            plain_text = plain_text.encode()
+        data = encrypt(key, plain_text)
         if args.out == sys.stdout:
             data = data.hex()
     else:
-        ciphertext = args.data.read()
-        if isinstance(ciphertext, str):
+        cipher_text = args.data.read()
+        if isinstance(cipher_text, str):
             # if not bytes, suppose hex string
-            ciphertext = bytes.fromhex(ciphertext.strip())
-        data = decrypt(key, ciphertext)
+            cipher_text = bytes.fromhex(cipher_text.strip())
+        data = decrypt(key, cipher_text)
         if args.out == sys.stdout:
             # if binary data, print hex; if not, print utf8
             data = readablize(data)

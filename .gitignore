@@ -106,6 +106,6 @@ venv.bak/
 .vscode/
 .DS_Store
 
-prv
-pub
+sk
+pk
 out

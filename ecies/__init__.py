@@ -1,9 +1,19 @@
 from typing import Union
 
 from coincurve import PrivateKey, PublicKey
-from ecies.utils import generate_key, hex2prv, hex2pub, encapsulate, decapsulate, aes_encrypt, aes_decrypt
 
-__all__ = ["encrypt", "decrypt"]
+from .config import ECIES_CONFIG
+from .utils import (
+    decapsulate,
+    encapsulate,
+    generate_key,
+    hex2pk,
+    hex2sk,
+    sym_decrypt,
+    sym_encrypt,
+)
+
+__all__ = ["encrypt", "decrypt", "ECIES_CONFIG"]
 
 
 def encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes:
@@ -22,17 +32,21 @@ def encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes:
     bytes
         Encrypted data
     """
-    ephemeral_key = generate_key()
     if isinstance(receiver_pk, str):
-        receiver_pubkey = hex2pub(receiver_pk)
+        pk = hex2pk(receiver_pk)
     elif isinstance(receiver_pk, bytes):
-        receiver_pubkey = PublicKey(receiver_pk)
+        pk = PublicKey(receiver_pk)
     else:
         raise TypeError("Invalid public key type")
 
-    aes_key = encapsulate(ephemeral_key, receiver_pubkey)
-    cipher_text = aes_encrypt(aes_key, msg)
-    return ephemeral_key.public_key.format(False) + cipher_text
+    ephemeral_sk = generate_key()
+    ephemeral_pk = ephemeral_sk.public_key.format(
+        ECIES_CONFIG.is_ephemeral_key_compressed
+    )
+
+    sym_key = encapsulate(ephemeral_sk, pk)
+    encrypted = sym_encrypt(sym_key, msg)
+    return ephemeral_pk + encrypted
 
 
 def decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes:
@@ -52,15 +66,14 @@ def decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes:
         Plain text
     """
     if isinstance(receiver_sk, str):
-        private_key = hex2prv(receiver_sk)
+        sk = hex2sk(receiver_sk)
     elif isinstance(receiver_sk, bytes):
-        private_key = PrivateKey(receiver_sk)
+        sk = PrivateKey(receiver_sk)
     else:
         raise TypeError("Invalid secret key type")
 
-    pubkey = msg[0:65]  # uncompressed pubkey's length is 65 bytes
-    encrypted = msg[65:]
-    ephemeral_public_key = PublicKey(pubkey)
+    key_size = ECIES_CONFIG.ephemeral_key_size
+    ephemeral_pk, encrypted = PublicKey(msg[0:key_size]), msg[key_size:]
 
-    aes_key = decapsulate(ephemeral_public_key, private_key)
-    return aes_decrypt(aes_key, encrypted)
+    sym_key = decapsulate(ephemeral_pk, sk)
+    return sym_decrypt(sym_key, encrypted)

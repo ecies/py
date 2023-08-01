@@ -1,0 +1,25 @@
+{
+  "words": [
+    "bitcointalk",
+    "Cipolla",
+    "Codacy",
+    "Codecov",
+    "coincurve",
+    "dataclass",
+    "ecdh",
+    "ecies",
+    "eciespy",
+    "fromhex",
+    "hashlib",
+    "helloworld",
+    "hexdigest",
+    "hkdf",
+    "pycryptodome",
+    "readablize",
+    "secp",
+    "urandom",
+    "xcfl",
+    "xchacha"
+  ],
+  "ignorePaths": [".cspell.jsonc", "LICENSE"]
+}
