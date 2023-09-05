@@ -1,4 +1,4 @@
-name: Publish
+name: CD
 
 on:
   release:
@@ -8,12 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install poetry
+        run: pipx install poetry
+
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
-      - uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: 1.5.1
+          cache: poetry
+
       - name: Upload to pypi
         run: |
           poetry build
