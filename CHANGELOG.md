@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.4.1 ~ 0.4.2
+
+- Bump dependencies
+- Support Python 3.12
+
 ## 0.4.0
 
 - Drop Python 3.7
