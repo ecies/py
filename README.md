@@ -140,13 +140,13 @@ class Config:
 ECIES_CONFIG = Config()
 ```
 
-If you set `is_ephemeral_key_compressed = true`, the payload would be like: `33 Bytes + AES` instead of `65 Bytes + AES`.
+On `is_ephemeral_key_compressed = true`, the payload would be like: `33 Bytes + AES` instead of `65 Bytes + AES`.
 
-If you set `is_hkdf_key_compressed = true`, the hkdf key would be derived from `ephemeral public key (compressed) + shared public key (compressed)` instead of `ephemeral public key (uncompressed) + shared public key (uncompressed)`.
+On `is_hkdf_key_compressed = true`, the hkdf key would be derived from `ephemeral public key (compressed) + shared public key (compressed)` instead of `ephemeral public key (uncompressed) + shared public key (uncompressed)`.
 
-If you set `symmetric_algorithm = "xchacha20"`, plaintext data would be encrypted with XChaCha20-Poly1305.
+On `symmetric_algorithm = "xchacha20"`, plaintext data would be encrypted with XChaCha20-Poly1305.
 
-If you set `symmetric_nonce_length = 12`, then the nonce of AES-256-GCM would be 12 bytes. XChaCha20-Poly1305's nonce is always 24 bytes.
+On `symmetric_nonce_length = 12`, then the nonce of AES-256-GCM would be 12 bytes. XChaCha20-Poly1305's nonce is always 24 bytes.
 
 For compatibility, make sure different applications share the same configuration.
 
