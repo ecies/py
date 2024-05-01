@@ -437,13 +437,13 @@ test = ["pytest (>=7.0.0)", "pytest-xdist (>=2.4.0)"]
 
 [[package]]
 name = "eth-keys"
-version = "0.5.0"
+version = "0.5.1"
 description = "eth-keys: Common API for Ethereum key operations"
 optional = false
-python-versions = ">=3.8, <4"
+python-versions = "<4,>=3.8"
 files = [
-    {file = "eth-keys-0.5.0.tar.gz", hash = "sha256:a0abccb83f3d84322591a2c047a1e3aa52ea86b185fa3e82ce311d120ca2791e"},
-    {file = "eth_keys-0.5.0-py3-none-any.whl", hash = "sha256:b2bed3ff3bcede68cc0cd4458c7147baaeaac1211a1efdb6ca019f9d3d989f2b"},
+    {file = "eth_keys-0.5.1-py3-none-any.whl", hash = "sha256:ad13d920a2217a49bed3a1a7f54fb0980f53caf86d3bbab2139fd3330a17b97e"},
+    {file = "eth_keys-0.5.1.tar.gz", hash = "sha256:2b587e4bbb9ac2195215a7ab0c0fb16042b17d4ec50240ed670bbb8f53da7a48"},
 ]
 
 [package.dependencies]
@@ -452,9 +452,9 @@ eth-utils = ">=2"
 
 [package.extras]
 coincurve = ["coincurve (>=12.0.0)"]
-dev = ["asn1tools (>=0.146.2)", "build (>=0.9.0)", "bumpversion (>=0.5.3)", "coincurve (>=12.0.0)", "eth-hash[pysha3]", "factory-boy (>=3.0.1)", "hypothesis (>=5.10.3,<6)", "ipython", "pre-commit (>=3.4.0)", "pyasn1 (>=0.4.5)", "pytest (>=7.0.0)", "towncrier (>=21,<22)", "tox (>=4.0.0)", "twine", "wheel"]
+dev = ["asn1tools (>=0.146.2)", "build (>=0.9.0)", "bumpversion (>=0.5.3)", "coincurve (>=12.0.0)", "eth-hash[pysha3]", "factory-boy (>=3.0.1)", "hypothesis (>=5.10.3)", "ipython", "pre-commit (>=3.4.0)", "pyasn1 (>=0.4.5)", "pytest (>=7.0.0)", "towncrier (>=21,<22)", "tox (>=4.0.0)", "twine", "wheel"]
 docs = ["towncrier (>=21,<22)"]
-test = ["asn1tools (>=0.146.2)", "eth-hash[pysha3]", "factory-boy (>=3.0.1)", "hypothesis (>=5.10.3,<6)", "pyasn1 (>=0.4.5)", "pytest (>=7.0.0)"]
+test = ["asn1tools (>=0.146.2)", "eth-hash[pysha3]", "factory-boy (>=3.0.1)", "hypothesis (>=5.10.3)", "pyasn1 (>=0.4.5)", "pytest (>=7.0.0)"]
 
 [[package]]
 name = "eth-typing"
