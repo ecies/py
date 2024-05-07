@@ -41,12 +41,13 @@ eth-keys = ">=0.4,<0.6"
 pycryptodome = "^3.19.1"
 
 [tool.poetry.group.dev.dependencies]
-black = {version = "^24.2", python = "^3.10"}
-flake8 = {version = "^7.0.0", python = "^3.10"}
 ipython = {version = "^8.20.0", python = "^3.10"}
-mypy = "^1.5.0"
+mypy = "^1.10"
+ruff = "^0.3.5"
+
+# test
 pytest = "^8.1.0"
-pytest-cov = ">=4.1,<6.0"
+pytest-cov = "^5.0.0"
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
