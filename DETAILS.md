@@ -104,7 +104,7 @@ True
 
 The format is depicted by the image below from the [bitcoin book](https://github.com/bitcoinbook/bitcoinbook).
 
-![EC public key format](https://raw.githubusercontent.com/bitcoinbook/bitcoinbook/develop/images/mbc2_0407.png)
+![EC public key format](https://raw.githubusercontent.com/bitcoinbook/bitcoinbook/develop/images/mbc3_0408.png)
 
 > If you want to convert the compressed format to uncompressed, basically, you need to calculate `y` from `x` by solving the equation using [Cipolla's Algorithm](https://en.wikipedia.org/wiki/Cipolla's_algorithm):
 >
