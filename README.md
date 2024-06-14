@@ -16,7 +16,7 @@ Other language versions:
 - [Golang](https://github.com/ecies/go)
 - [WASM](https://github.com/ecies/rs-wasm)
 
-You can also check a FastAPI web backend demo [here](https://github.com/kigawas/eciespy-demo).
+You can also check a FastAPI web backend demo [here](https://github.com/ecies/py-demo).
 
 ## Install
 
