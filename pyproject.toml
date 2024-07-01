@@ -36,7 +36,7 @@ include = ["ecies/py.typed"]
 python = "^3.8"
 
 # 3rd party
-coincurve = ">=13,<20"
+coincurve = ">=20.0.0,<21"
 eth-keys = ">=0.4,<0.6"
 pycryptodome = "^3.19.1"
 
