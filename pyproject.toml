@@ -36,16 +36,16 @@ include = ["ecies/py.typed"]
 python = "^3.8"
 
 # 3rd party
-coincurve = ">=13,<20"
-eth-keys = ">=0.4,<0.6"
+coincurve = ">=13,<21"
+eth-keys = "^0.5.1"
 pycryptodome = "^3.19.1"
 
 [tool.poetry.group.dev.dependencies]
 ipython = {version = "^8.20.0", python = "^3.10"}
 mypy = "^1.10"
-ruff = ">=0.3.5,<0.5.0"
+ruff = "^0.5.0"
 
-# test
+[tool.poetry.group.test.dependencies]
 pytest = "^8.1.0"
 pytest-cov = "^5.0.0"
 
