@@ -21,7 +21,7 @@ def generate_key() -> PrivateKey:
     return PrivateKey(get_valid_secret())
 
 
-def generate_eth_key() -> keys.PrivateKey:
+def generate_eth_key():
     """
     Generate a random `eth_keys.keys.PrivateKey`
 

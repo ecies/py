@@ -1,9 +1,9 @@
 # Release Notes
 
-## 0.4.1 ~ 0.4.2
+## 0.4.1 ~ 0.4.3
 
 - Bump dependencies
-- Support Python 3.12
+- Support Python 3.12, 3.13
 
 ## 0.4.0
 

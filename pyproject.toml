@@ -3,7 +3,7 @@ name = "eciespy"
 packages = [
   {include = "ecies"},
 ]
-version = "0.4.2"
+version = "0.4.3"
 # docs
 authors = ["Weiliang Li <to.be.impressive@gmail.com>"]
 description = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
@@ -37,16 +37,16 @@ python = "^3.8"
 
 # 3rd party
 coincurve = ">=13,<21"
-eth-keys = "^0.5.1"
+eth-keys = ">=0.4,<0.6"
 pycryptodome = "^3.19.1"
 
 [tool.poetry.group.dev.dependencies]
 ipython = {version = "^8.20.0", python = "^3.10"}
-mypy = "^1.10"
-ruff = "^0.5.0"
+mypy = "^1.11.2"
+ruff = "^0.6.5"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.1.0"
+pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
 
 [tool.poetry.scripts]
@@ -55,10 +55,6 @@ eciespy = "ecies.__main__:main"
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
-
-[tool.isort]
-multi_line_output = 3
-profile = "black"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
