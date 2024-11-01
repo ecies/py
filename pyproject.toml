@@ -43,7 +43,7 @@ pycryptodome = "^3.19.1"
 [tool.poetry.group.dev.dependencies]
 ipython = {version = "^8.20.0", python = "^3.10"}
 mypy = "^1.11.2"
-ruff = "^0.6.5"
+ruff = ">=0.6.5,<0.8.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.3"
