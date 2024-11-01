@@ -37,7 +37,7 @@ python = "^3.8"
 
 # 3rd party
 coincurve = ">=13,<21"
-eth-keys = ">=0.4,<0.6"
+eth-keys = ">=0.4,<0.7"
 pycryptodome = "^3.19.1"
 
 [tool.poetry.group.dev.dependencies]
