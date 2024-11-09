@@ -140,9 +140,9 @@ class Config:
 ECIES_CONFIG = Config()
 ```
 
-On `is_ephemeral_key_compressed = true`, the payload would be like: `33 Bytes + AES` instead of `65 Bytes + AES`.
+On `is_ephemeral_key_compressed = True`, the payload would be like: `33 Bytes + AES` instead of `65 Bytes + AES`.
 
-On `is_hkdf_key_compressed = true`, the hkdf key would be derived from `ephemeral public key (compressed) + shared public key (compressed)` instead of `ephemeral public key (uncompressed) + shared public key (uncompressed)`.
+On `is_hkdf_key_compressed = True`, the hkdf key would be derived from `ephemeral public key (compressed) + shared public key (compressed)` instead of `ephemeral public key (uncompressed) + shared public key (uncompressed)`.
 
 On `symmetric_algorithm = "xchacha20"`, plaintext data would be encrypted with XChaCha20-Poly1305.
 
