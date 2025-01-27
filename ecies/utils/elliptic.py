@@ -2,7 +2,7 @@ from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
 from eth_keys import keys
 
-from ..config import ECIES_CONFIG
+from ..config import ECIES_CONFIG, Config
 from .hex import decode_hex
 from .symmetric import derive_key
 
@@ -95,8 +95,8 @@ def hex2sk(sk_hex: str) -> PrivateKey:
 
 
 # private below
-def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey) -> bytes:
-    is_compressed = ECIES_CONFIG.is_hkdf_key_compressed
+def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey, config: Config = ECIES_CONFIG) -> bytes:
+    is_compressed = config.is_hkdf_key_compressed
     shared_point = peer_public_key.multiply(private_key.secret)
     master = private_key.public_key.format(is_compressed) + shared_point.format(
         is_compressed
@@ -104,8 +104,8 @@ def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey) -> bytes:
     return derive_key(master)
 
 
-def decapsulate(public_key: PublicKey, peer_private_key: PrivateKey) -> bytes:
-    is_compressed = ECIES_CONFIG.is_hkdf_key_compressed
+def decapsulate(public_key: PublicKey, peer_private_key: PrivateKey, config: Config = ECIES_CONFIG) -> bytes:
+    is_compressed = config.is_hkdf_key_compressed
     shared_point = public_key.multiply(peer_private_key.secret)
     master = public_key.format(is_compressed) + shared_point.format(is_compressed)
     return derive_key(master)
