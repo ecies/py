@@ -4,14 +4,14 @@ from Crypto.Cipher import AES, ChaCha20_Poly1305
 from Crypto.Hash import SHA256
 from Crypto.Protocol.KDF import HKDF
 
-from ..config import ECIES_CONFIG
+from ..config import ECIES_CONFIG, Config
 
 AES_CIPHER_MODE = AES.MODE_GCM
 AEAD_TAG_LENGTH = 16
 XCHACHA20_NONCE_LENGTH = 24
 
 
-def sym_encrypt(key: bytes, plain_text: bytes) -> bytes:
+def sym_encrypt(key: bytes, plain_text: bytes, config: Config = ECIES_CONFIG) -> bytes:
     """
     Symmetric encryption. AES-256-GCM or XChaCha20-Poly1305.
 
@@ -29,9 +29,9 @@ def sym_encrypt(key: bytes, plain_text: bytes) -> bytes:
     bytes
         nonce + tag(16 bytes) + encrypted data
     """
-    algorithm = ECIES_CONFIG.symmetric_algorithm
+    algorithm = config.symmetric_algorithm
     if algorithm == "aes-256-gcm":
-        nonce_length = ECIES_CONFIG.symmetric_nonce_length
+        nonce_length = config.symmetric_nonce_length
         nonce = os.urandom(nonce_length)
         cipher = AES.new(key, AES_CIPHER_MODE, nonce)
     elif algorithm == "xchacha20":
@@ -48,7 +48,7 @@ def sym_encrypt(key: bytes, plain_text: bytes) -> bytes:
     return bytes(cipher_text)
 
 
-def sym_decrypt(key: bytes, cipher_text: bytes) -> bytes:
+def sym_decrypt(key: bytes, cipher_text: bytes, config: Config = ECIES_CONFIG) -> bytes:
     """
     AES-GCM decryption. AES-256-GCM or XChaCha20-Poly1305.
 
@@ -84,9 +84,9 @@ def sym_decrypt(key: bytes, cipher_text: bytes) -> bytes:
     # If it's 12 bytes, the nonce can be incremented by 1 for each encryption
     # If it's 16 bytes, the nonce will be used to hash, so it's meaningless to increment
 
-    algorithm = ECIES_CONFIG.symmetric_algorithm
+    algorithm = config.symmetric_algorithm
     if algorithm == "aes-256-gcm":
-        nonce_length = ECIES_CONFIG.symmetric_nonce_length
+        nonce_length = config.symmetric_nonce_length
         nonce_tag_length = nonce_length + AEAD_TAG_LENGTH
         nonce = cipher_text[:nonce_length]
         tag = cipher_text[nonce_length:nonce_tag_length]

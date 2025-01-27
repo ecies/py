@@ -2,7 +2,7 @@ from typing import Union
 
 from coincurve import PrivateKey, PublicKey
 
-from .config import ECIES_CONFIG
+from .config import ECIES_CONFIG, Config
 from .utils import (
     decapsulate,
     encapsulate,
@@ -16,7 +16,7 @@ from .utils import (
 __all__ = ["encrypt", "decrypt", "ECIES_CONFIG"]
 
 
-def encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes:
+def encrypt(receiver_pk: Union[str, bytes], msg: bytes, config: Config = ECIES_CONFIG) -> bytes:
     """
     Encrypt with receiver's secp256k1 public key
 
@@ -41,15 +41,15 @@ def encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes:
 
     ephemeral_sk = generate_key()
     ephemeral_pk = ephemeral_sk.public_key.format(
-        ECIES_CONFIG.is_ephemeral_key_compressed
+        config.is_ephemeral_key_compressed
     )
 
-    sym_key = encapsulate(ephemeral_sk, pk)
-    encrypted = sym_encrypt(sym_key, msg)
+    sym_key = encapsulate(ephemeral_sk, pk, config)
+    encrypted = sym_encrypt(sym_key, msg, config)
     return ephemeral_pk + encrypted
 
 
-def decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes:
+def decrypt(receiver_sk: Union[str, bytes], msg: bytes, config: Config = ECIES_CONFIG) -> bytes:
     """
     Decrypt with receiver's secp256k1 private key
 
@@ -72,8 +72,8 @@ def decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes:
     else:
         raise TypeError("Invalid secret key type")
 
-    key_size = ECIES_CONFIG.ephemeral_key_size
+    key_size = config.ephemeral_key_size
     ephemeral_pk, encrypted = PublicKey(msg[0:key_size]), msg[key_size:]
 
-    sym_key = decapsulate(ephemeral_pk, sk)
-    return sym_decrypt(sym_key, encrypted)
+    sym_key = decapsulate(ephemeral_pk, sk, config)
+    return sym_decrypt(sym_key, encrypted, config)
