@@ -1,9 +1,17 @@
 # Release Notes
 
+## 0.4.4
+
+- Refactor `utils`
+- Bump dependencies
+- Make `eth-keys` optional. Install with `pip install ecies[eth]` for the first time
+- Revamp doc
+
 ## 0.4.1 ~ 0.4.3
 
 - Bump dependencies
 - Support Python 3.12, 3.13
+- Drop Python 3.8
 
 ## 0.4.0
 

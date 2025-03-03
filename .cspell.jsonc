@@ -1,6 +1,7 @@
 {
   "words": [
     "bitcointalk",
+    "chacha",
     "Cipolla",
     "Codacy",
     "Codecov",
@@ -15,11 +16,15 @@
     "hexdigest",
     "hkdf",
     "pycryptodome",
+    "pytest",
     "readablize",
     "secp",
     "urandom",
     "xcfl",
     "xchacha"
   ],
-  "ignorePaths": [".cspell.jsonc", "LICENSE"]
+  "ignorePaths": [
+    ".cspell.jsonc",
+    "LICENSE"
+  ]
 }
