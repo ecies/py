@@ -1,17 +1,20 @@
 import os
 
 from Crypto.Cipher import AES, ChaCha20_Poly1305
-from Crypto.Hash import SHA256
-from Crypto.Protocol.KDF import HKDF
 
-from ..config import ECIES_CONFIG, Config
+from ..config import NonceLength, SymmetricAlgorithm
 
 AES_CIPHER_MODE = AES.MODE_GCM
 AEAD_TAG_LENGTH = 16
 XCHACHA20_NONCE_LENGTH = 24
 
 
-def sym_encrypt(key: bytes, plain_text: bytes, config: Config = ECIES_CONFIG) -> bytes:
+def sym_encrypt(
+    key: bytes,
+    plain_text: bytes,
+    algorithm: SymmetricAlgorithm = "aes-256-gcm",
+    aes_nonce_length: NonceLength = 16,
+) -> bytes:
     """
     Symmetric encryption. AES-256-GCM or XChaCha20-Poly1305.
 
@@ -29,18 +32,17 @@ def sym_encrypt(key: bytes, plain_text: bytes, config: Config = ECIES_CONFIG) ->
     bytes
         nonce + tag(16 bytes) + encrypted data
     """
-    algorithm = config.symmetric_algorithm
     if algorithm == "aes-256-gcm":
-        nonce_length = config.symmetric_nonce_length
-        nonce = os.urandom(nonce_length)
-        cipher = AES.new(key, AES_CIPHER_MODE, nonce)
+        nonce = os.urandom(aes_nonce_length)
+        aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce)
+        encrypted, tag = aes_cipher.encrypt_and_digest(plain_text)
     elif algorithm == "xchacha20":
         nonce = os.urandom(XCHACHA20_NONCE_LENGTH)
-        cipher = ChaCha20_Poly1305.new(key=key, nonce=nonce)  # type:ignore
+        chacha_cipher = ChaCha20_Poly1305.new(key=key, nonce=nonce)
+        encrypted, tag = chacha_cipher.encrypt_and_digest(plain_text)
     else:
         raise NotImplementedError
 
-    encrypted, tag = cipher.encrypt_and_digest(plain_text)
     cipher_text = bytearray()
     cipher_text.extend(nonce)
     cipher_text.extend(tag)
@@ -48,7 +50,12 @@ def sym_encrypt(key: bytes, plain_text: bytes, config: Config = ECIES_CONFIG) ->
     return bytes(cipher_text)
 
 
-def sym_decrypt(key: bytes, cipher_text: bytes, config: Config = ECIES_CONFIG) -> bytes:
+def sym_decrypt(
+    key: bytes,
+    cipher_text: bytes,
+    algorithm: SymmetricAlgorithm = "aes-256-gcm",
+    nonce_length: NonceLength = 16,
+) -> bytes:
     """
     AES-GCM decryption. AES-256-GCM or XChaCha20-Poly1305.
 
@@ -84,25 +91,23 @@ def sym_decrypt(key: bytes, cipher_text: bytes, config: Config = ECIES_CONFIG) -
     # If it's 12 bytes, the nonce can be incremented by 1 for each encryption
     # If it's 16 bytes, the nonce will be used to hash, so it's meaningless to increment
 
-    algorithm = config.symmetric_algorithm
     if algorithm == "aes-256-gcm":
-        nonce_length = config.symmetric_nonce_length
-        nonce_tag_length = nonce_length + AEAD_TAG_LENGTH
-        nonce = cipher_text[:nonce_length]
-        tag = cipher_text[nonce_length:nonce_tag_length]
-        ciphered_data = cipher_text[nonce_tag_length:]
-        cipher = AES.new(key, AES_CIPHER_MODE, nonce)
+        nonce, tag, ciphered_data = _split_cipher_text(cipher_text, nonce_length)
+        aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce)
+        return aes_cipher.decrypt_and_verify(ciphered_data, tag)
     elif algorithm == "xchacha20":
-        nonce_tag_length = XCHACHA20_NONCE_LENGTH + AEAD_TAG_LENGTH
-        nonce = cipher_text[:XCHACHA20_NONCE_LENGTH]
-        tag = cipher_text[XCHACHA20_NONCE_LENGTH:nonce_tag_length]
-        ciphered_data = cipher_text[nonce_tag_length:]
-        cipher = ChaCha20_Poly1305.new(key=key, nonce=nonce)  # type:ignore
+        nonce, tag, ciphered_data = _split_cipher_text(
+            cipher_text, XCHACHA20_NONCE_LENGTH
+        )
+        xchacha_cipher = ChaCha20_Poly1305.new(key=key, nonce=nonce)
+        return xchacha_cipher.decrypt_and_verify(ciphered_data, tag)
     else:
         raise NotImplementedError
-    return cipher.decrypt_and_verify(ciphered_data, tag)
 
 
-def derive_key(master: bytes) -> bytes:
-    derived = HKDF(master, 32, b"", SHA256)
-    return derived  # type: ignore
+def _split_cipher_text(cipher_text: bytes, nonce_length: int):
+    nonce_tag_length = nonce_length + AEAD_TAG_LENGTH
+    nonce = cipher_text[:nonce_length]
+    tag = cipher_text[nonce_length:nonce_tag_length]
+    ciphered_data = cipher_text[nonce_tag_length:]
+    return nonce, tag, ciphered_data

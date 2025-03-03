@@ -1,5 +1,13 @@
 # Release Notes
 
+## 0.4.4
+
+- Make `eth-keys` optional
+- Drop Python 3.8
+- Refactor `utils`
+- Revamp documentation
+- Bump dependencies
+
 ## 0.4.1 ~ 0.4.3
 
 - Bump dependencies

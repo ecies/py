@@ -14,7 +14,7 @@ import argparse
 import sys
 
 from ecies import decrypt, encrypt
-from ecies.utils import generate_eth_key
+from ecies.utils import generate_key, to_eth_address, to_eth_public_key
 
 __description__ = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
 
@@ -68,11 +68,11 @@ def main():
 
     args = parser.parse_args()
     if args.generate:
-        k = generate_eth_key()
+        k = generate_key()
         sk, pk, addr = (
             k.to_hex(),
-            k.public_key.to_hex(),
-            k.public_key.to_checksum_address(),
+            f"0x{to_eth_public_key(k.public_key).hex()}",
+            to_eth_address(k.public_key),
         )
         print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pk, addr))
         return

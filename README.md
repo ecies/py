@@ -1,64 +1,66 @@
 # eciespy
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a11aeb9939244019d2c64bce3ff3c4e)](https://app.codacy.com/gh/ecies/py/dashboard)
+[![License](https://img.shields.io/github/license/ecies/py.svg)](https://github.com/ecies/py)
+[![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/eciespy)](https://pypistats.org/packages/eciespy)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
 [![CI](https://img.shields.io/github/actions/workflow/status/ecies/py/ci.yml?branch=master)](https://github.com/ecies/py/actions)
 [![Codecov](https://img.shields.io/codecov/c/github/ecies/py.svg)](https://codecov.io/gh/ecies/py)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/eciespy.svg)](https://pypi.org/project/eciespy/)
-[![PyPI](https://img.shields.io/pypi/v/eciespy.svg)](https://pypi.org/project/eciespy/)
-[![License](https://img.shields.io/github/license/ecies/py.svg)](https://github.com/ecies/py)
 
 Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
 
 Other language versions:
 
-- [Rust](https://github.com/ecies/rs)
 - [TypeScript](https://github.com/ecies/js)
+- [Rust](https://github.com/ecies/rs)
 - [Golang](https://github.com/ecies/go)
 - [WASM](https://github.com/ecies/rs-wasm)
+- [Java](https://github.com/ecies/java)
+- [Dart](https://github.com/ecies/dart)
 
-You can also check a FastAPI web backend demo [here](https://github.com/ecies/py-demo).
+You can also check a web backend demo [here](https://github.com/ecies/py-demo).
 
 ## Install
 
 `pip install eciespy`
 
+Or `pip install 'eciespy[eth]'` to install `eth-keys` as well.
+
 ## Quick Start
 
 ```python
->>> from ecies.utils import generate_eth_key, generate_key
+>>> from ecies.utils import generate_key
 >>> from ecies import encrypt, decrypt
->>> eth_k = generate_eth_key()
->>> sk_hex = eth_k.to_hex()  # hex string
->>> pk_hex = eth_k.public_key.to_hex()  # hex string
->>> data = b'this is a test'
->>> decrypt(sk_hex, encrypt(pk_hex, data))
-b'this is a test'
->>> secp_k = generate_key()
->>> sk_bytes = secp_k.secret  # bytes
->>> pk_bytes = secp_k.public_key.format(True)  # bytes
->>> decrypt(sk_bytes, encrypt(pk_bytes, data))
-b'this is a test'
+>>> data = 'hello world🌍'.encode()
+>>> sk = generate_key()
+>>> sk_bytes = sk.secret  # bytes
+>>> pk_bytes = sk.public_key.format(True)  # bytes
+>>> decrypt(sk_bytes, encrypt(pk_bytes, data)).decode()
+'hello world🌍'
 ```
 
 Or just use a builtin command `eciespy` in your favorite [command line](#command-line-interface).
 
 ## API
 
-### `ecies.encrypt(receiver_pk: Union[str, bytes], msg: bytes) -> bytes`
+### `ecies.encrypt(receiver_pk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG) -> bytes`
 
 Parameters:
 
 - **receiver_pk** - Receiver's public key (hex str or bytes)
-- **msg** - Data to encrypt
+- **data** - Data to encrypt
+- **config** - Optional configuration object
 
 Returns: **bytes**
 
-### `ecies.decrypt(receiver_sk: Union[str, bytes], msg: bytes) -> bytes`
+### `ecies.decrypt(receiver_sk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG) -> bytes`
 
 Parameters:
 
 - **receiver_sk** - Receiver's private key (hex str or bytes)
-- **msg** - Data to decrypt
+- **data** - Data to decrypt
+- **config** - Optional configuration object
 
 Returns: **bytes**
 
