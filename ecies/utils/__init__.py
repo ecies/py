@@ -1,4 +1,5 @@
 from .elliptic import (
+    compat_eth_public_key,
     decapsulate,
     encapsulate,
     generate_eth_key,
@@ -20,4 +21,5 @@ __all__ = [
     "hex2pk",
     "decapsulate",
     "encapsulate",
+    "compat_eth_public_key",
 ]

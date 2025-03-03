@@ -69,12 +69,12 @@ def main():
     args = parser.parse_args()
     if args.generate:
         k = generate_eth_key()
-        sk, pub, addr = (
+        sk, pk, addr = (
             k.to_hex(),
             k.public_key.to_hex(),
             k.public_key.to_checksum_address(),
         )
-        print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pub, addr))
+        print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pk, addr))
         return
 
     if args.encrypt == args.decrypt:

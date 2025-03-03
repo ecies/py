@@ -1,6 +1,5 @@
 from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
-from eth_keys import keys
 
 from ..config import ECIES_CONFIG, Config
 from .hex import decode_hex
@@ -30,8 +29,9 @@ def generate_eth_key():
     eth_keys.keys.PrivateKey
         An ethereum key
 
-    >>> k = generate_eth_key()
     """
+    from eth_keys import keys
+
     return keys.PrivateKey(get_valid_secret())
 
 
@@ -51,23 +51,14 @@ def hex2pk(pk_hex: str) -> PublicKey:
     coincurve.PublicKey
         A secp256k1 public key
 
-    >>> from ecies.utils import sha256
-    >>> data = b'0' * 32
-    >>> data_hash = sha256(data)
-    >>> eth_sk = generate_eth_key()
-    >>> cc_sk = hex2sk(eth_sk.to_hex())
-    >>> eth_sk.sign_msg_hash(data_hash).to_bytes() == cc_sk.sign_recoverable(data)
-    True
-    >>> pk_hex = eth_sk.public_key.to_hex()
-    >>> computed_pk = hex2pk(pk_hex)
-    >>> computed_pk == cc_sk.public_key
-    True
     """
-    uncompressed = decode_hex(pk_hex)
-    if len(uncompressed) == 64:  # eth public key format
-        uncompressed = b"\x04" + uncompressed
+    return PublicKey(compat_eth_public_key(decode_hex(pk_hex)))
 
-    return PublicKey(uncompressed)
+
+def compat_eth_public_key(data: bytes):
+    if len(data) == 64:  # eth public key format
+        data = b"\x04" + data
+    return data
 
 
 def hex2sk(sk_hex: str) -> PrivateKey:
@@ -84,18 +75,14 @@ def hex2sk(sk_hex: str) -> PrivateKey:
     coincurve.PrivateKey
         A secp256k1 private key
 
-    >>> k = generate_eth_key()
-    >>> sk_hex = k.to_hex()
-    >>> pk_hex = k.public_key.to_hex()
-    >>> computed_sk = hex2sk(sk_hex)
-    >>> computed_sk.to_int() == int(k.to_hex(), 16)
-    True
     """
     return PrivateKey(decode_hex(sk_hex))
 
 
 # private below
-def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey, config: Config = ECIES_CONFIG) -> bytes:
+def encapsulate(
+    private_key: PrivateKey, peer_public_key: PublicKey, config: Config = ECIES_CONFIG
+) -> bytes:
     is_compressed = config.is_hkdf_key_compressed
     shared_point = peer_public_key.multiply(private_key.secret)
     master = private_key.public_key.format(is_compressed) + shared_point.format(
@@ -104,7 +91,9 @@ def encapsulate(private_key: PrivateKey, peer_public_key: PublicKey, config: Con
     return derive_key(master)
 
 
-def decapsulate(public_key: PublicKey, peer_private_key: PrivateKey, config: Config = ECIES_CONFIG) -> bytes:
+def decapsulate(
+    public_key: PublicKey, peer_private_key: PrivateKey, config: Config = ECIES_CONFIG
+) -> bytes:
     is_compressed = config.is_hkdf_key_compressed
     shared_point = public_key.multiply(peer_private_key.secret)
     master = public_key.format(is_compressed) + shared_point.format(is_compressed)

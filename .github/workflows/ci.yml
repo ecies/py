@@ -28,7 +28,7 @@ jobs:
       - run: brew install automake
         if: matrix.os == 'macos-latest'
 
-      - run: poetry install --with test
+      - run: poetry install --with test -E eth
 
       - name: Run test
         run: poetry run pytest -s --cov=ecies tests --cov-report xml
@@ -36,6 +36,7 @@ jobs:
       - run: ./scripts/ci.sh
 
       - uses: codecov/codecov-action@v4
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.13'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
