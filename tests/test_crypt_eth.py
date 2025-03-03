@@ -37,4 +37,4 @@ def test_hex_to_sk(sk):
     pk_hex = sk.public_key.to_hex()
     computed_sk = hex2sk(sk_hex)
     assert computed_sk.to_int() == int(sk.to_hex(), 16)
-    assert computed_sk.public_key.format(False) == b"\x04" + decode_hex(pk_hex)
+    assert computed_sk.public_key.format(False)[1:] == decode_hex(pk_hex)

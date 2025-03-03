@@ -7,12 +7,11 @@ from .elliptic import (
     hex2pk,
     hex2sk,
 )
-from .hex import decode_hex, sha256
+from .hash import derive_key, sha256
+from .hex import decode_hex
 from .symmetric import sym_decrypt, sym_encrypt
 
 __all__ = [
-    "sha256",
-    "decode_hex",
     "sym_encrypt",
     "sym_decrypt",
     "generate_key",
@@ -22,4 +21,9 @@ __all__ = [
     "decapsulate",
     "encapsulate",
     "compat_eth_public_key",
+    # hex
+    "decode_hex",
+    # hash
+    "sha256",
+    "derive_key",
 ]

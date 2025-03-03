@@ -1,25 +1,4 @@
 import codecs
-import hashlib
-
-
-def sha256(msg: bytes) -> bytes:
-    """
-    Calculate sha256 hash.
-
-    Parameters
-    ----------
-    msg: bytes
-        message to hash
-
-    Returns
-    -------
-    bytes
-        sha256 hash in bytes
-
-    >>> sha256(b'0'*16).hex()[:8] == 'fcdb4b42'
-    True
-    """
-    return hashlib.sha256(msg).digest()
 
 
 def decode_hex(s: str) -> bytes:
