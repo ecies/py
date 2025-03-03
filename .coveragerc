@@ -1,6 +1,0 @@
-[run]
-omit =
-    ecies/__main__.py
-[report]
-exclude_also =
-    raise NotImplementedError
