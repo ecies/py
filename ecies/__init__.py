@@ -4,7 +4,7 @@ from coincurve import PrivateKey, PublicKey
 
 from .config import ECIES_CONFIG, Config
 from .utils import (
-    compat_eth_public_key,
+    bytes2pk,
     decapsulate,
     encapsulate,
     generate_key,
@@ -18,7 +18,7 @@ __all__ = ["encrypt", "decrypt", "ECIES_CONFIG"]
 
 
 def encrypt(
-    receiver_pk: Union[str, bytes], msg: bytes, config: Config = ECIES_CONFIG
+    receiver_pk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG
 ) -> bytes:
     """
     Encrypt with receiver's secp256k1 public key
@@ -27,8 +27,10 @@ def encrypt(
     ----------
     receiver_pk: Union[str, bytes]
         Receiver's public key (hex str or bytes)
-    msg: bytes
+    data: bytes
         Data to encrypt
+    config: Config
+        Optional configuration object
 
     Returns
     -------
@@ -38,20 +40,22 @@ def encrypt(
     if isinstance(receiver_pk, str):
         pk = hex2pk(receiver_pk)
     elif isinstance(receiver_pk, bytes):
-        pk = PublicKey(compat_eth_public_key(receiver_pk))
+        pk = bytes2pk(receiver_pk)
     else:
         raise TypeError("Invalid public key type")
 
     ephemeral_sk = generate_key()
     ephemeral_pk = ephemeral_sk.public_key.format(config.is_ephemeral_key_compressed)
 
-    sym_key = encapsulate(ephemeral_sk, pk, config)
-    encrypted = sym_encrypt(sym_key, msg, config)
+    sym_key = encapsulate(ephemeral_sk, pk, config.is_hkdf_key_compressed)
+    encrypted = sym_encrypt(
+        sym_key, data, config.symmetric_algorithm, config.symmetric_nonce_length
+    )
     return ephemeral_pk + encrypted
 
 
 def decrypt(
-    receiver_sk: Union[str, bytes], msg: bytes, config: Config = ECIES_CONFIG
+    receiver_sk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG
 ) -> bytes:
     """
     Decrypt with receiver's secp256k1 private key
@@ -60,8 +64,10 @@ def decrypt(
     ----------
     receiver_sk: Union[str, bytes]
         Receiver's private key (hex str or bytes)
-    msg: bytes
+    data: bytes
         Data to decrypt
+    config: Config
+        Optional configuration object
 
     Returns
     -------
@@ -76,7 +82,9 @@ def decrypt(
         raise TypeError("Invalid secret key type")
 
     key_size = config.ephemeral_key_size
-    ephemeral_pk, encrypted = PublicKey(msg[0:key_size]), msg[key_size:]
+    ephemeral_pk, encrypted = PublicKey(data[0:key_size]), data[key_size:]
 
-    sym_key = decapsulate(ephemeral_pk, sk, config)
-    return sym_decrypt(sym_key, encrypted, config)
+    sym_key = decapsulate(ephemeral_pk, sk, config.is_hkdf_key_compressed)
+    return sym_decrypt(
+        sym_key, encrypted, config.symmetric_algorithm, config.symmetric_nonce_length
+    )
