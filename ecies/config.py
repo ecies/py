@@ -1,11 +1,10 @@
 from dataclasses import dataclass
 from typing import Literal
 
+from .consts import COMPRESSED_PUBLIC_KEY_SIZE, UNCOMPRESSED_PUBLIC_KEY_SIZE
+
 SymmetricAlgorithm = Literal["aes-256-gcm", "xchacha20"]
 NonceLength = Literal[12, 16]  # only for aes-256-gcm, xchacha20 will always be 24
-
-COMPRESSED_PUBLIC_KEY_SIZE = 33
-UNCOMPRESSED_PUBLIC_KEY_SIZE = 65
 
 
 @dataclass()

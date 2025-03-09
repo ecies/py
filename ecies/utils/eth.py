@@ -1,9 +1,8 @@
 from coincurve import PublicKey
 from coincurve.utils import get_valid_secret
 
-from .hash import keccak_256
-
-ETH_PUBLIC_KEY_LENGTH = 64
+from ..consts import ETH_PUBLIC_KEY_LENGTH
+from .hash import keccak256
 
 
 def generate_eth_key():
@@ -23,13 +22,14 @@ def generate_eth_key():
     return keys.PrivateKey(get_valid_secret())
 
 
+# for cli only
 def to_eth_public_key(pk: PublicKey) -> bytes:
     return pk.format(False)[1:]
 
 
 def to_eth_address(pk: PublicKey) -> str:
     pk_bytes = to_eth_public_key(pk)
-    return encode_checksum(keccak_256(pk_bytes)[-20:].hex())
+    return encode_checksum(keccak256(pk_bytes)[-20:].hex())
 
 
 # private below
@@ -42,7 +42,7 @@ def convert_eth_public_key(data: bytes):
 def encode_checksum(raw_address: str) -> str:
     # https://github.com/ethereum/ercs/blob/master/ERCS/erc-55.md
     address = raw_address.lower().replace("0x", "")
-    address_hash = keccak_256(address.encode()).hex()
+    address_hash = keccak256(address.encode()).hex()
 
     res = []
     for a, h in zip(address, address_hash):
