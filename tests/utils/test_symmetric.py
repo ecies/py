@@ -23,19 +23,30 @@ def test_symmetric_big(algorithm, big_data):
     __check_symmetric_random(big_data, algorithm)
 
 
-def test_aes_known():
-    key = decode_hex("0000000000000000000000000000000000000000000000000000000000000000")
-    nonce = decode_hex("0xf3e1ba810d2c8900b11312b7c725565f")
-    tag = decode_hex("0Xec3b71e17c11dbe31484da9450edcf6c")
-    encrypted = decode_hex("02d2ffed93b856f148b9")
-    data = b"".join([nonce, tag, encrypted])
-    assert b"helloworld" == sym_decrypt(key, data)
+@pytest.mark.parametrize(
+    "key,nonce,tag,encrypted,algorithm",
+    [
+        (
+            "0000000000000000000000000000000000000000000000000000000000000000",
+            "0xf3e1ba810d2c8900b11312b7c725565f",
+            "0Xec3b71e17c11dbe31484da9450edcf6c",
+            "02d2ffed93b856f148b9",
+            "aes-256-gcm",
+        ),
+        (
+            "27bd6ec46292a3b421cdaf8a3f0ca759cbc67bcbe7c5855aa0d1e0700fd0e828",
+            "0xfbd5dd10431af533c403d6f4fa629931e5f31872d2f7e7b6",
+            "0X5b5ccc27324af03b7ca92dd067ad6eb5",
+            "aa0664f3c00a09d098bf",
+            "xchacha20",
+        ),
+    ],
+)
+def test_known(key, nonce, tag, encrypted, algorithm):
+    key = decode_hex(key)
+    nonce = decode_hex(nonce)
+    tag = decode_hex(tag)
+    encrypted = decode_hex(encrypted)
 
-
-def test_xchacha20_known():
-    key = decode_hex("27bd6ec46292a3b421cdaf8a3f0ca759cbc67bcbe7c5855aa0d1e0700fd0e828")
-    nonce = decode_hex("0xfbd5dd10431af533c403d6f4fa629931e5f31872d2f7e7b6")
-    tag = decode_hex("0X5b5ccc27324af03b7ca92dd067ad6eb5")
-    encrypted = decode_hex("aa0664f3c00a09d098bf")
     data = b"".join([nonce, tag, encrypted])
-    assert b"helloworld" == sym_decrypt(key, data, "xchacha20")
+    assert b"helloworld" == sym_decrypt(key, data, algorithm)

@@ -26,7 +26,7 @@ def encrypt(
     Parameters
     ----------
     receiver_pk: Union[str, bytes]
-        Receiver's public key (hex str or bytes)
+        Receiver's public key (hex `str` or `bytes`)
     data: bytes
         Data to encrypt
     config: Config
@@ -63,7 +63,7 @@ def decrypt(
     Parameters
     ----------
     receiver_sk: Union[str, bytes]
-        Receiver's private key (hex str or bytes)
+        Receiver's private key (hex `str` or `bytes`)
     data: bytes
         Data to decrypt
     config: Config

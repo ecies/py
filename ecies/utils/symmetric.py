@@ -3,17 +3,14 @@ import os
 from Crypto.Cipher import AES, ChaCha20_Poly1305
 
 from ..config import NonceLength, SymmetricAlgorithm
-
-AES_CIPHER_MODE = AES.MODE_GCM
-AEAD_TAG_LENGTH = 16
-XCHACHA20_NONCE_LENGTH = 24
+from ..consts import AEAD_TAG_LENGTH, XCHACHA20_NONCE_LENGTH
 
 
 def sym_encrypt(
     key: bytes,
     plain_text: bytes,
     algorithm: SymmetricAlgorithm = "aes-256-gcm",
-    aes_nonce_length: NonceLength = 16,
+    nonce_length: NonceLength = 16,
 ) -> bytes:
     """
     Symmetric encryption. AES-256-GCM or XChaCha20-Poly1305.
@@ -33,8 +30,8 @@ def sym_encrypt(
         nonce + tag(16 bytes) + encrypted data
     """
     if algorithm == "aes-256-gcm":
-        nonce = os.urandom(aes_nonce_length)
-        aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce)
+        nonce = os.urandom(nonce_length)
+        aes_cipher = AES.new(key, AES.MODE_GCM, nonce)
         encrypted, tag = aes_cipher.encrypt_and_digest(plain_text)
     elif algorithm == "xchacha20":
         nonce = os.urandom(XCHACHA20_NONCE_LENGTH)
@@ -92,11 +89,11 @@ def sym_decrypt(
     # If it's 16 bytes, the nonce will be used to hash, so it's meaningless to increment
 
     if algorithm == "aes-256-gcm":
-        nonce, tag, ciphered_data = _split_cipher_text(cipher_text, nonce_length)
-        aes_cipher = AES.new(key, AES_CIPHER_MODE, nonce)
+        nonce, tag, ciphered_data = __split_cipher_text(cipher_text, nonce_length)
+        aes_cipher = AES.new(key, AES.MODE_GCM, nonce)
         return aes_cipher.decrypt_and_verify(ciphered_data, tag)
     elif algorithm == "xchacha20":
-        nonce, tag, ciphered_data = _split_cipher_text(
+        nonce, tag, ciphered_data = __split_cipher_text(
             cipher_text, XCHACHA20_NONCE_LENGTH
         )
         xchacha_cipher = ChaCha20_Poly1305.new(key=key, nonce=nonce)
@@ -105,7 +102,7 @@ def sym_decrypt(
         raise NotImplementedError
 
 
-def _split_cipher_text(cipher_text: bytes, nonce_length: int):
+def __split_cipher_text(cipher_text: bytes, nonce_length: int):
     nonce_tag_length = nonce_length + AEAD_TAG_LENGTH
     nonce = cipher_text[:nonce_length]
     tag = cipher_text[nonce_length:nonce_tag_length]

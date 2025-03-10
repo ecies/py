@@ -48,7 +48,7 @@ Or just use a builtin command `eciespy` in your favorite [command line](#command
 
 Parameters:
 
-- **receiver_pk** - Receiver's public key (hex str or bytes)
+- **receiver_pk** - Receiver's public key (hex `str` or `bytes`)
 - **data** - Data to encrypt
 - **config** - Optional configuration object
 
@@ -58,7 +58,7 @@ Returns: **bytes**
 
 Parameters:
 
-- **receiver_sk** - Receiver's private key (hex str or bytes)
+- **receiver_sk** - Receiver's private key (hex `str` or `bytes`)
 - **data** - Data to decrypt
 - **config** - Optional configuration object
 
@@ -116,11 +116,10 @@ $ rm sk pk data enc_data
 Ephemeral key format in the payload and shared key in the key derivation can be configured as compressed or uncompressed format.
 
 ```py
+from .consts import COMPRESSED_PUBLIC_KEY_SIZE, UNCOMPRESSED_PUBLIC_KEY_SIZE
+
 SymmetricAlgorithm = Literal["aes-256-gcm", "xchacha20"]
 NonceLength = Literal[12, 16]  # only for aes-256-gcm, xchacha20 will always be 24
-
-COMPRESSED_PUBLIC_KEY_SIZE = 33
-UNCOMPRESSED_PUBLIC_KEY_SIZE = 65
 
 
 @dataclass()
