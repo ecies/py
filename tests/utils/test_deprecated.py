@@ -1,6 +1,10 @@
 from coincurve import PrivateKey
 
-from ecies.utils import decapsulate, encapsulate
+from ecies.utils import decapsulate, encapsulate, sha256
+
+
+def test_hash():
+    assert sha256(b"0" * 16).hex()[:8] == "fcdb4b42"
 
 
 def test_encapsulate_decapsulate():

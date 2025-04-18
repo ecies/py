@@ -1,8 +1,4 @@
-from ecies.utils import derive_key, sha256
-
-
-def test_hash():
-    assert sha256(b"0" * 16).hex()[:8] == "fcdb4b42"
+from ecies.utils import derive_key
 
 
 def test_hkdf():

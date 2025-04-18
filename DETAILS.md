@@ -136,6 +136,6 @@ Now we have the shared key, and we can use the `nonce` and `tag` to decrypt. Thi
 b'helloworld'
 ```
 
-> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils/symmetric.py`](./ecies/utils/symmetric.py#L86).
+> Strictly speaking, `nonce` != `iv`, but this is a little bit off topic, if you are curious, you can check [the comment in `utils/symmetric.py`](./ecies/utils/symmetric.py#L83).
 >
 > Warning: it's dangerous to reuse nonce, if you don't know what you are doing, just follow the default setting.

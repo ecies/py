@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.4.5
+
+- Add homemade key pair: `ecies.keys.PrivateKey` and `ecies.keys.PublicKey`
+- Bump dependencies
+
 ## 0.4.4
 
 - Make `eth-keys` optional

@@ -3,7 +3,7 @@ import pytest
 
 @pytest.fixture(scope="session")
 def data():
-    return "hello world🌍".encode()
+    return "helloworld🌍".encode()
 
 
 @pytest.fixture(scope="session")
