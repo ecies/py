@@ -14,9 +14,6 @@ def decode_hex(s: str) -> bytes:
     -------
     bytes
         decoded bytes
-
-    >>> decode_hex('0x7468697320697320612074657374') == b'this is a test'
-    True
     """
     return codecs.decode(remove_0x(s), "hex")
 

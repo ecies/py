@@ -3,12 +3,14 @@ from typing import Literal
 
 from .consts import COMPRESSED_PUBLIC_KEY_SIZE, UNCOMPRESSED_PUBLIC_KEY_SIZE
 
+EllipticCurve = Literal["secp256k1"]
 SymmetricAlgorithm = Literal["aes-256-gcm", "xchacha20"]
 NonceLength = Literal[12, 16]  # only for aes-256-gcm, xchacha20 will always be 24
 
 
 @dataclass()
 class Config:
+    elliptic_curve: EllipticCurve = "secp256k1"
     is_ephemeral_key_compressed: bool = False
     is_hkdf_key_compressed: bool = False
     symmetric_algorithm: SymmetricAlgorithm = "aes-256-gcm"

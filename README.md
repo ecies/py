@@ -30,13 +30,17 @@ Or `pip install 'eciespy[eth]'` to install `eth-keys` as well.
 ## Quick Start
 
 ```python
->>> from ecies.utils import generate_key
+>>> from ecies.keys import PrivateKey
 >>> from ecies import encrypt, decrypt
 >>> data = 'hello world🌍'.encode()
->>> sk = generate_key()
+>>> sk = PrivateKey('secp256k1')
 >>> sk_bytes = sk.secret  # bytes
->>> pk_bytes = sk.public_key.format(True)  # bytes
+>>> pk_bytes = sk.public_key.to_bytes(True)  # bytes
 >>> decrypt(sk_bytes, encrypt(pk_bytes, data)).decode()
+'hello world🌍'
+>>> sk_hex = sk.to_hex() # hex str
+>>> pk_hex = sk.public_key.to_hex() # hex str
+>>> decrypt(sk_hex, encrypt(pk_hex, data)).decode()
 'hello world🌍'
 ```
 

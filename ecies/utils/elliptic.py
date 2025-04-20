@@ -1,11 +1,13 @@
 from coincurve import PrivateKey, PublicKey
 from coincurve.utils import get_valid_secret
+from typing_extensions import deprecated
 
-from .eth import convert_eth_public_key
+from ..consts import ETH_PUBLIC_KEY_LENGTH
 from .hash import derive_key
 from .hex import decode_hex
 
 
+@deprecated("Use `ecies.keys.PrivateKey` or `coincurve.PrivateKey` instead")
 def generate_key() -> PrivateKey:
     """
     Generate a random coincurve.PrivateKey`
@@ -14,12 +16,11 @@ def generate_key() -> PrivateKey:
     -------
     coincurve.PrivateKey
         A secp256k1 key
-
-    >>> k = generate_key()
     """
     return PrivateKey(get_valid_secret())
 
 
+@deprecated("Use `ecies.keys.PublicKey.from_hex` instead")
 def hex2pk(pk_hex: str) -> PublicKey:
     """
     Convert public key hex to `coincurve.PublicKey`
@@ -40,24 +41,7 @@ def hex2pk(pk_hex: str) -> PublicKey:
     return PublicKey(convert_eth_public_key(decode_hex(pk_hex)))
 
 
-def bytes2pk(pk_bytes: bytes) -> PublicKey:
-    """
-    Convert public key bytes to `coincurve.PublicKey`
-
-    Parameters
-    ----------
-    pk_bytes: bytes
-        Public key bytes
-
-    Returns
-    -------
-    coincurve.PublicKey
-        A secp256k1 public key
-
-    """
-    return PublicKey(convert_eth_public_key(pk_bytes))
-
-
+@deprecated("Use `ecies.keys.PrivateKey.from_hex` instead")
 def hex2sk(sk_hex: str) -> PrivateKey:
     """
     Convert ethereum hex to `coincurve.PrivateKey`
@@ -77,6 +61,7 @@ def hex2sk(sk_hex: str) -> PrivateKey:
 
 
 # private below
+@deprecated("Use `ecies.keys.PrivateKey.encapsulate` instead")
 def encapsulate(
     private_key: PrivateKey, peer_public_key: PublicKey, is_compressed: bool = False
 ) -> bytes:
@@ -87,9 +72,16 @@ def encapsulate(
     return derive_key(master)
 
 
+@deprecated("Use `ecies.keys.PrivateKey.decapsulate` instead")
 def decapsulate(
     public_key: PublicKey, peer_private_key: PrivateKey, is_compressed: bool = False
 ) -> bytes:
     shared_point = public_key.multiply(peer_private_key.secret)
     master = public_key.format(is_compressed) + shared_point.format(is_compressed)
     return derive_key(master)
+
+
+def convert_eth_public_key(data: bytes):
+    if len(data) == ETH_PUBLIC_KEY_LENGTH:
+        data = b"\x04" + data
+    return data
