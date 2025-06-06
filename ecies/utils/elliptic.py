@@ -7,7 +7,7 @@ from .hash import derive_key
 from .hex import decode_hex
 
 
-@deprecated("Use `ecies.keys.PrivateKey` or `coincurve.PrivateKey` instead")
+@deprecated("Use `ecies.keys.PrivateKey` instead")
 def generate_key() -> PrivateKey:
     """
     Generate a random coincurve.PrivateKey`

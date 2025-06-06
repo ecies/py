@@ -25,13 +25,13 @@ def test_elliptic_ok(data, key: PrivateKey, compressed: bool):
 
 def test_elliptic_error(data):
     with pytest.raises(TypeError):
-        encrypt(1, data)
+        encrypt(1, data)  # type: ignore
 
     k = generate_key()
     pk_hex = k.public_key.format(True).hex()
 
     with pytest.raises(TypeError):
-        decrypt(1, encrypt(bytes.fromhex(pk_hex), data))
+        decrypt(1, encrypt(bytes.fromhex(pk_hex), data))  # type: ignore
 
 
 def test_hkdf_config(data):
