@@ -16,14 +16,19 @@ from .public import PublicKey
 
 class PrivateKey:
     def __init__(self, curve: EllipticCurve, secret: Optional[bytes] = None):
-        self._curve = curve
+        self._curve: EllipticCurve = curve
         if not secret:
-            self._secret = get_valid_secret(curve)
-        elif is_valid_secret(curve, secret):
+            self._secret = get_valid_secret(self._curve)
+        elif is_valid_secret(self._curve, secret):
             self._secret = secret
         else:
-            raise ValueError(f"Invalid {curve} secret key")
-        self._public_key = PublicKey(curve, get_public_key(curve, self._secret))
+            raise ValueError(f"Invalid {self._curve} secret key")
+        self._public_key = PublicKey(
+            self._curve, get_public_key(self._curve, self._secret)
+        )
+
+    def __repr__(self):
+        return f"PrivateKey('{self._curve}', {self._secret})"
 
     def __eq__(self, value):
         return self._secret == value._secret if isinstance(value, PrivateKey) else False

@@ -3,7 +3,9 @@
 ## 0.4.5
 
 - Add homemade key pair: `ecies.keys.PrivateKey` and `ecies.keys.PublicKey`
+- Deprecate some functions in `ecies.utils`
 - Bump dependencies
+- Add x25519 support
 
 ## 0.4.4
 

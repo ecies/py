@@ -20,6 +20,9 @@ class PublicKey:
             uncompressed if len(compressed) != len(uncompressed) else b""
         )
 
+    def __repr__(self):
+        return f"PublicKey('{self._curve}', {self._data})"
+
     def __eq__(self, value):
         return self._data == value._data if isinstance(value, PublicKey) else False
 
@@ -40,7 +43,9 @@ class PublicKey:
         """
         For secp256k1, return uncompressed public key (65 bytes) by default
         """
-        return self._data if compressed else self._data_uncompressed
+        if not compressed and self._data_uncompressed:
+            return self._data_uncompressed
+        return self._data
 
     def decapsulate(self, sk: PrivateKey, compressed: bool = False) -> bytes:
         sender_point = self.to_bytes(compressed)

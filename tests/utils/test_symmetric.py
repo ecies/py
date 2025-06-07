@@ -10,7 +10,7 @@ def __check_symmetric_random(
     data: bytes, algorithm: SymmetricAlgorithm = "aes-256-gcm"
 ):
     key = os.urandom(32)
-    sym_decrypt(key, sym_encrypt(key, data, algorithm), algorithm) == data
+    assert sym_decrypt(key, sym_encrypt(key, data, algorithm), algorithm) == data
 
 
 @pytest.mark.parametrize("algorithm", ["aes-256-gcm", "xchacha20"])
