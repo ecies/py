@@ -18,7 +18,7 @@ def generate_eth_key():
         An ethereum flavored secp256k1 key
 
     """
-    from eth_keys import keys
+    from eth_keys import keys  # type:ignore
 
     return keys.PrivateKey(get_valid_secret())
 

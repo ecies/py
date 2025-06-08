@@ -19,7 +19,7 @@ Other language versions:
 - [Java](https://github.com/ecies/java)
 - [Dart](https://github.com/ecies/dart)
 
-You can also check a web backend demo [here](https://github.com/ecies/py-demo).
+You can also check a [web backend demo](https://github.com/ecies/py-demo).
 
 ## Install
 
@@ -28,6 +28,8 @@ You can also check a web backend demo [here](https://github.com/ecies/py-demo).
 Or `pip install 'eciespy[eth]'` to install `eth-keys` as well.
 
 ## Quick Start
+
+### Secp256k1
 
 ```python
 >>> from ecies.keys import PrivateKey
@@ -39,8 +41,21 @@ Or `pip install 'eciespy[eth]'` to install `eth-keys` as well.
 >>> decrypt(sk_bytes, encrypt(pk_bytes, data)).decode()
 'hello world🌍'
 >>> sk_hex = sk.to_hex() # hex str
->>> pk_hex = sk.public_key.to_hex() # hex str
+>>> pk_hex = sk.public_key.to_hex(True) # hex str
 >>> decrypt(sk_hex, encrypt(pk_hex, data)).decode()
+'hello world🌍'
+```
+
+### X25519
+
+```python
+>>> from ecies.keys import PrivateKey
+>>> from ecies import encrypt, decrypt
+>>> from ecies.config import ECIES_CONFIG
+>>> ECIES_CONFIG.elliptic_curve = 'x25519'
+>>> data = 'hello world🌍'.encode()
+>>> sk = PrivateKey('x25519')
+>>> decrypt(sk.secret, encrypt(sk.public_key.to_bytes(), data)).decode()
 'hello world🌍'
 ```
 
@@ -120,14 +135,14 @@ $ rm sk pk data enc_data
 Ephemeral key format in the payload and shared key in the key derivation can be configured as compressed or uncompressed format.
 
 ```py
-from .consts import COMPRESSED_PUBLIC_KEY_SIZE, UNCOMPRESSED_PUBLIC_KEY_SIZE
-
+EllipticCurve = Literal["secp256k1", "x25519"]
 SymmetricAlgorithm = Literal["aes-256-gcm", "xchacha20"]
 NonceLength = Literal[12, 16]  # only for aes-256-gcm, xchacha20 will always be 24
 
 
 @dataclass()
 class Config:
+    elliptic_curve: EllipticCurve = "secp256k1"
     is_ephemeral_key_compressed: bool = False
     is_hkdf_key_compressed: bool = False
     symmetric_algorithm: SymmetricAlgorithm = "aes-256-gcm"
@@ -135,11 +150,16 @@ class Config:
 
     @property
     def ephemeral_key_size(self):
-        return (
-            COMPRESSED_PUBLIC_KEY_SIZE
-            if self.is_ephemeral_key_compressed
-            else UNCOMPRESSED_PUBLIC_KEY_SIZE
-        )
+        if self.elliptic_curve == "secp256k1":
+            return (
+                COMPRESSED_PUBLIC_KEY_SIZE
+                if self.is_ephemeral_key_compressed
+                else UNCOMPRESSED_PUBLIC_KEY_SIZE
+            )
+        elif self.elliptic_curve == "x25519":
+            return CURVE25519_PUBLIC_KEY_SIZE
+        else:
+            raise NotImplementedError
 
 
 ECIES_CONFIG = Config()
