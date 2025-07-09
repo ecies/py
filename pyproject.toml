@@ -34,7 +34,9 @@ include = ["ecies/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-typing-extensions = "^4.13.2"
+
+# for @deprecated
+typing-extensions = ">=4.9.0"
 
 # 3rd party
 coincurve = ">=13,<22"
@@ -47,15 +49,15 @@ eth-keys = {version = ">=0.4,<0.8", optional = true}
 eth = ["eth-keys"]
 
 [tool.poetry.group.dev.dependencies]
-ipython = {version = "^9.3.0", python = "^3.11"}
-mypy = {version = "^1.16.0", python = "^3.9"}
-ruff = "^0.11.13"
+ipython = {version = "^9.4.0", python = "^3.11"}
+mypy = {version = "^1.16.0", python = "^3.11"}
+ruff = "^0.12.2"
 
 eth-typing = "^5.2.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.4.0"
-pytest-cov = {version = "^6.1.1", python = "^3.9"}
+pytest-cov = {version = "^6.2.1", python = "^3.9"}
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
