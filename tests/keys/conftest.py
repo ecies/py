@@ -1,7 +1,7 @@
 import pytest
 
 from ecies.config import EllipticCurve
-from ecies.keys import PrivateKey
+from ecies.keys import PrivateKey, PublicKey
 
 
 @pytest.fixture
@@ -22,3 +22,13 @@ def pk1(k1: PrivateKey):
 @pytest.fixture
 def pk2(k2: PrivateKey):
     return k2.public_key
+
+
+@pytest.fixture
+def random_sk(curve: EllipticCurve) -> PrivateKey:
+    return PrivateKey(curve)
+
+
+@pytest.fixture
+def random_pk(curve: EllipticCurve) -> PublicKey:
+    return PrivateKey(curve).public_key

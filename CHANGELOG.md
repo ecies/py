@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.4.6
+
+- Bump dependencies
+- Add ed25519 support
+
 ## 0.4.5
 
 - Add homemade key pair: `ecies.keys.PrivateKey` and `ecies.keys.PublicKey`

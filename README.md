@@ -8,7 +8,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/ecies/py/ci.yml?branch=master)](https://github.com/ecies/py/actions)
 [![Codecov](https://img.shields.io/codecov/c/github/ecies/py.svg)](https://codecov.io/gh/ecies/py)
 
-Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python.
+Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python.
 
 Other language versions:
 
@@ -89,22 +89,20 @@ Returns: **bytes**
 
 ```console
 $ eciespy -h
-usage: eciespy [-h] [-e] [-d] [-g] [-k KEY] [-D [DATA]] [-O [OUT]]
+usage: eciespy [-h] [-e] [-d] [-g] [-k KEY] [-c {secp256k1,x25519,ed25519}] [-D [DATA]] [-O [OUT]]
 
-Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python
+Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -e, --encrypt         encrypt with public key, exclusive with -d
   -d, --decrypt         decrypt with private key, exclusive with -e
-  -g, --generate        generate ethereum key pair
-  -k KEY, --key KEY     public or private key file
-  -D [DATA], --data [DATA]
-                        file to encrypt or decrypt, if not specified, it will
-                        read from stdin
-  -O [OUT], --out [OUT]
-                        encrypted or decrypted file, if not specified, it will
-                        write to stdout
+  -g, --generate        generate key pair, for secp256k1, ethereum public key and address will be printed
+  -k, --key KEY         public or private key file
+  -c, --curve {secp256k1,x25519,ed25519}
+                        elliptic curve, default: secp256k1
+  -D, --data [DATA]     file to encrypt or decrypt, if not specified, it will read from stdin
+  -O, --out [OUT]       encrypted or decrypted file, if not specified, it will write to stdout
 ```
 
 ### Generate eth key
@@ -135,7 +133,7 @@ $ rm sk pk data enc_data
 Ephemeral key format in the payload and shared key in the key derivation can be configured as compressed or uncompressed format.
 
 ```py
-EllipticCurve = Literal["secp256k1", "x25519"]
+EllipticCurve = Literal["secp256k1", "x25519", "ed25519"]
 SymmetricAlgorithm = Literal["aes-256-gcm", "xchacha20"]
 NonceLength = Literal[12, 16]  # only for aes-256-gcm, xchacha20 will always be 24
 
@@ -157,6 +155,8 @@ class Config:
                 else UNCOMPRESSED_PUBLIC_KEY_SIZE
             )
         elif self.elliptic_curve == "x25519":
+            return CURVE25519_PUBLIC_KEY_SIZE
+        elif self.elliptic_curve == "ed25519":
             return CURVE25519_PUBLIC_KEY_SIZE
         else:
             raise NotImplementedError

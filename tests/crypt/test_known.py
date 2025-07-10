@@ -11,7 +11,7 @@ def __check_known(sk: str, pk: str, data: bytes, encrypted: bytes):
     assert decrypt(sk, encrypted) == data
 
 
-@pytest.mark.parametrize("curve", ["secp256k1", "x25519"])
+@pytest.mark.parametrize("curve", ["secp256k1", "x25519", "ed25519"])
 def test_sym_config(curve, data):
     ECIES_CONFIG.symmetric_algorithm = "xchacha20"
     if curve == "secp256k1":
@@ -30,6 +30,14 @@ def test_sym_config(curve, data):
             "cfff9c146116355d0e7ce81df984b4d64c5e5c9c055fbfda0ff8169e11d05e12ed"
             "f025069032adf3e16b763d886f3812bc8f1902fd29204ed3b6a2ea4e52a01dc440"
             "72ed1635aefbad1571bd5b972a7304ba25301f12"
+        )
+    elif curve == "ed25519":
+        sk = "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60"
+        pk = "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+        encrypted = decode_hex(
+            "329c94d4f7b282e885626302c1383a4f60a0d1ad34ca46b6c0d128404376afb5cf"
+            "6d42a1f70997f4f2af4926e278259fb5b67ac9c30b5e50a311d4a890378926881d"
+            "f1d3e0556c99ff7e0ed8b0d14f1e9536c83a282f"
         )
     else:
         raise NotImplementedError

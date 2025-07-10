@@ -22,6 +22,8 @@ def __check_random(data: bytes, k: PrivateKey, compressed: bool = False):
         ("secp256k1", True),
         ("x25519", False),
         ("x25519", True),
+        ("ed25519", False),
+        ("ed25519", True),
     ],
 )
 def test_elliptic_ok(data, curve: EllipticCurve, compressed: bool):
@@ -29,7 +31,7 @@ def test_elliptic_ok(data, curve: EllipticCurve, compressed: bool):
         __check_random(data, PrivateKey(curve), compressed)
 
 
-@pytest.mark.parametrize("curve", ["secp256k1", "x25519"])
+@pytest.mark.parametrize("curve", ["secp256k1", "x25519", "ed25519"])
 def test_hkdf_config(curve, data):
     ECIES_CONFIG.is_hkdf_key_compressed = True
     with config_manager(curve):
@@ -37,7 +39,7 @@ def test_hkdf_config(curve, data):
     ECIES_CONFIG.is_hkdf_key_compressed = False
 
 
-@pytest.mark.parametrize("curve", ["secp256k1", "x25519"])
+@pytest.mark.parametrize("curve", ["secp256k1", "x25519", "ed25519"])
 def test_ephemeral_key_config(curve, data):
     ECIES_CONFIG.is_ephemeral_key_compressed = True
     with config_manager(curve):
@@ -45,7 +47,7 @@ def test_ephemeral_key_config(curve, data):
     ECIES_CONFIG.is_ephemeral_key_compressed = False
 
 
-@pytest.mark.parametrize("curve", ["secp256k1", "x25519"])
+@pytest.mark.parametrize("curve", ["secp256k1", "x25519", "ed25519"])
 def test_aes_nonce_config(curve, data):
     ECIES_CONFIG.symmetric_nonce_length = 12
     with config_manager(curve):
