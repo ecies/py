@@ -57,7 +57,7 @@ eth-typing = "^5.2.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.4.0"
-pytest-cov = {version = "^6.2.1", python = "^3.9"}
+pytest-cov = "^6.2.1"
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
