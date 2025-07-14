@@ -17,7 +17,7 @@ def test_group_order():
         PrivateKey("secp256k1", (GROUP_ORDER_INT + 1).to_bytes(32, "big"))
 
 
-@pytest.mark.parametrize("curve", ["secp256k1", "x25519"])
+@pytest.mark.parametrize("curve", ["secp256k1", "x25519", "ed25519"])
 def test_invalid_length(curve: EllipticCurve):
     with pytest.raises(ValueError, match=f"Invalid {curve} secret key"):
         PrivateKey(curve, b"\x00")

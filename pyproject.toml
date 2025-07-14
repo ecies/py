@@ -3,10 +3,10 @@ name = "eciespy"
 packages = [
   {include = "ecies"},
 ]
-version = "0.4.5"
+version = "0.4.6"
 # docs
 authors = ["Weiliang Li <to.be.impressive@gmail.com>"]
-description = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
+description = "Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python"
 license = "MIT"
 maintainers = ["Weiliang Li <to.be.impressive@gmail.com>"]
 readme = "README.md"

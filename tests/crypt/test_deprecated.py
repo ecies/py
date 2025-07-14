@@ -1,3 +1,4 @@
+# TODO: delete
 import pytest
 from coincurve import PrivateKey
 

@@ -5,7 +5,10 @@ from Crypto.Protocol.DH import (
     import_x25519_public_key,
     key_agreement,
 )
+from Crypto.PublicKey.ECC import EccKey
 from Crypto.Random import get_random_bytes
+from Crypto.Signature.eddsa import import_private_key as import_ed25519_private_key
+from Crypto.Signature.eddsa import import_public_key as import_ed25519_public_key
 
 from ..config import EllipticCurve
 from ..consts import ETH_PUBLIC_KEY_LENGTH, SECRET_KEY_SIZE
@@ -17,6 +20,8 @@ def is_valid_secret(curve: EllipticCurve, secret: bytes) -> bool:
     if curve == "secp256k1":
         return 0 < bytes_to_int(secret) < GROUP_ORDER_INT
     elif curve == "x25519":
+        return True
+    elif curve == "ed25519":
         return True
     else:
         raise NotImplementedError
@@ -36,6 +41,8 @@ def get_public_key(
         return PublicKey.from_secret(secret).format(compressed)
     elif curve == "x25519":
         return import_x25519_private_key(secret).public_key().export_key(format="raw")
+    elif curve == "ed25519":
+        return import_ed25519_private_key(secret).public_key().export_key(format="raw")
     else:
         raise NotImplementedError
 
@@ -51,6 +58,11 @@ def get_shared_point(
             static_priv=import_x25519_private_key(sk),
             eph_pub=import_x25519_public_key(pk),
         )
+    elif curve == "ed25519":
+        shared_point = (
+            import_ed25519_public_key(pk).pointQ * import_ed25519_private_key(sk).d
+        )
+        return EccKey(curve=curve, point=shared_point).export_key(format="raw")
     else:
         raise NotImplementedError
 
@@ -63,6 +75,8 @@ def convert_public_key(
         return PublicKey(pad_eth_public_key(data)).format(compressed)
     elif curve == "x25519":
         return import_x25519_public_key(data).export_key(format="raw")
+    elif curve == "ed25519":
+        return import_ed25519_public_key(data).export_key(format="raw")
     else:
         raise NotImplementedError
 

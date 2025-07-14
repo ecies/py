@@ -14,10 +14,13 @@ import argparse
 import sys
 
 from ecies import decrypt, encrypt
+from ecies.config import Config, EllipticCurve
 from ecies.keys import PrivateKey
 from ecies.utils import to_eth_address
 
-__description__ = "Elliptic Curve Integrated Encryption Scheme for secp256k1 in Python"
+__description__ = (
+    "Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python"
+)
 
 
 def readablize(b: bytes) -> str:
@@ -25,6 +28,21 @@ def readablize(b: bytes) -> str:
         return b.decode()
     except ValueError:
         return b.hex()
+
+
+def __generate(curve: EllipticCurve):
+    k = PrivateKey(curve)
+    pk_bytes = k.public_key.to_bytes()
+    if curve == "secp256k1":
+        eth_pk_bytes = pk_bytes[1:]
+        sk, pk = f"0x{k.to_hex()}", f"0x{eth_pk_bytes.hex()}"
+        address = to_eth_address(eth_pk_bytes)
+        print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pk, address))
+    elif curve in ("x25519", "ed25519"):
+        sk, pk = f"0x{k.to_hex()}", f"0x{pk_bytes.hex()}"
+        print("Private: {}\nPublic: {}".format(sk, pk))
+    else:
+        raise NotImplementedError
 
 
 def main():
@@ -43,10 +61,20 @@ def main():
         help="decrypt with private key, exclusive with -e",
     )
     parser.add_argument(
-        "-g", "--generate", action="store_true", help="generate ethereum key pair"
+        "-g",
+        "--generate",
+        action="store_true",
+        help="generate key pair, for secp256k1, ethereum public key and address will be printed",
     )
     parser.add_argument(
         "-k", "--key", type=argparse.FileType("r"), help="public or private key file"
+    )
+    parser.add_argument(
+        "-c",
+        "--curve",
+        choices=["secp256k1", "x25519", "ed25519"],
+        default="secp256k1",
+        help="elliptic curve, default: secp256k1",
     )
 
     parser.add_argument(
@@ -69,14 +97,7 @@ def main():
 
     args = parser.parse_args()
     if args.generate:
-        k = PrivateKey("secp256k1")
-        eth_pk_bytes = k.public_key.to_bytes()[1:]
-        sk, pk, addr = (
-            k.to_hex(),
-            f"0x{eth_pk_bytes.hex()}",
-            to_eth_address(eth_pk_bytes),
-        )
-        print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pk, addr))
+        __generate(args.curve)
         return
 
     if args.encrypt == args.decrypt:
@@ -87,23 +108,26 @@ def main():
         parser.print_help()
         return
 
+    config = Config(elliptic_curve=args.curve)
     key = args.key.read().strip()
     if args.encrypt:
         plain_text = args.data.read()
         if isinstance(plain_text, str):
             plain_text = plain_text.encode()
-        data = encrypt(key, plain_text)
+        data = encrypt(key, plain_text, config)
         if args.out == sys.stdout:
             data = data.hex()
-    else:
+    elif args.decrypt:
         cipher_text = args.data.read()
         if isinstance(cipher_text, str):
             # if not bytes, suppose hex string
             cipher_text = bytes.fromhex(cipher_text.strip())
-        data = decrypt(key, cipher_text)
+        data = decrypt(key, cipher_text, config)
         if args.out == sys.stdout:
             # if binary data, print hex; if not, print utf8
             data = readablize(data)
+    else:
+        raise NotImplementedError
 
     args.out.write(data)
 
