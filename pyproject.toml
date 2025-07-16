@@ -50,8 +50,8 @@ eth = ["eth-keys"]
 
 [tool.poetry.group.dev.dependencies]
 ipython = {version = "^9.4.0", python = "^3.11"}
-mypy = {version = "^1.16.0", python = "^3.11"}
 ruff = "^0.12.2"
+ty = "^0.0.1a14"
 
 eth-typing = "^5.2.1"
 

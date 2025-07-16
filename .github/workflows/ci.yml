@@ -30,12 +30,15 @@ jobs:
 
       - run: poetry install --with test -E eth
 
+      - name: Lint
+        run: poetry run ruff check --fix && poetry run ruff format && poetry run ty check
+
       - name: Run test
         run: poetry run pytest -s --cov=ecies tests --cov-report xml
 
       - run: ./scripts/ci.sh
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.13'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
