@@ -28,9 +28,7 @@ class Config:
                 if self.is_ephemeral_key_compressed
                 else UNCOMPRESSED_PUBLIC_KEY_SIZE
             )
-        elif self.elliptic_curve == "x25519":
-            return CURVE25519_PUBLIC_KEY_SIZE
-        elif self.elliptic_curve == "ed25519":
+        elif self.elliptic_curve in ("x25519", "ed25519"):
             return CURVE25519_PUBLIC_KEY_SIZE
         else:
             raise NotImplementedError

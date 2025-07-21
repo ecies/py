@@ -46,15 +46,15 @@ Or `pip install 'eciespy[eth]'` to install `eth-keys` as well.
 'hello world🌍'
 ```
 
-### X25519
+### X25519/Ed25519
 
 ```python
 >>> from ecies.keys import PrivateKey
 >>> from ecies import encrypt, decrypt
 >>> from ecies.config import ECIES_CONFIG
->>> ECIES_CONFIG.elliptic_curve = 'x25519'
+>>> ECIES_CONFIG.elliptic_curve = 'x25519' # or 'ed25519'
 >>> data = 'hello world🌍'.encode()
->>> sk = PrivateKey('x25519')
+>>> sk = PrivateKey('x25519') # or 'ed25519'
 >>> decrypt(sk.secret, encrypt(sk.public_key.to_bytes(), data)).decode()
 'hello world🌍'
 ```
@@ -67,21 +67,21 @@ Or just use a builtin command `eciespy` in your favorite [command line](#command
 
 Parameters:
 
-- **receiver_pk** - Receiver's public key (hex `str` or `bytes`)
-- **data** - Data to encrypt
-- **config** - Optional configuration object
+- `receiver_pk` - Receiver's public key (hex `str` or `bytes`)
+- `data` - Data to encrypt
+- `config` - Optional configuration object
 
-Returns: **bytes**
+Returns: `bytes`
 
 ### `ecies.decrypt(receiver_sk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG) -> bytes`
 
 Parameters:
 
-- **receiver_sk** - Receiver's private key (hex `str` or `bytes`)
-- **data** - Data to decrypt
-- **config** - Optional configuration object
+- `receiver_sk` - Receiver's private key (hex `str` or `bytes`)
+- `data` - Data to decrypt
+- `config` - Optional configuration object
 
-Returns: **bytes**
+Returns: `bytes`
 
 ## Command Line Interface
 
@@ -130,7 +130,15 @@ $ rm sk pk data enc_data
 
 ## Configuration
 
-Ephemeral key format in the payload and shared key in the key derivation can be configured as compressed or uncompressed format.
+Following configurations are available.
+
+- Elliptic curve: secp256k1 or curve25519 (x25519/ed25519)
+- Ephemeral key format in the payload: compressed or uncompressed (only for secp256k1)
+- Shared elliptic curve key format in the key derivation: compressed or uncompressed (only for secp256k1)
+- Symmetric cipher algorithm: AES-256-GCM or XChaCha20-Poly1305
+- Symmetric nonce length: 12 or 16 bytes (only for AES-256-GCM)
+
+For compatibility, make sure different applications share the same configuration.
 
 ```py
 EllipticCurve = Literal["secp256k1", "x25519", "ed25519"]
@@ -154,9 +162,7 @@ class Config:
                 if self.is_ephemeral_key_compressed
                 else UNCOMPRESSED_PUBLIC_KEY_SIZE
             )
-        elif self.elliptic_curve == "x25519":
-            return CURVE25519_PUBLIC_KEY_SIZE
-        elif self.elliptic_curve == "ed25519":
+        elif self.elliptic_curve in ("x25519", "ed25519"):
             return CURVE25519_PUBLIC_KEY_SIZE
         else:
             raise NotImplementedError
@@ -165,19 +171,35 @@ class Config:
 ECIES_CONFIG = Config()
 ```
 
-On `is_ephemeral_key_compressed = True`, the payload would be like: `33 Bytes + AES` instead of `65 Bytes + AES`.
+On `ECIES_CONFIG.elliptic_curve = "x25519"` or `"ed25519"`, x25519 (key exchange function on curve25519) or ed25519 (signature algorithm on curve25519) will be used for key exchange instead of secp256k1.
+
+In this case, the payload would always be: `32 Bytes + Ciphered`.
+
+> If you don't know how to choose between x25519 and ed25519, just use the dedicated key exchange function x25519 for efficiency.
+>
+> Because any 32-byte data is a valid curve25519 public key, the payload would seem random. This property is excellent for circumventing censorship by adversaries.
+
+### Secp256k1-specific configuration
+
+On `is_ephemeral_key_compressed = True`, the payload would be like: `33 Bytes + Ciphered` instead of `65 Bytes + Ciphered`.
 
 On `is_hkdf_key_compressed = True`, the hkdf key would be derived from `ephemeral public key (compressed) + shared public key (compressed)` instead of `ephemeral public key (uncompressed) + shared public key (uncompressed)`.
+
+### Symmetric cipher configuration
 
 On `symmetric_algorithm = "xchacha20"`, plaintext data would be encrypted with XChaCha20-Poly1305.
 
 On `symmetric_nonce_length = 12`, then the nonce of AES-256-GCM would be 12 bytes. XChaCha20-Poly1305's nonce is always 24 bytes.
 
-For compatibility, make sure different applications share the same configuration.
+### Which configuration should I choose?
+
+For compatibility with other [ecies libraries](https://github.com/orgs/ecies/repositories), start with the default (secp256k1 with AES-256-GCM).
+
+For speed and security, pick x25519 with XChaCha20-Poly1305.
 
 ## Technical details
 
-They are moved to [DETAILS.md](./DETAILS.md).
+See [DETAILS.md](./DETAILS.md).
 
 ## Changelog
 

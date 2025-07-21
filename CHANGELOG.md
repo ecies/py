@@ -4,6 +4,8 @@
 
 - Bump dependencies
 - Add ed25519 support
+- Add x25519/ed25519 for CLI
+- Update documentation
 
 ## 0.4.5
 
