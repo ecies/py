@@ -3,7 +3,7 @@ name = "eciespy"
 packages = [
   {include = "ecies"},
 ]
-version = "0.4.6"
+version = "0.4.7"
 # docs
 authors = ["Weiliang Li <to.be.impressive@gmail.com>"]
 description = "Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python"
@@ -49,15 +49,15 @@ eth-keys = {version = ">=0.4,<0.8", optional = true}
 eth = ["eth-keys"]
 
 [tool.poetry.group.dev.dependencies]
-ipython = {version = "^9.4.0", python = "^3.11"}
-ruff = "^0.12.4"
-ty = "^0.0.1a14"
+ipython = {version = "^9.7.0", python = "^3.11"}
+ruff = "^0.14.5"
+ty = "^0.0.1a27"
 
 eth-typing = "^5.2.1"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.4.0"
-pytest-cov = "^6.2.1"
+pytest = "^8.4.2"
+pytest-cov = "^6.3.0"
 
 [tool.poetry.scripts]
 eciespy = "ecies.__main__:main"
@@ -74,3 +74,6 @@ omit = ["ecies/__main__.py"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError"]
+
+[tool.ty.rules]
+deprecated = "ignore"

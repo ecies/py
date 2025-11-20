@@ -10,7 +10,7 @@
 
 Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python.
 
-Other language versions:
+Other language versions (curve25519 is not supported in some versions):
 
 - [TypeScript](https://github.com/ecies/js)
 - [Rust](https://github.com/ecies/rs)
@@ -18,6 +18,7 @@ Other language versions:
 - [WASM](https://github.com/ecies/rs-wasm)
 - [Java](https://github.com/ecies/java)
 - [Dart](https://github.com/ecies/dart)
+- [Ruby](https://github.com/ecies/rb)
 
 You can also check a [web backend demo](https://github.com/ecies/py-demo).
 

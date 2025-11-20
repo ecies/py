@@ -28,6 +28,8 @@
   ],
   "ignorePaths": [
     ".cspell.jsonc",
-    "LICENSE"
+    ".gitignore",
+    "LICENSE",
+    "pyproject.toml",
   ]
 }
