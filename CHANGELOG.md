@@ -1,5 +1,10 @@
 # Release Notes
 
+## 0.4.7
+
+- Bump dependencies
+- Support Python 3.14
+
 ## 0.4.6
 
 - Bump dependencies
