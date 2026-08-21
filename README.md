@@ -205,3 +205,13 @@ See [DETAILS.md](./DETAILS.md).
 ## Changelog
 
 See [CHANGELOG.md](./CHANGELOG.md).
+
+## Development
+
+```bash
+uv sync --all-extras
+uv run pytest -v
+uv run ruff check --fix
+uv run ruff format
+uv run ty check
+```

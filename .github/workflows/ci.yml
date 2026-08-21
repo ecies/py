@@ -17,24 +17,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
+      - uses: astral-sh/setup-uv@v9.0.0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: poetry
+      - run: uv python install ${{ matrix.python-version }}
 
       - run: brew install automake
         if: matrix.os == 'macos-latest'
 
-      - run: poetry install --with test -E eth
+      - run: uv sync --locked --all-extras --python ${{ matrix.python-version }}
 
       - name: Lint
-        run: poetry run ruff check --fix && poetry run ruff format && poetry run ty check
+        run: |
+          uv run --locked --all-extras --python ${{ matrix.python-version }} ruff check .
+          uv run --locked --all-extras --python ${{ matrix.python-version }} ruff format --check .
+          uv run --locked --all-extras --python ${{ matrix.python-version }} ty check
 
       - name: Run test
-        run: poetry run pytest -s --cov=ecies tests --cov-report xml
+        run: uv run --locked --all-extras --python ${{ matrix.python-version }} pytest -s --cov=ecies tests --cov-report xml
 
       - run: ./scripts/ci.sh
 
@@ -43,4 +42,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - run: poetry build
+      - run: uv build
