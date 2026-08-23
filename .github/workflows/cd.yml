@@ -9,23 +9,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: pipx install poetry
+      - uses: astral-sh/setup-uv@v9.0.0
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: poetry
+      - run: uv build
 
-      - name: Upload to pypi
-        run: |
-          poetry build
-          poetry config repositories.testpypi https://test.pypi.org/legacy/
-          poetry config pypi-token.testpypi "$TEST_PYPI_TOKEN"
-          poetry config pypi-token.pypi "$PYPI_TOKEN"
-          poetry publish --dry-run
-          poetry publish --repository testpypi
-          poetry publish
+      - run: uv publish --dry-run
+
+      - run: uv publish --publish-url https://test.pypi.org/legacy/
         env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-          TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+          UV_PUBLISH_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+
+      - run: uv publish
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}

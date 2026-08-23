@@ -1,25 +1,25 @@
-[tool.poetry]
-name = "eciespy"
-packages = [
-  {include = "ecies"},
-]
-version = "0.4.7"
-# docs
-authors = ["Weiliang Li <to.be.impressive@gmail.com>"]
-description = "Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python"
-license = "MIT"
-maintainers = ["Weiliang Li <to.be.impressive@gmail.com>"]
-readme = "README.md"
-repository = "https://github.com/ecies/py"
-# tags
+[project]
+authors = [{ name = "Weiliang Li", email = "to.be.impressive@gmail.com" }]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: Implementation :: CPython",
   "Operating System :: OS Independent",
   "Topic :: Security :: Cryptography",
 ]
+dependencies = [
+  "coincurve>=13,<22",
+  "pycryptodome>=3.21.0",
+  "typing-extensions>=4.9.0",
+]
+description = "Elliptic Curve Integrated Encryption Scheme for secp256k1/curve25519 in Python"
 keywords = [
   "secp256k1",
   "crypto",
@@ -29,42 +29,41 @@ keywords = [
   "ethereum",
   "cryptocurrency",
 ]
-# package data
-include = ["ecies/py.typed"]
+license = "MIT"
+maintainers = [{ name = "Weiliang Li", email = "to.be.impressive@gmail.com" }]
+name = "eciespy"
+readme = "README.md"
+requires-python = ">=3.9,<4"
+version = "0.4.7"
 
-[tool.poetry.dependencies]
-python = "^3.9"
+[project.urls]
+Repository = "https://github.com/ecies/py"
 
-# for @deprecated
-typing-extensions = ">=4.9.0"
+[project.optional-dependencies]
+eth = ["eth-keys>=0.4,<0.8"]
 
-# 3rd party
-coincurve = ">=13,<22"
-pycryptodome = ">=3.21.0"
-
-# optional
-eth-keys = {version = ">=0.4,<0.8", optional = true}
-
-[tool.poetry.extras]
-eth = ["eth-keys"]
-
-[tool.poetry.group.dev.dependencies]
-ipython = {version = "^9.7.0", python = "^3.11"}
-ruff = "^0.14.5"
-ty = "^0.0.1a27"
-
-eth-typing = "^5.2.1"
-
-[tool.poetry.group.test.dependencies]
-pytest = "^8.4.2"
-pytest-cov = "^6.3.0"
-
-[tool.poetry.scripts]
+[project.scripts]
 eciespy = "ecies.__main__:main"
 
+[dependency-groups]
+dev = [
+  "eth-typing>=5.2.1,<6",
+  "ipython>=9.7.0,<10; python_version >= '3.11'",
+  "pytest>=8.4.2,<9",
+  "pytest-cov>=6.3.0,<7",
+  "ruff>=0.14.5,<0.15",
+  "ty>=0.0.1a27,<0.0.2",
+]
+
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core>=1.0.0"]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core>=3.11,<5"]
+
+[tool.flit.module]
+name = "ecies"
+
+[tool.flit.sdist]
+exclude = ["ecies/.mypy_cache/"]
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules --cov=ecies --cov-report term:skip-covered"
