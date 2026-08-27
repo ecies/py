@@ -19,9 +19,7 @@ def is_valid_secret(curve: EllipticCurve, secret: bytes) -> bool:
         return False
     if curve == "secp256k1":
         return 0 < bytes_to_int(secret) < GROUP_ORDER_INT
-    elif curve == "x25519":
-        return True
-    elif curve == "ed25519":
+    elif curve == "x25519" or curve == "ed25519":
         return True
     else:
         raise NotImplementedError
@@ -54,7 +52,7 @@ def get_shared_point(
         return PublicKey(pk).multiply(sk).format(compressed)
     elif curve == "x25519":
         return key_agreement(
-            kdf=lambda x: x,
+            kdf=bytes,
             static_priv=import_x25519_private_key(sk),
             eph_pub=import_x25519_public_key(pk),
         )

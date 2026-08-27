@@ -4,7 +4,7 @@ from .config import ECIES_CONFIG, Config
 from .keys import PrivateKey, PublicKey
 from .utils import sym_decrypt, sym_encrypt
 
-__all__ = ["encrypt", "decrypt", "ECIES_CONFIG"]
+__all__ = ["ECIES_CONFIG", "decrypt", "encrypt"]
 
 
 def encrypt(

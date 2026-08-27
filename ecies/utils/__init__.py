@@ -5,19 +5,16 @@ from .hex import decode_hex
 from .symmetric import sym_decrypt, sym_encrypt
 
 __all__ = [
-    "sym_encrypt",
-    "sym_decrypt",
-    "generate_key",
-    "hex2sk",
-    "hex2pk",
-    "encapsulate",
     "decapsulate",
-    # eth
-    "generate_eth_key",
-    "to_eth_address",
-    # hex
     "decode_hex",
-    # hash
-    "sha256",
     "derive_key",
+    "encapsulate",
+    "generate_eth_key",
+    "generate_key",
+    "hex2pk",
+    "hex2sk",
+    "sha256",
+    "sym_decrypt",
+    "sym_encrypt",
+    "to_eth_address",
 ]

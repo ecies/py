@@ -38,9 +38,11 @@ def test_multiply(curve: EllipticCurve):
     else:
         raise NotImplementedError
 
-    assert PrivateKey.from_hex(curve, sk).multiply(
+    shared_point = PrivateKey.from_hex(curve, sk).multiply(
         PublicKey.from_hex(curve, peer_pk), compressed=True
-    ) == bytes.fromhex(shared)
+    )
+    assert isinstance(shared_point, bytes)
+    assert shared_point == bytes.fromhex(shared)
 
 
 @pytest.mark.parametrize("curve", ["secp256k1", "x25519", "ed25519"])

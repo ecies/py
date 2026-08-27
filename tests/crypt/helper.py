@@ -1,6 +1,5 @@
 from contextlib import contextmanager
 
-
 from ecies import ECIES_CONFIG
 from ecies.config import EllipticCurve
 

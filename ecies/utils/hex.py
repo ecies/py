@@ -20,6 +20,6 @@ def decode_hex(s: str) -> bytes:
 
 # private below
 def remove_0x(s: str) -> str:
-    if s.startswith("0x") or s.startswith("0X"):
+    if s.startswith(("0x", "0X")):
         return s[2:]
     return s
