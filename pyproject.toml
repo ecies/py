@@ -47,10 +47,10 @@ eciespy = "ecies.__main__:main"
 
 [dependency-groups]
 dev = [
-  "eth-typing>=5.2.1,<6",
-  "ipython>=9.7.0,<10; python_version >= '3.11'",
-  "pytest>=8.4.2,<9",
-  "pytest-cov>=6.3.0,<7",
+  "eth-typing>=6.0.0,<7; python_version >= '3.10'",
+  "ipython>=9.17.0,<10; python_version >= '3.11'",
+  "pytest>=9.1.1,<10; python_version >= '3.10'",
+  "pytest-cov>=7.1.0,<8",
   "ruff>=0.16.5",
   "ty>=0.0.75",
 ]
