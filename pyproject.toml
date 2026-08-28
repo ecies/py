@@ -50,7 +50,7 @@ dev = [
   "eth-typing>=5.2.1,<6",
   "ipython>=9.7.0,<10; python_version >= '3.11'",
   "pytest>=8.4.2,<9",
-  "pytest-cov>=6.3.0,<7",
+  "pytest-cov>=6.3.0,<8",
   "ruff>=0.16.5",
   "ty>=0.0.75",
 ]
