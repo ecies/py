@@ -37,10 +37,10 @@ def __generate(curve: EllipticCurve):
         eth_pk_bytes = pk_bytes[1:]
         sk, pk = f"0x{k.to_hex()}", f"0x{eth_pk_bytes.hex()}"
         address = to_eth_address(eth_pk_bytes)
-        print("Private: {}\nPublic: {}\nAddress: {}".format(sk, pk, address))
+        print(f"Private: {sk}\nPublic: {pk}\nAddress: {address}")
     elif curve in ("x25519", "ed25519"):
         sk, pk = f"0x{k.to_hex()}", f"0x{pk_bytes.hex()}"
-        print("Private: {}\nPublic: {}".format(sk, pk))
+        print(f"Private: {sk}\nPublic: {pk}")
     else:
         raise NotImplementedError
 

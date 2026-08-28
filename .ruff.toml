@@ -1,7 +1,7 @@
 line-length = 88
 
 [lint]
-ignore = ["E501", "W605", "E203"]
+ignore = ["E501", "W605", "E203", "FA100", "UP045", "PLR0124"]
 
 [lint.mccabe]
 max-complexity = 10

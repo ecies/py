@@ -6,7 +6,7 @@ from ecies.keys import PrivateKey
 
 
 def test_group_order():
-    sk1 = PrivateKey("secp256k1", int(1).to_bytes(32, "big"))
+    sk1 = PrivateKey("secp256k1", (1).to_bytes(32, "big"))
     sk2 = PrivateKey("secp256k1", (GROUP_ORDER_INT - 1).to_bytes(32, "big"))
     assert sk1.multiply(sk2.public_key) == sk2.public_key.to_bytes()
 
