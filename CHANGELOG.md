@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.4.7
+
+- Drop Python 3.9
+- Migrate from poetry to uv
+- Bump dependencies
+
 ## 0.4.6
 
 - Bump dependencies
