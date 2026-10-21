@@ -51,8 +51,8 @@ dev = [
   "ipython>=9.17.0,<10; python_version >= '3.11'",
   "pytest>=9.1.1,<10; python_version >= '3.10'",
   "pytest-cov>=7.1.0,<8",
-  "ruff>=0.16.5",
-  "ty>=0.0.75",
+  "ruff>=0.17.1",
+  "ty>=0.0.90",
 ]
 
 [build-system]
