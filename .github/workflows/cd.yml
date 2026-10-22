@@ -4,8 +4,10 @@ on:
   release:
     types: [published]
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v7
 
@@ -15,12 +17,31 @@ jobs:
 
       - run: uv build
 
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write # trusted publishing and attestations
+    steps:
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          version: "0.13.4"
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+
+      - uses: astral-sh/attest-action@v0.0.6
+
       - run: uv publish --dry-run
 
       - run: uv publish --publish-url https://test.pypi.org/legacy/
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
 
       - run: uv publish
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}

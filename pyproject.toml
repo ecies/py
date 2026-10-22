@@ -5,7 +5,6 @@ classifiers = [
   "Intended Audience :: Developers",
   "Natural Language :: English",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -33,8 +32,8 @@ license = "MIT"
 maintainers = [{ name = "Weiliang Li", email = "to.be.impressive@gmail.com" }]
 name = "eciespy"
 readme = "README.md"
-requires-python = ">=3.9,<4"
-version = "0.4.7"
+requires-python = ">=3.10,<4"
+version = "0.4.8"
 
 [project.urls]
 Repository = "https://github.com/ecies/py"
@@ -51,8 +50,8 @@ dev = [
   "ipython>=9.17.0,<10; python_version >= '3.11'",
   "pytest>=9.1.1,<10; python_version >= '3.10'",
   "pytest-cov>=7.1.0,<8",
-  "ruff>=0.17.1",
-  "ty>=0.0.90",
+  "ruff>=0.17.2",
+  "ty>=0.0.91",
 ]
 
 [build-system]
