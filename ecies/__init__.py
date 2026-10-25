@@ -1,5 +1,3 @@
-from typing import Union
-
 from .config import ECIES_CONFIG, Config
 from .keys import PrivateKey, PublicKey
 from .utils import sym_decrypt, sym_encrypt
@@ -8,7 +6,7 @@ __all__ = ["ECIES_CONFIG", "decrypt", "encrypt"]
 
 
 def encrypt(
-    receiver_pk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG
+    receiver_pk: str | bytes, data: bytes, config: Config = ECIES_CONFIG
 ) -> bytes:
     """
     Encrypt with receiver's secp256k1 public key
@@ -46,7 +44,7 @@ def encrypt(
 
 
 def decrypt(
-    receiver_sk: Union[str, bytes], data: bytes, config: Config = ECIES_CONFIG
+    receiver_sk: str | bytes, data: bytes, config: Config = ECIES_CONFIG
 ) -> bytes:
     """
     Decrypt with receiver's secp256k1 private key
